@@ -11,6 +11,7 @@ description: "Spring AI 接入 DeepSeek 模型"
 3. [Spring AI Alibaba 快速开始](../get-started.md)；
 4. 本章节的代码您可以在 [Spring AI Alibaba Example](https://github.com/springaialibaba/spring-ai-alibaba-examples/tree/main/spring-ai-alibaba-chat-example) 仓库找到。
 
+> 本示例主要演示如何以 ChatModel 形式接入。关于如何使用 ChatClient，请参考 Github 代码仓库示例。
 
 ## DeepSeek 
 
@@ -76,24 +77,24 @@ DeepSeek是一家创新型科技公司，成立于2023年7月17日，使用数�
 
 另外，Spring AI Alibaba 还支持 DeepSeek 的 Reasoning Content 透出，您可以通过以下方式获得 DeepSeek 的 Reasoning Content：
 
-    ```java
-    @GetMapping("/{prompt}")
-    public String chat(@PathVariable(value = "prompt") String prompt) {
+```java
+@GetMapping("/{prompt}")
+public String chat(@PathVariable(value = "prompt") String prompt) {
 
-        ChatResponse chatResponse = chatModel.call(new Prompt(prompt));
+    ChatResponse chatResponse = chatModel.call(new Prompt(prompt));
 
-        if (!chatResponse.getResults().isEmpty()) {
-            Map<String, Object> metadata = chatResponse.getResults()
-                    .get(0)
-                    .getOutput()
-                    .getMetadata();
+    if (!chatResponse.getResults().isEmpty()) {
+        Map<String, Object> metadata = chatResponse.getResults()
+                .get(0)
+                .getOutput()
+                .getMetadata();
 
-            System.out.println(metadata.get("reasoningContent"));
-        }
-
-        return chatResponse.getResult().getOutput().getContent();
+        System.out.println(metadata.get("reasoningContent"));
     }
-    ```
+
+    return chatResponse.getResult().getOutput().getContent();
+}
+```
 
 之后，您可以在控制台看到如下输出：
 

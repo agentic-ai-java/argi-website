@@ -13,6 +13,7 @@ description: "Spring AI Alibaba 接入 DashScope 模型"
 3. [Spring AI Alibaba 快速开始](../get-started.md)；
 4. 本章节的代码您可以在 [Spring AI Alibaba Example](https://github.com/springaialibaba/spring-ai-alibaba-examples/tree/main/spring-ai-alibaba-chat-example) 仓库找到。
 
+> 本示例主要演示如何以 ChatModel 形式接入。关于如何使用 ChatClient，请参考 Github 代码仓库示例。
 
 ## DashScope 平台
 
