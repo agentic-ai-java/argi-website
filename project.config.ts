@@ -36,17 +36,6 @@ export interface ProjectConfig {
     linkedin?: string
   }
 
-  // Search configuration
-  search: {
-    // Enable vector search functionality
-    enableVectorSearch: boolean
-    // Pinecone configuration
-    pinecone?: {
-      apiKey: string
-      environment: string
-      indexName: string
-    }
-  }
 }
 
 const projectConfig: ProjectConfig = {
@@ -87,17 +76,6 @@ const projectConfig: ProjectConfig = {
     // linkedin: 'https://linkedin.com/in/your-profile',
   },
 
-  // Search functionality configuration
-  search: {
-    // Enable vector search functionality (requires Pinecone configuration)
-    enableVectorSearch: true, // Set to true to enable vector search demo
-    // Pinecone vector database configuration
-    pinecone: {
-      apiKey: 'demo-api-key', // Replace with your actual Pinecone API key
-      environment: 'demo-environment', // Replace with your Pinecone environment
-      indexName: 'demo-index', // Replace with your index name
-    },
-  },
 }
 
 // Export configuration and helper functions
@@ -130,20 +108,5 @@ export const getAuthorInfo = (config: ProjectConfig) => {
     name,
     email,
     full: website ? `${name} <${email}> (${website})` : `${name} <${email}>`,
-  }
-}
-
-// Helper function: get search configuration
-export const getSearchConfig = (config: ProjectConfig) => {
-  const { search } = config
-  const isVectorSearchEnabled = search.enableVectorSearch &&
-    search.pinecone?.apiKey &&
-    search.pinecone?.environment &&
-    search.pinecone?.indexName
-
-  return {
-    enableVectorSearch: search.enableVectorSearch,
-    isVectorSearchConfigured: isVectorSearchEnabled,
-    pinecone: search.pinecone,
   }
 }

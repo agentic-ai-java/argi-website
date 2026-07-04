@@ -1,5 +1,5 @@
 import MDXComponents from '@theme-original/MDXComponents'
-import CodeBlockWithLink from '@site/src/components/CodeBlockWithLink'
+import CodeBlockWithLink from '../components/CodeBlockWithLink'
 
 export default {
   ...MDXComponents,
@@ -7,4 +7,3 @@ export default {
   // 也可以用简短的别名
   Code: CodeBlockWithLink,
 }
-

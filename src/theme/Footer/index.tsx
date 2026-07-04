@@ -6,7 +6,7 @@ import projectConfig from '../../../project.config'
 
 type Props = WrapperProps<typeof FooterType>
 
-export default function FooterWrapper(props: Props): JSX.Element {
+export default function FooterWrapper(props: Props): React.ReactElement {
   return (
     <>
       <Footer {...props} />

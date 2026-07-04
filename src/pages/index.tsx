@@ -3,9 +3,7 @@ import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
-import EcosystemShowcase from '@site/src/components/EcosystemShowcase'
-import MeteorShower from '@site/src/components/MeteorShower'
-import FloatingClouds from '../components/FloatingClouds'
+import EcosystemShowcase from '../components/EcosystemShowcase'
 import Translate from '@docusaurus/Translate'
 
 import styles from './index.module.css'
@@ -13,106 +11,6 @@ import projectConfig, { getGitHubUrls } from '../../project.config'
 
 // Generate GitHub links from project configuration
 const githubUrls = getGitHubUrls(projectConfig)
-
-// Neural Network Animation Component
-function NeuralNetwork() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const lastFrameTimeRef = useRef<number>(0)
-  const animationFrameRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    canvas.width = canvas.offsetWidth
-    canvas.height = canvas.offsetHeight
-
-    const nodes: Array<{ x: number; y: number; vx: number; vy: number }> = []
-    const nodeCount = 20 // Reduced from 30 to 20
-
-    // Initialize nodes
-    for (let i = 0; i < nodeCount; i++) {
-      nodes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-      })
-    }
-
-    function animate(currentTime: number) {
-      if (!ctx || !canvas) return
-
-      // Frame rate control: target ~24fps
-      const elapsed = currentTime - lastFrameTimeRef.current
-      if (elapsed < 42) { // ~24fps
-        animationFrameRef.current = requestAnimationFrame(animate)
-        return
-      }
-      lastFrameTimeRef.current = currentTime
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      // Update and draw nodes
-      nodes.forEach((node, i) => {
-        node.x += node.vx
-        node.y += node.vy
-
-        // Bounce off edges
-        if (node.x < 0 || node.x > canvas.width) node.vx *= -1
-        if (node.y < 0 || node.y > canvas.height) node.vy *= -1
-
-        // Draw node
-        ctx.beginPath()
-        ctx.arc(node.x, node.y, 2.5, 0, Math.PI * 2) // Slightly smaller
-        ctx.fillStyle = 'rgba(96, 165, 250, 0.5)' // Reduced opacity
-        ctx.fill()
-
-        // Draw connections
-        nodes.forEach((otherNode, j) => {
-          if (i === j) return
-
-          const dx = node.x - otherNode.x
-          const dy = node.y - otherNode.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 100) { // Reduced from 120 to 100
-            ctx.beginPath()
-            ctx.moveTo(node.x, node.y)
-            ctx.lineTo(otherNode.x, otherNode.y)
-            ctx.strokeStyle = `rgba(96, 165, 250, ${0.25 * (1 - distance / 100)})` // Reduced opacity
-            ctx.lineWidth = 0.8 // Thinner lines
-            ctx.stroke()
-          }
-        })
-      })
-
-      animationFrameRef.current = requestAnimationFrame(animate)
-    }
-
-    lastFrameTimeRef.current = performance.now()
-    animationFrameRef.current = requestAnimationFrame(animate)
-
-    const handleResize = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-      }
-    }
-  }, [])
-
-  return <canvas ref={canvasRef} className={styles.neuralNetwork} />
-}
-
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext()
