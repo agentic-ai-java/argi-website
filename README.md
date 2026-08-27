@@ -15,6 +15,10 @@ English: `make preview-en`
 
 `make build && make serve`
 
+## GitHub Pages Deployment
+
+After `main` is updated, GitHub Actions publishes the `build` directory once lint and build checks pass. Before the first deployment, set the publishing source to `GitHub Actions` under `Settings > Pages`. The site is available at <https://agentic-spring-ai.github.io/website/>.
+
 ## Before Committing
 
 Before committing, run `make npm-lint && make markdown` to ensure the GitHub CI passes successfully.

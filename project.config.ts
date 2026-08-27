@@ -59,14 +59,14 @@ const projectConfig: ProjectConfig = {
 
   // Docs/website repository information
   docsGithub: {
-    username: 'spring-ai-alibaba',
+    username: 'agentic-spring-ai',
     repoName: 'website',
   },
 
   // Website deployment configuration
   deployment: {
-    url: 'https://spring-ai-alibaba.github.io',
-    baseUrl: '/', // For GitHub Pages, usually '/your-repo-name/'
+    url: 'https://agentic-spring-ai.github.io',
+    baseUrl: '/website/', // 项目站点部署在 GitHub Pages 的仓库子路径下
   },
 
   // Social media links (optional)

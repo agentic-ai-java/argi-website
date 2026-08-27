@@ -15,6 +15,10 @@ Spring AI Alibaba 项目的官方文档网站，基于 Docusaurus 构建。
 
 `make build && make serve`
 
+## GitHub Pages 部署
+
+`main` 分支更新后，GitHub Actions 会在 lint 和构建通过后自动发布 `build` 目录。首次部署前，需要在仓库的 `Settings > Pages` 中将发布源设置为 `GitHub Actions`。站点地址为 <https://agentic-spring-ai.github.io/website/>。
+
 ## 提交之前
 
 在提交之前，执行 `make npm-lint && make markdown`，确保 github CI 顺利通过。

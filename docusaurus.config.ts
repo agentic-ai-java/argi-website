@@ -8,6 +8,11 @@ const darkCodeTheme = themes.vsDark
 
 // Generate GitHub links from project configuration
 const githubUrls = getGitHubUrls(projectConfig)
+// GitHub Pages 项目站点的公开地址包含仓库子路径，用于生成正确的 SEO 链接。
+const siteUrl = new URL(projectConfig.deployment.baseUrl, projectConfig.deployment.url)
+  .toString()
+  .replace(/\/$/, '')
+const siteAssetUrl = (path: string) => `${siteUrl}/${path.replace(/^\/+/, '')}`
 
 const config: Config = {
   title: projectConfig.title,
@@ -22,8 +27,8 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: projectConfig.github.username, // Replace with your GitHub username or organization name
-  projectName: projectConfig.github.repoName, // Replace with your repository name
+  organizationName: projectConfig.docsGithub.username,
+  projectName: projectConfig.docsGithub.repoName,
 
   // check links and markdown links
   // if the link is broken, it will throw an error during build
@@ -67,7 +72,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:url',
-        content: projectConfig.deployment.url,
+        content: siteUrl,
       },
     },
     {
@@ -88,7 +93,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:image',
-        content: `${projectConfig.deployment.url}/img/social-card.jpg`,
+        content: siteAssetUrl('img/social-card.jpg'),
       },
     },
     {
@@ -131,7 +136,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'twitter:image',
-        content: `${projectConfig.deployment.url}/img/social-card.jpg`,
+        content: siteAssetUrl('img/social-card.jpg'),
       },
     },
     // Additional SEO tags
@@ -180,8 +185,8 @@ const config: Config = {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Spring AI Alibaba',
-        url: projectConfig.deployment.url,
-        logo: `${projectConfig.deployment.url}/img/logo.svg`,
+        url: siteUrl,
+        logo: siteAssetUrl('img/logo.svg'),
         description: projectConfig.description,
         sameAs: [
           `https://github.com/${projectConfig.github.username}/${projectConfig.github.repoName}`,
@@ -197,11 +202,11 @@ const config: Config = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Spring AI Alibaba',
-        url: projectConfig.deployment.url,
+        url: siteUrl,
         description: projectConfig.description,
         potentialAction: {
           '@type': 'SearchAction',
-          target: `${projectConfig.deployment.url}/search?q={search_term_string}`,
+          target: `${siteUrl}/search?q={search_term_string}`,
           'query-input': 'required name=search_term_string',
         },
       }),
