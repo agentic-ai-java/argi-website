@@ -292,7 +292,7 @@
   },
   "ecosystem.framework.extensions.name": {
     "message": "Agentic AI Extensions",
-    "description": "Extensions name"
+    "description": "Extensions framework name"
   },
   "theme.SearchBar.label": {
     "message": "Search"
@@ -336,5 +336,33 @@
   "theme.common.reportAnIssue": {
     "message": "Report an issue",
     "description": "The link label to report an issue for the current page"
+  },
+  "homepage.hero.subtitle": {
+    "message": "Production-grade Agent Runtime for Java builders. Build observable, recoverable, and collaborative multi-agent systems with ReAct loops, StateGraph orchestration, durable checkpoints, and context engineering.",
+    "description": "Homepage hero subtitle"
+  },
+  "homepage.architectureOverview": {
+    "message": "Architecture",
+    "description": "Architecture Overview button text"
+  },
+  "homepage.playground.title": {
+    "message": "From Declarative Java to Autonomous Graph Execution",
+    "description": "Code playground section title"
+  },
+  "homepage.playground.subtitle": {
+    "message": "Move beyond fragile prompt chains and opaque loops. Gain durable state checkpoints, parallel fan-out/fan-in branches, and human-in-the-loop governance on top of standard Java & Spring.",
+    "description": "Code playground section subtitle"
+  },
+  "announcement.message": {
+    "message": "Agentic AI Runtime now supports full ReAct loops, StateGraph orchestration, and real-time Studio trace debugging",
+    "description": "Announcement bar main message"
+  },
+  "announcement.cta": {
+    "message": "Explore Architecture",
+    "description": "Announcement bar CTA link"
+  },
+  "ecosystem.framework.extensions.description": {
+    "message": "Pluggable ecosystem for model adapters, distributed persistence backends, A2A discovery, MCP registry, and sandboxed tool execution.",
+    "description": "Extensions framework description"
   }
 }

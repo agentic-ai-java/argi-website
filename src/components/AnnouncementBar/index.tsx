@@ -1,31 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Link from '@docusaurus/Link'
+import Translate from '@docusaurus/Translate'
 import styles from './styles.module.css'
 import clsx from 'clsx'
 
 interface AnnouncementBarProps {
-  /**
-   * Announcement content. Supports ReactNode or an HTML string.
-   */
   content?: React.ReactNode | string
-  /**
-   * Whether the announcement can be closed.
-   */
   closable?: boolean
-  /**
-   * Callback after closing.
-   */
   onClose?: () => void
 }
 
+const STORAGE_KEY = 'agentic_ai_announcement_dismissed_v1'
+
 export default function AnnouncementBar({
-  content = '<a href="/docs/overview" target="_blank">Agentic AI 文档已更新</a>，聚焦 ReAct Agent、Graph Core 与 Studio。',
+  content,
   closable = true,
   onClose,
 }: AnnouncementBarProps) {
   const [isVisible, setIsVisible] = useState(true)
 
+  useEffect(() => {
+    try {
+      if (window.sessionStorage.getItem(STORAGE_KEY) === '1') {
+        setIsVisible(false)
+      }
+    } catch {
+      // Ignore storage access restrictions in private browsing
+    }
+  }, [])
+
   const handleClose = () => {
     setIsVisible(false)
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, '1')
+    } catch {
+      // Ignore storage errors
+    }
     onClose?.()
   }
 
@@ -33,35 +43,54 @@ export default function AnnouncementBar({
     return null
   }
 
-  // Detect whether content is an HTML string.
   const isHtmlString = typeof content === 'string' && /<[^>]+>/.test(content)
 
   return (
-    <div className={styles.announcementBar}>
+    <div className={styles.announcementBar} role="region" aria-label="Runtime announcement">
       <div className={clsx('container', styles.container)}>
-        {isHtmlString ? (
-          <div 
-            className={styles.content}
-            dangerouslySetInnerHTML={{ __html: content as string }}
-          />
+        {content ? (
+          isHtmlString ? (
+            <div
+              className={styles.content}
+              dangerouslySetInnerHTML={{ __html: content as string }}
+            />
+          ) : (
+            <div className={styles.content}>{content}</div>
+          )
         ) : (
           <div className={styles.content}>
-            {content}
+            <span className={styles.statusBadge}>
+              <span className={styles.statusDot} />
+              RUNTIME v1.0
+            </span>
+            <span className={styles.messageText}>
+              <Translate id="announcement.message" description="Announcement bar main message">
+                Agentic AI 智能体运行时现已全面支持 ReAct 循环、Graph 状态编排与 Studio 实时观测
+              </Translate>
+            </span>
+            <Link to="/docs/overview" className={styles.ctaLink}>
+              <Translate id="announcement.cta" description="Announcement bar CTA link">
+                探索架构总览
+              </Translate>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         )}
         {closable && (
           <button
+            type="button"
             className={styles.closeButton}
             onClick={handleClose}
-            aria-label="关闭通知"
-            title="关闭通知"
+            aria-label="Close announcement"
+            title="Close"
           >
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
               <path
                 d="M12 4L4 12M4 4L12 12"

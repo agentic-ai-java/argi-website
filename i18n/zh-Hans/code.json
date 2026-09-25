@@ -468,5 +468,37 @@
   "theme.common.reportAnIssue": {
     "message": "问题反馈",
     "description": "The link label to report an issue for the current page"
+  },
+  "homepage.hero.subtitle": {
+    "message": "面向生产环境的智能体运行时。用 ReAct Agent、Graph 状态图编排、持久化检查点和上下文工程，构建可观测、可恢复、可协作的企业级 Java 智能体系统。",
+    "description": "Homepage hero subtitle"
+  },
+  "homepage.architectureOverview": {
+    "message": "架构总览",
+    "description": "Architecture Overview button text"
+  },
+  "homepage.playground.title": {
+    "message": "从声明式 Java 代码到自治状态图执行",
+    "description": "Code playground section title"
+  },
+  "homepage.playground.subtitle": {
+    "message": "告别脆弱的 Prompt 拼接与不可控黑盒循环。在熟悉的 Spring 与 Java 类型系统之上，获得生产级检查点、分支并发与人在回路控制力。",
+    "description": "Code playground section subtitle"
+  },
+  "announcement.message": {
+    "message": "Agentic AI 智能体运行时现已全面支持 ReAct 循环、Graph 状态编排与 Studio 实时观测",
+    "description": "Announcement bar main message"
+  },
+  "announcement.cta": {
+    "message": "探索架构总览",
+    "description": "Announcement bar CTA link"
+  },
+  "ecosystem.framework.extensions.name": {
+    "message": "Agentic AI Extensions",
+    "description": "Extensions framework name"
+  },
+  "ecosystem.framework.extensions.description": {
+    "message": "可插拔扩展生态，涵盖大模型适配器、分布式持久化存储后端、A2A 智能体发现、MCP 注册中心与沙箱工具执行。",
+    "description": "Extensions framework description"
   }
 }
