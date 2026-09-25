@@ -4,21 +4,21 @@ import clsx from 'clsx'
 
 interface AnnouncementBarProps {
   /**
-   * 通知内容，支持 ReactNode 或 HTML 字符串
+   * Announcement content. Supports ReactNode or an HTML string.
    */
   content?: React.ReactNode | string
   /**
-   * 是否可关闭
+   * Whether the announcement can be closed.
    */
   closable?: boolean
   /**
-   * 关闭后的回调
+   * Callback after closing.
    */
   onClose?: () => void
 }
 
 export default function AnnouncementBar({
-  content = '🎉🎉 <a href="/docs/frameworks/agent-framework/tutorials/skills" target="_blank">1.1.2.0 版本正式发布</a>，适配 Spring AI 1.1.2，支持 Agent Skills，支持 Supervisor、Routing 等多种 Multi-agent 最佳实践！',
+  content = '<a href="/docs/overview" target="_blank">Agentic AI 文档已更新</a>，聚焦 ReAct Agent、Graph Core 与 Studio。',
   closable = true,
   onClose,
 }: AnnouncementBarProps) {
@@ -33,7 +33,7 @@ export default function AnnouncementBar({
     return null
   }
 
-  // 判断 content 是否是包含 HTML 标签的字符串
+  // Detect whether content is an HTML string.
   const isHtmlString = typeof content === 'string' && /<[^>]+>/.test(content)
 
   return (
@@ -77,4 +77,3 @@ export default function AnnouncementBar({
     </div>
   )
 }
-

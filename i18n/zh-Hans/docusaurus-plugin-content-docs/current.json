@@ -15,12 +15,24 @@
     "message": "使用示例",
     "description": "The label for category 使用示例 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.参与贡献": {
-    "message": "参与贡献",
-    "description": "The label for category 参与贡献 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.问题排查": {
     "message": "问题排查",
     "description": "The label for category 问题排查 in sidebar tutorialSidebar"
+  },
+  "sidebar.docsSidebar.category.ReAct Agent": {
+    "message": "ReAct Agent",
+    "description": "The label for category ReAct Agent in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Graph Core": {
+    "message": "Graph Core",
+    "description": "The label for category Graph Core in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Studio": {
+    "message": "Studio",
+    "description": "The label for category Studio in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.社区协议": {
+    "message": "社区协议",
+    "description": "The label for category 社区协议 in sidebar docsSidebar"
   }
 }

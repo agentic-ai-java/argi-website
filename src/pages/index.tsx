@@ -2,6 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import useBaseUrl from '@docusaurus/useBaseUrl'
 import Layout from '@theme/Layout'
 import EcosystemShowcase from '../components/EcosystemShowcase'
 import Translate from '@docusaurus/Translate'
@@ -14,66 +15,65 @@ const githubUrls = getGitHubUrls(projectConfig)
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext()
+  const logo = useBaseUrl('/img/brand/logo.svg')
+
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className={clsx('container', styles.heroContainer)}>
         <div className={styles.heroContent}>
-          <div className={styles.heroLeft}>
-            {/*<div className={styles.titleRow}>*/}
-            {/*  <img*/}
-            {/*    src="img/logo.svg"*/}
-            {/*    alt={siteConfig.title}*/}
-            {/*    className={styles.heroLogo}*/}
-            {/*  />*/}
-            {/*</div>*/}
+          <div className={styles.heroCopy}>
+            <div className={styles.brandLockup}>
+              <img
+                src={logo}
+                alt={`${siteConfig.title} Logo`}
+                className={styles.brandMark}
+              />
+              <span className={styles.brandText}>Agentic AI</span>
+            </div>
             <h1 className={clsx('hero__title', styles.heroTitle)}>
-              {siteConfig.title}
+              Agent Runtime for Java builders
             </h1>
             <p className={clsx('hero__subtitle', styles.heroSubtitle)}>
-              Agentic AI Framework for Java Developers.
-              <br />
-              Built on the core concept of DAG Graph, Spring AI Alibaba can easily achieve single agent, multi-agent, and complex workflow orchestration.
+              面向生产环境的智能体运行时。用 ReAct Agent、Graph 工作流、持久化执行和上下文工程构建可观察、可恢复、可协作的 Java Agent 应用。
             </p>
 
             <div className={styles.heroLabels}>
-              <span className={styles.label}>
-                <svg className={styles.labelIcon} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M20,2H4C2.9,2,2,2.9,2,4v16c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M8.5,15L8.5,15 c-0.83,0-1.5-0.67-1.5-1.5v-3C7,9.67,7.67,9,8.5,9l0,0C9.33,9,10,9.67,10,10.5v3C10,14.33,9.33,15,8.5,15z M15.5,15L15.5,15 c-0.83,0-1.5-0.67-1.5-1.5v-3c0-0.83,0.67-1.5,1.5-1.5l0,0c0.83,0,1.5,0.67,1.5,1.5v3C17,14.33,16.33,15,15.5,15z"/>
-                </svg>
-                Context Engineering
-              </span>
-              <span className={styles.label}>
-                <svg className={styles.labelIcon} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
-                </svg>
-                Multi-agent
-              </span>
-              <span className={styles.label}>
-                <svg className={styles.labelIcon} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,17V16H9V14H13V13H10A1,1 0 0,1 9,12V10A1,1 0 0,1 10,9H14V10H12V11H14V12H15V14A1,1 0 0,1 14,15H10V16H13V17H11Z"/>
-                </svg>
-                Workflow
-              </span>
+              <span className={styles.label}>ReAct Agent</span>
+              <span className={styles.label}>Graph Orchestration</span>
+              <span className={styles.label}>Durable Execution</span>
             </div>
 
             <div className={styles.heroButtons}>
               <Link
-                className={clsx('button button--primary button--lg', styles.heroButton)}
+                className={clsx('button button--primary button--lg', styles.heroButton, styles.heroButtonPrimary)}
                 to="/docs/quick-start">
-                <svg className={styles.buttonIcon} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M9,4V20H15V4H9M4,8V16H6V8H4M18,8V16H20V8H18Z" />
+                <svg className={styles.buttonIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
                 </svg>
-                &nbsp; <Translate id="homepage.quickStart" description="Quick Start button text">快速开始</Translate>
+                <Translate id="homepage.quickStart" description="Quick Start button text">快速开始</Translate>
               </Link>
               <Link
-                className={clsx('button button--primary button--lg', styles.heroButton)}
+                className={clsx('button button--secondary button--lg', styles.heroButton, styles.heroButtonSecondary)}
                 to={githubUrls.repo}>
-                <svg style={{ width: '1.2em', height: '1.2em', marginRight: '0.5em', verticalAlign: 'middle' }} viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <svg className={styles.buttonIcon} viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                 </svg>
                 <Translate id="homepage.viewOnGithub" description="View on GitHub button text">GitHub</Translate>
               </Link>
             </div>
+          </div>
+
+          <div className={styles.runtimeMap} aria-label="Agentic AI runtime flow">
+            <div className={styles.runtimeNode}>Plan</div>
+            <div className={styles.runtimeLine} />
+            <div className={styles.runtimeNode}>Act</div>
+            <div className={styles.runtimeLine} />
+            <div className={styles.runtimeNode}>Observe</div>
+            <div className={styles.runtimeLoop}>State checkpoint</div>
+            <div className={styles.runtimeFooter}>ReAct Agent + Graph Core</div>
           </div>
         </div>
       </div>
@@ -81,106 +81,42 @@ function HomepageHeader() {
   )
 }
 
-function ArchitectureSection() {
+function CapabilitySection() {
   return (
     <section className={styles.architectureSection}>
       <div className="container">
         <div className={styles.architectureContent}>
-          <h2 className={styles.architectureTitle}>
-            <Translate id="homepage.architecture.title" description="Architecture section title">
-              帮助 Java 开发者步入 AI Native 时代
-            </Translate>
-          </h2>
-
-          <div className={styles.architectureImageWrapper}>
-            <img
-              src="/img/index/index.png"
-              alt="Spring AI Alibaba Architecture"
-              className={styles.architectureImage}
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function AcknowledgmentsSection() {
-  return (
-    <section className={styles.featuresSection}>
-      <div className="container">
-        <h2 className={styles.sectionTitle}>
-          <Translate id="homepage.acknowledgments.title" description="Acknowledgments section title">
-            致谢
-          </Translate>
-        </h2>
-        <p className={styles.sectionSubtitle}>
-          <Translate id="homepage.acknowledgments.subtitle" description="Acknowledgments section subtitle">
-            Spring AI Alibaba 的成功离不开开源社区和合作伙伴的支持
-          </Translate>
-        </p>
-        <div className={styles.acknowledgmentsGrid}>
-          <div className={styles.acknowledgmentCard}>
-            <div className={styles.acknowledgmentIcon}>
-              <img
-                src="/img/spring-ai.svg"
-                alt="Spring AI Logo"
-                style={{ width: '100%', height: 'auto', maxWidth: '120px' }}
-              />
-            </div>
-            <h3 className={styles.acknowledgmentTitle}>Spring AI</h3>
-            <p className={styles.acknowledgmentDescription}>
-              <Translate id="homepage.acknowledgments.springai.description" description="Spring AI acknowledgment">
-                感谢 Spring AI 团队提供的优秀框架，为 AI 应用开发提供了坚实的基础
+          <div className={styles.sectionIntro}>
+            <h2 className={styles.architectureTitle}>
+              <Translate id="homepage.architecture.title" description="Architecture section title">
+                上层 Agent 设计，底层运行时能力
+              </Translate>
+            </h2>
+            <p className={styles.architectureSubtitle}>
+              <Translate id="homepage.architecture.subtitle" description="Architecture section subtitle">
+                Graph 和 ReAct Agent 承担编排、状态、恢复和协作语义，让复杂 Agent 应用具备可观察、可恢复和可扩展的运行时边界。
               </Translate>
             </p>
-            <a
-              href="https://github.com/spring-projects/spring-ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.acknowledgmentLink}
-            >
-              <Translate id="homepage.acknowledgments.viewOnGithub" description="View on GitHub">
-                访问 GitHub
-              </Translate>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3.707 9.293a1 1 0 01-1.414 1.414L9 9.414V13a1 1 0 11-2 0V9.414L5.707 10.707a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3z"/>
-              </svg>
-            </a>
           </div>
 
-          <div className={styles.acknowledgmentCard}>
-            <div className={styles.acknowledgmentIcon}>
-              <img
-                src="https://img.alicdn.com/imgextra/i1/O1CN01p9GgeC2AENLT5qzaQ_!!6000000008171-2-tps-162-162.png"
-                alt="Bailian Logo"
-                style={{ width: '100%', height: 'auto', maxWidth: '120px' }}
-              />
+          <div className={styles.capabilityGrid}>
+            <div className={styles.capabilityItem}>
+              <span className={styles.capabilityKicker}>01</span>
+              <h3>ReAct Agent</h3>
+              <p>将推理、工具调用和观察反馈组织成可扩展的 Agent 执行循环。</p>
             </div>
-            <h3 className={styles.acknowledgmentTitle}>
-              <Translate id="homepage.acknowledgments.bailian.name" description="Bailian name">
-                阿里云百炼大模型服务平台
-              </Translate>
-            </h3>
-            <p className={styles.acknowledgmentDescription}>
-              <Translate id="homepage.acknowledgments.bailian.description" description="Bailian acknowledgment">
-                感谢阿里云百炼平台提供强大的大模型能力和完善的服务支持
-              </Translate>
-            </p>
-            <a
-              href="https://www.aliyun.com/product/bailian"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.acknowledgmentLink}
-            >
-              <Translate id="homepage.acknowledgments.learnMore" description="Learn more">
-                了解更多
-              </Translate>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3.707 9.293a1 1 0 01-1.414 1.414L9 9.414V13a1 1 0 11-2 0V9.414L5.707 10.707a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3z"/>
-              </svg>
-            </a>
+            <div className={styles.capabilityItem}>
+              <span className={styles.capabilityKicker}>02</span>
+              <h3>Graph Core</h3>
+              <p>用节点、边、状态和检查点描述长期运行工作流，支持恢复与人在回路。</p>
+            </div>
+            <div className={styles.capabilityItem}>
+              <span className={styles.capabilityKicker}>03</span>
+              <h3>Studio</h3>
+              <p>内嵌可视化调试界面，用于检查 Agent 对话、图执行和工具调用过程。</p>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -195,9 +131,8 @@ export default function Home() {
       description={siteConfig.tagline}>
       <HomepageHeader />
       <main>
-        <ArchitectureSection />
+        <CapabilitySection />
         <EcosystemShowcase />
-        <AcknowledgmentsSection />
       </main>
     </Layout>
   )

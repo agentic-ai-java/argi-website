@@ -158,11 +158,11 @@ export default function PagefindSearch() {
           pageSize: 8,
           translations: i18n.currentLocale === 'zh-Hans'
             ? {
-              placeholder: '搜索文档、博客和页面',
+              placeholder: '搜索文档和页面',
               zero_results: '未找到与 [SEARCH_TERM] 相关的内容',
             }
             : {
-              placeholder: 'Search docs, blog, and pages',
+              placeholder: 'Search docs and pages',
               zero_results: 'No results for [SEARCH_TERM]',
             },
         })
@@ -225,8 +225,8 @@ export default function PagefindSearch() {
               <h2 className={styles.searchTitle}>{searchLabel}</h2>
               <p className={styles.searchDescription}>
                 {i18n.currentLocale === 'zh-Hans'
-                  ? '搜索站内文档、博客与页面内容'
-                  : 'Search documentation, blog posts, and pages'}
+                  ? '搜索站内文档与页面内容'
+                  : 'Search documentation and pages'}
               </p>
             </div>
             <button

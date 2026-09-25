@@ -105,14 +105,6 @@
   }
 }
 
-/* Adjust button position to avoid blocking TOC on blog page which is on the right side */
-@media (min-width: 997px) {
-  .theme-blog-post-page .backToTop {
-    right: 2rem;
-    bottom: 2rem;
-  }
-}
-
 /* Ensure it doesn't block other fixed elements */
 .backToTop {
   pointer-events: auto;

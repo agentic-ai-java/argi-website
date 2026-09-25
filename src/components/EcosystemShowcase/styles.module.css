@@ -96,30 +96,13 @@
   color: #d1d5db;
 }
 
-.cardGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-/* Framework Grid - 2+3 layout */
 .frameworkGrid {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  justify-content: center;
-}
-
-.frameworkGrid > * {
-  flex: 0 0 calc((100% - 4rem) / 3);
-  max-width: calc((100% - 4rem) / 3);
-}
-
-.frameworkGridBottom {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 408px));
   gap: 2rem;
+  justify-content: center;
+  margin: 2rem auto 0;
+  max-width: 880px;
 }
 
 .ecosystemCard {
@@ -274,13 +257,8 @@
 
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
-  .cardGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .frameworkGrid,
-  .frameworkGridBottom {
-    grid-template-columns: repeat(2, 1fr);
+  .frameworkGrid {
+    max-width: 880px;
   }
 }
 
@@ -301,18 +279,9 @@
     font-size: 1.5rem;
   }
 
-  .cardGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .frameworkGrid,
-  .frameworkGridBottom {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .frameworkGrid > * {
-    flex: 0 0 calc((100% - 2rem) / 2);
-    max-width: calc((100% - 2rem) / 2);
+  .frameworkGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 760px;
   }
 }
 
@@ -342,24 +311,10 @@
     text-align: center;
   }
 
-  .cardGrid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
   .frameworkGrid {
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .frameworkGrid > * {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
-  .frameworkGridBottom {
     grid-template-columns: 1fr;
     gap: 1.25rem;
+    max-width: 420px;
   }
 
   .ecosystemCard {

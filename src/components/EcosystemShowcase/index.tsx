@@ -16,96 +16,42 @@ interface EcosystemItem {
 
 const frameworkItems: EcosystemItem[] = [
   {
-    name: 'Spring AI Alibaba Agent Framework',
+    name: 'Agentic AI ReAct Agent',
     nameId: 'ecosystem.framework.agent.name',
-    description: 'Framework for building agent and multi-agent applications, with embedded context engineering support.',
+    description: 'Upper-layer framework for ReAct Agent, stateful agent loops, and multi-agent coordination.',
     descriptionId: 'ecosystem.framework.agent.description',
-    icon: '🚀',
-    repoUrl: 'https://github.com/alibaba/spring-ai-alibaba',
-    docUrl: '/docs/frameworks/agent-framework/tutorials/agents',
-    stars: 'spring-ai-alibaba',
+    icon: 'AF',
+    repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai',
+    docUrl: '/docs/frameworks/agent-framework/quick-start',
+    stars: 'agentic-spring-ai',
   },
   {
-    name: 'Spring AI Alibaba Graph',
+    name: 'Agentic AI Graph Core',
     nameId: 'ecosystem.framework.graph.name',
-    description: 'A low-level orchestration framework and runtime for building, managing, and deploying long-running, stateful agents.',
+    description: 'Graph runtime for workflow orchestration, state checkpoints, recovery, and human-in-the-loop execution.',
     descriptionId: 'ecosystem.framework.graph.description',
-    icon: '🔗',
-    repoUrl: 'https://github.com/alibaba/spring-ai-alibaba',
+    icon: 'GC',
+    repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai',
     docUrl: '/docs/frameworks/graph-core/quick-start',
-    stars: 'spring-ai-alibaba-graph',
+    stars: 'agentic-ai-graph-core',
   },
   {
-    name: 'Spring AI Alibaba Studio',
+    name: 'Agentic AI Studio',
     nameId: 'ecosystem.framework.graphCommunity.name',
-    description: 'Spring AI Alibaba Agent Chat UI.',
+    description: 'Embedded visual debugging studio for agent conversations and graph workflows.',
     descriptionId: 'ecosystem.framework.graphCommunity.description',
-    icon: '🌐',
-    repoUrl: 'https://github.com/alibaba/spring-ai-alibaba',
-    stars: 'spring-ai-alibaba-graph-community',
+    icon: 'ST',
+    repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai',
+    stars: 'agentic-ai-studio',
   },
   {
-    name: 'Spring AI Alibaba Admin',
-    nameId: 'ecosystem.framework.admin.name',
-    description: 'Local visualization toolkit for the development of agent applications, supporting project management, runtime visualization, tracing, and agent evaluation.',
-    descriptionId: 'ecosystem.framework.admin.description',
-    icon: '📊',
-    repoUrl: 'https://github.com/spring-ai-alibaba/spring-ai-alibaba-admin',
-    docUrl: '/ecosystem/admin/quick-start',
-    stars: 'spring-ai-alibaba-admin',
-  },
-  {
-    name: 'Spring AI',
+    name: 'Agentic AI Extensions',
     nameId: 'ecosystem.framework.extensions.name',
-    description: 'Extended implementations for Spring AI core concepts, including DashScopeChatModel, MCP registry, etc.',
+    description: 'Optional repository for model adapters, persistence backends, A2A discovery, MCP registry, and sandboxed tool execution.',
     descriptionId: 'ecosystem.framework.extensions.description',
-    icon: '🔌',
-    repoUrl: 'https://github.com/spring-ai-alibaba/spring-ai-extensions',
-    docUrl: '/integration/chatmodels/comparison',
-    stars: 'spring-ai-extensions',
-  },
-]
-
-const productItems: EcosystemItem[] = [
-  {
-    name: 'JManus',
-    nameId: 'ecosystem.product.jmanus.name',
-    description: 'A Java implementation of Manus built with Spring AI Alibaba, currently used in many applications within Alibaba Group.',
-    descriptionId: 'ecosystem.product.jmanus.description',
-    icon: '🤖',
-    repoUrl: 'https://github.com/spring-ai-alibaba/jmanus',
-    docUrl: '/agents/jmanus/quick-start',
-    stars: 'jmanus',
-  },
-  {
-    name: 'AssistantAgent',
-    nameId: 'ecosystem.product.copilot.name',
-    description: 'An framework for quickly building enterprise-level AIOps agents, Q&A Agent, Customer Service Agent, Diagnostic Agent, etc.',
-    descriptionId: 'ecosystem.product.copilot.description',
-    icon: '💻',
-    repoUrl: 'https://github.com/spring-ai-alibaba/AssistantAgent',
-    docUrl: '/agents/assistantagent/quick-start',
-    stars: 'copilot',
-  },
-  {
-    name: 'DataAgent',
-    nameId: 'ecosystem.product.dataagent.name',
-    description: 'A natural language to SQL project based on Spring AI Alibaba, enabling you to query databases directly with natural language without writing complex SQL.',
-    descriptionId: 'ecosystem.product.dataagent.description',
-    icon: '🗃️',
-    repoUrl: 'https://github.com/spring-ai-alibaba/dataagent',
-    docUrl: '/agents/dataagent/quick-start',
-    stars: 'dataagent',
-  },
-  {
-    name: 'DeepResearch',
-    nameId: 'ecosystem.product.deepresearch.name',
-    description: 'Deep Research implemented based on spring-ai-alibaba-graph.',
-    descriptionId: 'ecosystem.product.deepresearch.description',
-    icon: '🔬',
-    repoUrl: 'https://github.com/spring-ai-alibaba/deep-research',
-    docUrl: '/agents/deepresearch/graph/quick-start',
-    stars: 'deep-research',
+    icon: 'EX',
+    repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai-extensions',
+    stars: 'agentic-spring-ai-extensions',
   },
 ]
 
@@ -160,16 +106,12 @@ function EcosystemCard({ item }: EcosystemCardProps): React.JSX.Element {
 }
 
 export default function EcosystemShowcase(): React.JSX.Element {
-  // Split framework items: first 2 and last 3
-  const topFrameworkItems = frameworkItems.slice(0, 2)
-  const bottomFrameworkItems = frameworkItems.slice(2)
-
   return (
     <section className={styles.ecosystem}>
       <div className="container">
         <div className={styles.ecosystemHeader}>
           <h2 className={styles.ecosystemTitle}>
-            <Translate id="ecosystem.title">Spring AI Alibaba's Ecosystem</Translate>
+            <Translate id="ecosystem.title">Agentic AI Ecosystem</Translate>
           </h2>
           <p className={styles.ecosystemSubtitle}>
             <Translate id="ecosystem.subtitle">
@@ -182,48 +124,21 @@ export default function EcosystemShowcase(): React.JSX.Element {
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
             <h3 className={styles.sectionTitle}>
-              <span className={styles.sectionIcon}>🏗️</span>
               <Translate id="ecosystem.framework.title">Core Framework</Translate>
             </h3>
             <p className={styles.sectionDescription}>
               <Translate id="ecosystem.framework.description">
-                Foundation frameworks for building AI-powered applications
+                Runtime modules for building agentic Java applications
               </Translate>
             </p>
           </div>
-          {/* Top row: 2 items */}
           <div className={styles.frameworkGrid}>
-            {topFrameworkItems.map((item, idx) => (
-              <EcosystemCard key={idx} item={item} />
-            ))}
-          </div>
-          {/* Bottom row: 3 items */}
-          <div className={styles.frameworkGridBottom}>
-            {bottomFrameworkItems.map((item, idx) => (
+            {frameworkItems.map((item, idx) => (
               <EcosystemCard key={idx} item={item} />
             ))}
           </div>
         </div>
 
-        {/* Products Section */}
-        <div className={styles.section}>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>
-              <span className={styles.sectionIcon}>🎯</span>
-              <Translate id="ecosystem.product.title">Built with Spring AI Alibaba</Translate>
-            </h3>
-            <p className={styles.sectionDescription}>
-              <Translate id="ecosystem.product.description">
-                Production-ready applications powered by our framework
-              </Translate>
-            </p>
-          </div>
-          <div className={styles.cardGrid}>
-            {productItems.map((item, idx) => (
-              <EcosystemCard key={idx} item={item} />
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )

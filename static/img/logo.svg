@@ -30,8 +30,8 @@
     <path d="M 152 50 Q 157 42, 165 46 Q 160 54, 152 50 Z" fill="url(#accentGreen)"/>
   </g>
 
-  <!-- SAA 流畅艺术字体 - 主体 -->
-  <g id="saa-text">
+  <!-- Agentic AI initials -->
+  <g id="agentic-text">
     <text x="35" y="55"
           font-family="'Brush Script MT', 'Lucida Handwriting', cursive"
           font-size="42"
@@ -39,7 +39,7 @@
           fill="url(#mainGreen)"
           font-style="italic"
           letter-spacing="2">
-      SAA
+      AI
     </text>
   </g>
 
@@ -49,16 +49,16 @@
     <ellipse cx="4" cy="2" rx="3" ry="1.5" fill="url(#accentGreen)" transform="rotate(30)"/>
   </g>
 
-  <!-- 底部艺术字 - Spring AI Alibaba -->
+  <!-- Bottom wordmark -->
   <g id="bottom-text" opacity="0.5">
-    <text x="35" y="80"
+    <text x="42" y="80"
           font-family="'Brush Script MT', 'Lucida Handwriting', cursive"
           font-size="12"
           font-weight="normal"
           fill="url(#mainGreen)"
           font-style="italic"
           letter-spacing="1">
-      Spring AI Alibaba
+      Agentic AI
     </text>
   </g>
 

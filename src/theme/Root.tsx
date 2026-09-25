@@ -61,7 +61,7 @@ export default function Root({ children }: RootProps) {
     }
   }, [])
 
-  // 在 navbar 右侧添加版本选择器
+  // Add the version selector portal to the right side of the navbar.
   useEffect(() => {
     const navbar = document.querySelector('.navbar__items--right')
     if (navbar) {
@@ -71,7 +71,7 @@ export default function Root({ children }: RootProps) {
         versionContainer = document.createElement('div')
         versionContainer.className = 'navbar__version-dropdown'
         versionContainer.id = 'version-dropdown-portal'
-        // 插入到语言选择器之前
+        // Place it before the locale dropdown when one is available.
         const localeDropdown = navbar.querySelector('.navbar__item.dropdown')
         if (localeDropdown) {
           navbar.insertBefore(versionContainer, localeDropdown)
@@ -82,21 +82,17 @@ export default function Root({ children }: RootProps) {
     }
   }, [])
 
-  // 加载图片放大功能的 JavaScript
+  // Enable image zoom for article content.
   useEffect(() => {
     const processedImages = new WeakSet<HTMLImageElement>()
     
-    // 图片放大功能
     function initImageZoom() {
-      // 查找博客文章容器
-      const blogArticle = document.querySelector('article')
-      if (!blogArticle) return
+      const article = document.querySelector('article')
+      if (!article) return
 
-      // 查找所有博客文章中的图片
-      const images = blogArticle.querySelectorAll('img')
+      const images = article.querySelectorAll('img')
 
       images.forEach((img) => {
-        // 跳过已经处理过的图片
         if (processedImages.has(img as HTMLImageElement) || img.closest('.image-zoom-wrapper')) return
         
         processedImages.add(img as HTMLImageElement)
@@ -106,14 +102,11 @@ export default function Root({ children }: RootProps) {
         const className = img.getAttribute('class') || ''
 
         if (src) {
-          // 使用DocumentFragment减少重排
           const fragment = document.createDocumentFragment()
           
-          // 创建包装器
           const wrapper = document.createElement('div')
           wrapper.className = 'image-zoom-wrapper'
 
-          // 复制原始图片的所有属性
           const newImg = document.createElement('img')
           newImg.src = src
           newImg.alt = alt
@@ -121,19 +114,16 @@ export default function Root({ children }: RootProps) {
           newImg.setAttribute('data-zoom-src', src)
           newImg.setAttribute('data-zoom-alt', alt)
 
-          // 复制所有其他属性 (优化版)
           Array.from(img.attributes).forEach(attr => {
             if (!['src', 'alt', 'class'].includes(attr.name)) {
               newImg.setAttribute(attr.name, attr.value)
             }
           })
 
-          // 添加点击事件来模拟放大功能
           newImg.style.cursor = 'pointer'
 
           wrapper.appendChild(newImg)
 
-          // 添加悬浮放大按钮
           const zoomButton = document.createElement('div')
           zoomButton.className = 'image-zoom-button'
           zoomButton.innerHTML = `
@@ -148,16 +138,13 @@ export default function Root({ children }: RootProps) {
           wrapper.appendChild(zoomButton)
           fragment.appendChild(wrapper)
 
-          // 插入到原始图片位置
           img.parentNode?.insertBefore(fragment, img)
           img.remove()
         }
       })
     }
 
-    // 打开图片放大模态框
     function openImageZoom(src: string, alt: string) {
-      // 创建模态框
       const modal = document.createElement('div')
       modal.className = 'image-zoom-modal'
 
@@ -196,7 +183,6 @@ export default function Root({ children }: RootProps) {
         }
       })
 
-      // 添加键盘事件支持
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
           document.body.removeChild(modal)
@@ -216,7 +202,6 @@ export default function Root({ children }: RootProps) {
       document.body.classList.add('modal-open')
     }
 
-    // 使用事件委托处理图片点击
     const handleImageClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const img = target.closest('.image-zoom-wrapper img, .image-zoom-button')
@@ -232,14 +217,12 @@ export default function Root({ children }: RootProps) {
 
     document.addEventListener('click', handleImageClick)
 
-    // 页面加载完成后初始化
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initImageZoom)
     } else {
       initImageZoom()
     }
 
-    // 监听路由变化（适用于 SPA）
     let currentPath = window.location.pathname
     let debounceTimer: NodeJS.Timeout | null = null
 
@@ -247,13 +230,11 @@ export default function Root({ children }: RootProps) {
       const newPath = window.location.pathname
       if (newPath !== currentPath) {
         currentPath = newPath
-        // 使用防抖延迟执行
         if (debounceTimer) clearTimeout(debounceTimer)
         debounceTimer = setTimeout(initImageZoom, 300)
       }
     }
 
-    // 使用更优化的 MutationObserver 配置
     const observer = new MutationObserver(() => {
       if (debounceTimer) clearTimeout(debounceTimer)
       debounceTimer = setTimeout(observeUrlChange, 200)
@@ -262,7 +243,7 @@ export default function Root({ children }: RootProps) {
     const mainContent = document.querySelector('main') || document.body
     observer.observe(mainContent, {
       childList: true,
-      subtree: false, // 减少监听深度
+      subtree: false,
     })
 
     return () => {

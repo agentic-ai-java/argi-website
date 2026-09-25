@@ -50,14 +50,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'keywords',
-        content: 'Spring AI Alibaba, Agent Framework, ReactAgent, Graph, Multi-Agent, Java AI, 智能体, 通义千问, DashScope, AI应用开发, LangChain Java, AI Agent开发, 阿里云AI, 百炼大模型',
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        name: 'author',
-        content: projectConfig.author.name,
+        content: 'Agentic AI, Agent Framework, ReactAgent, Graph Core, Multi-Agent, Java AI, 智能体, 工作流编排, Context Engineering, AI Agent开发',
       },
     },
     // Open Graph / Facebook
@@ -79,7 +72,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:title',
-        content: 'Spring AI Alibaba - Agentic AI Framework for Java Developers',
+        content: 'Agentic AI - Agentic AI Framework for Java Developers',
       },
     },
     {
@@ -100,7 +93,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:site_name',
-        content: 'Spring AI Alibaba',
+        content: 'Agentic AI',
       },
     },
     {
@@ -122,7 +115,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'twitter:title',
-        content: 'Spring AI Alibaba - Agentic AI Framework for Java Developers',
+        content: 'Agentic AI - Agentic AI Framework for Java Developers',
       },
     },
     {
@@ -184,7 +177,7 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        name: 'Spring AI Alibaba',
+        name: 'Agentic AI',
         url: siteUrl,
         logo: siteAssetUrl('img/logo.svg'),
         description: projectConfig.description,
@@ -201,7 +194,7 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: 'Spring AI Alibaba',
+        name: 'Agentic AI',
         url: siteUrl,
         description: projectConfig.description,
         potentialAction: {
@@ -247,44 +240,6 @@ const config: Config = {
   themes: ['@docusaurus/theme-mermaid'],
 
   plugins: [
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'agents',
-        path: 'agents-docs',
-        routeBasePath: 'agents',
-        sidebarPath: './sidebars/sidebars-agents.ts',
-        editUrl: githubUrls.editDocs,
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-        breadcrumbs: true,
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'ecosystem',
-        path: 'ecosystem',
-        routeBasePath: 'ecosystem',
-        sidebarPath: './sidebars/sidebars-ecosystem.ts',
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-        breadcrumbs: true,
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'integration',
-        path: 'integration',
-        routeBasePath: 'integration',
-        sidebarPath: './sidebars/sidebars-integration.ts',
-        editUrl: githubUrls.editDocs,
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-        breadcrumbs: true,
-      },
-    ],
     // [
     //   '@docusaurus/plugin-content-docs',
     //   {
@@ -306,35 +261,13 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl: githubUrls.editDocs,
           // Enhanced SEO for docs
-          showLastUpdateAuthor: true,
+          showLastUpdateAuthor: false,
           showLastUpdateTime: true,
           breadcrumbs: true,
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-            title: 'Spring AI Alibaba Blog',
-            description: 'Spring AI Alibaba 官方博客 - Java AI 开发框架最新动态、技术文章和最佳实践',
-            copyright: `版权所有 © ${new Date().getFullYear()} ${projectConfig.author.name}`,
-            language: 'zh-CN',
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: githubUrls.editBlog,
-          blogTitle: 'Spring AI Alibaba Blog',
-          blogDescription: 'Spring AI Alibaba 官方博客 - 分享 AI Agent 开发技术、最佳实践和行业洞察',
-          blogSidebarTitle: '最新文章',
-          blogSidebarCount: 'ALL',
-          postsPerPage: 10,
-          blogListComponent: '@theme/BlogListPage',
-          blogPostComponent: '@theme/BlogPostPage',
-          blogTagsListComponent: '@theme/BlogTagsListPage',
-          blogTagsPostsComponent: '@theme/BlogTagsPostsPage',
-        },
+        blog: false,
         theme: {
-          customCss: ['./src/css/custom.css', './src/css/blog.css', './src/css/image-zoom.css'],
+          customCss: ['./src/css/custom.css', './src/css/image-zoom.css'],
         },
         sitemap: {
           changefreq: 'weekly',
@@ -353,7 +286,7 @@ const config: Config = {
     image: 'img/social-card.jpg',
     // Enhanced metadata for SEO
     metadata: [
-      { name: 'keywords', content: 'Spring AI Alibaba, Agent Framework, ReactAgent, Graph, Multi-Agent, Java AI, 智能体, AI开发框架' },
+      { name: 'keywords', content: 'Agentic AI, Agent Framework, ReactAgent, Graph Core, Multi-Agent, Java AI, 智能体, AI开发框架' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { property: 'og:type', content: 'website' },
     ],
@@ -363,73 +296,34 @@ const config: Config = {
       title: projectConfig.title,
       logo: {
         alt: `${projectConfig.title} Logo`,
-        src: 'img/logo-fullname.svg',
-        srcDark: 'img/logo-fullname.svg',
+        src: 'img/brand/logo.svg',
+        srcDark: 'img/brand/logo.svg',
       },
       hideOnScroll: false,
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'docsSidebar',
+          sidebarId: 'graphCoreSidebar',
           position: 'left',
-          label: '文档',
+          label: 'Graph Core',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'agentsSidebar',
-          docsPluginId: 'agents',
+          sidebarId: 'reactAgentSidebar',
           position: 'left',
-          label: '智能体',
+          label: 'ReAct Agent',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'integrationSidebar',
-          docsPluginId: 'integration',
+          sidebarId: 'studioSidebar',
           position: 'left',
-          label: '生态集成',
+          label: 'Studio',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'ecosystemSidebar',
-          docsPluginId: 'ecosystem',
+          sidebarId: 'communitySidebar',
           position: 'left',
-          label: 'Admin',
-        },
-        {
-          to: '/blog',
-          label: '博客',
-          position: 'left',
-        },
-        {
-          type: 'dropdown',
-          label: '社区',
-          position: 'left',
-          items: [
-            {
-              label: '团队',
-              to: '/community/team',
-            },
-            {
-              label: '贡献指南',
-              to: '/community/contributing',
-            },
-            {
-              label: '行为准则',
-              to: '/community/code-of-conduct',
-            },
-            {
-              type: 'html',
-              value: '<hr style="margin: 0.3rem 0;">',
-            },
-            {
-              label: 'GitHub 讨论',
-              href: githubUrls.discussions,
-            },
-            {
-              label: 'GitHub 问题',
-              href: githubUrls.issues,
-            },
-          ],
+          label: '社区协议',
         },
         {
           type: 'localeDropdown',
@@ -458,37 +352,16 @@ const config: Config = {
           title: '开发框架',
           items: [
             {
-              label: 'Agent Framework',
-              to: '/docs/quick-start',
+              label: 'ReAct Agent',
+              to: '/docs/frameworks/agent-framework/quick-start',
             },
             {
               label: 'Graph Core',
               to: '/docs/frameworks/graph-core/quick-start',
             },
             {
-              label: 'Admin',
-              to: '/ecosystem/admin/quick-start',
-            },
-            {
-              label: 'Spring AI',
-              to: '/integration/chatmodels/comparison',
-            },
-          ],
-        },
-        {
-          title: '智能体',
-          items: [
-            {
-              label: 'DeepResearch',
-              to: '/agents/deepresearch/graph/quick-start',
-            },
-            {
-              label: 'DataAgent',
-              to: '/agents/dataagent/quick-start',
-            },
-            {
-              label: 'JManus',
-              to: '/agents/jmanus/quick-start',
+              label: 'Studio',
+              to: '/docs/frameworks/studio/quick-start',
             },
           ],
         },
@@ -496,16 +369,24 @@ const config: Config = {
           title: '社区',
           items: [
             {
+              label: '社区协议',
+              to: '/docs/community/policies',
+            },
+            {
+              label: '贡献指南',
+              href: githubUrls.contributing,
+            },
+            {
+              label: '安全策略',
+              href: `${githubUrls.repo}/security/policy`,
+            },
+            {
               label: 'GitHub',
               href: githubUrls.repo,
             },
             {
               label: '讨论',
               href: githubUrls.discussions,
-            },
-            {
-              label: '贡献',
-              href: githubUrls.contributing,
             },
           ],
         },
@@ -516,18 +397,10 @@ const config: Config = {
               label: '许可证',
               href: githubUrls.license,
             },
-            {
-              label: '博客',
-              to: '/blog',
-            },
-            {
-              label: '团队',
-              to: '/community/team',
-            },
           ],
         },
       ],
-      copyright: `版权所有 © ${new Date().getFullYear()} ${projectConfig.author.name}。使用 Docusaurus 构建。`,
+      copyright: `© ${new Date().getFullYear()} ${projectConfig.author.name}`,
     },
     prism: {
       theme: lightCodeTheme,
