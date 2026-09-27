@@ -44,7 +44,11 @@
   --ifm-color-content: var(--text-primary);
   --ifm-color-content-secondary: var(--text-secondary);
   --ifm-navbar-background-color: rgba(244, 248, 252, 0.84);
-  --ifm-footer-background-color: #060b16;
+  --ifm-footer-background-color: #eaf1f9;
+  --ifm-footer-color: var(--text-secondary);
+  --ifm-footer-link-color: var(--text-secondary);
+  --ifm-footer-title-color: var(--text-primary);
+  --ifm-footer-border-color: var(--border-light);
   --ifm-code-font-size: 93%;
   --docusaurus-highlighted-code-line-bg: rgba(2, 132, 199, 0.1);
 
@@ -91,6 +95,10 @@
   --ifm-color-content-secondary: var(--text-secondary);
   --ifm-navbar-background-color: rgba(5, 8, 17, 0.82);
   --ifm-footer-background-color: #03060d;
+  --ifm-footer-color: var(--text-secondary);
+  --ifm-footer-link-color: var(--text-secondary);
+  --ifm-footer-title-color: var(--text-primary);
+  --ifm-footer-border-color: rgba(56, 189, 248, 0.18);
   --docusaurus-highlighted-code-line-bg: rgba(56, 189, 248, 0.14);
 
   --gradient-primary: var(--ifm-background-color);
@@ -141,9 +149,11 @@ body {
   -webkit-backdrop-filter: blur(16px);
 }
 
-.footer {
+.footer,
+.footer--dark {
   background: var(--ifm-footer-background-color) !important;
-  border-top: 1px solid rgba(56, 189, 248, 0.18);
+  border-top: 1px solid var(--ifm-footer-border-color, var(--border-light)) !important;
+  color: var(--ifm-footer-color) !important;
 }
 
 /* Navigation bar styles */
@@ -918,7 +928,7 @@ tr:hover {
 /* Footer styles */
 .footer {
   backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border-light);
+  border-top: 1px solid var(--ifm-footer-border-color, var(--border-light));
   margin-top: 3rem;
   padding: 2.5rem 0 1.5rem;
 }

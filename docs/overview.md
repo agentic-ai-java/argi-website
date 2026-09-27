@@ -1,24 +1,28 @@
 ---
 sidebar_position: 1
-title: Overview
-description: Agentic AI is a Java agent runtime for ReAct Agent, graph orchestration, durable execution, and human-in-the-loop workflows.
-keywords: [Agentic AI, Agent Framework, ReactAgent, Graph Core, Java Agent, workflow orchestration]
+title: 项目架构概述
+sidebar_label: 项目架构概述
+description: Agentic AI 是面向 Java 开发者的智能体运行时，支持 ReAct Agent、图编排、可持久化执行与人机协同。
+keywords: [Agentic AI, Agent Framework, ReactAgent, Graph Core, Java Agent, 架构概述, workflow orchestration]
 ---
 
-# Overview
+# 项目架构概述
 
-Agentic AI is a Java agent runtime for building production-grade agent applications.
+Agentic AI 是面向 Java 开发者的智能体运行时与编排框架，用于构建 ReAct Agent、显式图工作流以及需要状态恢复能力的智能体应用。
 
-The project focuses on upper-layer agent design:
+项目聚焦于顶层智能体系统架构设计：
 
-- **Agent Framework** for ReAct Agent, agent loops, hooks, context control, and multi-agent patterns.
-- **Graph Core** for workflow orchestration, state checkpoints, recovery, streaming, and human-in-the-loop execution.
-- **Studio** for embedded visual debugging of agent conversations and graph workflows.
+- **Agent Framework**：提供 `ReactAgent` 与多智能体编排能力。`ReactAgent` 基于 Reasoning-Acting 循环运行，并支持工具、Hook、Interceptor、结构化输出和模型错误处理配置。
+- **Graph Core**：提供 `StateGraph`、`CompiledGraph`、节点、边、共享状态、检查点、恢复、流式输出和人工介入等图运行时能力。
+- **Studio**：提供嵌入式可视化调试界面，用于观测智能体对话流与图工作流执行过程。
 
-Agentic AI was forked from Spring AI Alibaba and keeps some legacy Maven coordinates, package names, configuration prefixes, and class names for compatibility. Treat those identifiers as public contracts unless a migration guide explicitly says otherwise.
+Agentic AI fork 自 Spring AI Alibaba。refactor 分支已经将核心 Maven 坐标迁移到 `io.github.agentic-ai`，模块名迁移到 `agentic-ai-*`，Java 包名迁移到 `io.github.agentic.spring.ai.*`。
 
-## Design Positioning
+## 架构设计与定位
 
-ReAct Agent and Graph are Agentic AI upper-layer designs. They define the runtime behavior: how state moves, how execution resumes, how tools are controlled, and how human feedback enters the workflow.
+ReAct Agent 与 Graph 是 Agentic AI 当前文档需要优先对齐的两类核心能力：
 
-For model access, use the adapters provided by the project and its optional companion repositories.
+1. **Graph**：适用于需要显式控制分支、循环、并行、子图、检查点和恢复的工作流。图由 `StateGraph` 定义，编译为 `CompiledGraph` 后执行。
+2. **ReAct Agent**：适用于模型需要在「推理、工具调用、观察结果、继续推理」之间循环的智能体应用。`ReactAgent` 构建在 Graph 运行时之上。
+
+在模型接入层面，Agentic AI 使用 Spring AI 的 `ChatModel`、`ToolCallback` 等抽象。Graph 编排、状态管理和恢复语义由 Agentic AI 自身提供。
