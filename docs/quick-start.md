@@ -17,8 +17,8 @@ Use this path when starting a new Agentic AI application:
 
 ## First Pages To Read
 
-- [Agent Framework](frameworks/agent-framework/quick-start.md)
-- [Graph Core](frameworks/graph-core/quick-start.md)
+- [ReAct Agent](frameworks/agent-framework/agents-intro.md)
+- [Graph Core](frameworks/graph-core/workflow-orchestration.md)
 - [Studio](frameworks/studio/quick-start.md)
 
 ## Repository

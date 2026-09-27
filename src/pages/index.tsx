@@ -253,7 +253,7 @@ CompiledGraph runtime = workflow.compile(
     highlights: [
       '支持 DAG 有向无环图与 Cyclic 自反思循环图混合编排',
       '支持并行分支扇出（Fan-out）与确定性状态归约合并（Fan-in）',
-      '子图嵌套（Sub-Graph）与多智能体 Supervisor / Routing 模式开箱即用',
+      '子图嵌套（Sub-Graph）与多智能体顺序、并行、路由、循环模式开箱即用',
     ],
   },
   {
@@ -767,7 +767,7 @@ function CapabilitySection() {
               <p>
                 将思考（Reason）、工具行动（Act）与环境反馈（Observe）组织成受控的闭环执行流，内置模型限流、上下文压缩与结构化输出校验。
               </p>
-              <Link to="/docs/frameworks/agent-framework/quick-start" className={styles.capabilityLink}>
+              <Link to="/docs/frameworks/agent-framework/agents-intro" className={styles.capabilityLink}>
                 探索 ReAct Agent <span>→</span>
               </Link>
             </div>
@@ -870,9 +870,9 @@ function CapabilitySection() {
               </div>
               <h3>MCP 协议与多智能体协同网络</h3>
               <p>
-                原生集成 Model Context Protocol（MCP）工具生态与 A2A 多智能体发现协议，支持 Sequential、Parallel、Supervisor 与 Handoffs 编排。
+                原生集成 Model Context Protocol（MCP）工具生态，支持 A2A 远程 Agent 封装，以及 Sequential、Parallel、LlmRouting、Loop 与 Agent-as-tool 编排。
               </p>
-              <Link to="/docs/frameworks/agent-framework/quick-start" className={styles.capabilityLink}>
+              <Link to="/docs/frameworks/agent-framework/multi-agent" className={styles.capabilityLink}>
                 探索多智能体编排 <span>→</span>
               </Link>
             </div>

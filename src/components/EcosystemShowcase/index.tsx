@@ -25,7 +25,7 @@ const frameworkItems: EcosystemItem[] = [
     tags: ['ReAct Loop', 'Hooks & Guardrails', 'Context Compression', 'Multi-Agent'],
     iconType: 'agent',
     repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai',
-    docUrl: '/docs/frameworks/agent-framework/quick-start',
+    docUrl: '/docs/frameworks/agent-framework/agents-intro',
   },
   {
     name: 'Agentic AI Graph Core',
@@ -36,7 +36,7 @@ const frameworkItems: EcosystemItem[] = [
     tags: ['StateGraph', 'Conditional Edges', 'Durable Checkpoints', 'HITL'],
     iconType: 'graph',
     repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai',
-    docUrl: '/docs/frameworks/graph-core/quick-start',
+    docUrl: '/docs/frameworks/graph-core/workflow-orchestration',
   },
   {
     name: 'Agentic AI Studio',

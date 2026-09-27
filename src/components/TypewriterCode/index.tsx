@@ -68,7 +68,7 @@ const TypewriterCode: React.FC<TypewriterCodeProps> = ({
     const tokens: Token[] = []
     const keywords = ['public', 'private', 'class', 'return', 'new', 'final', 'this']
     const annotations = ['@RestController', '@RequestMapping', '@SpringBootApplication', '@GetMapping']
-    const types = ['String', 'ChatModel', 'Prompt', 'DashScopeChatOptions', 'DashScopeApi']
+    const types = ['String', 'ChatModel', 'Prompt', 'OpenAiChatOptions', 'OpenAiChatModel']
 
     let remaining = line
 

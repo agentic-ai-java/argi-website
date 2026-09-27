@@ -6,7 +6,7 @@ keywords: [Agentic AI, community, contribution, security, code of conduct]
 
 # 社区协议
 
-Agentic AI Fork 自 Spring AI Alibaba。项目会保留部分历史 Maven 坐标、包名、配置前缀和类名，以维持现有用户的兼容性；代码规范也沿用 Spring AI Alibaba 的格式化与检查规则。
+Agentic AI fork 自 Spring AI Alibaba。refactor 分支已经将核心 Maven 坐标迁移到 `io.github.agentic-ai`，核心模块名迁移到 `agentic-ai-*`，Java 包名迁移到 `io.github.agentic.spring.ai.*`。贡献代码时请以当前分支中的 POM、源码包名和模块目录为准。
 
 ## 贡献协议
 

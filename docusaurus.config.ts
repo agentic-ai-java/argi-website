@@ -303,6 +303,12 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
+          sidebarId: 'architectureSidebar',
+          position: 'left',
+          label: '架构',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'graphCoreSidebar',
           position: 'left',
           label: 'Graph Core',
@@ -312,6 +318,12 @@ const config: Config = {
           sidebarId: 'reactAgentSidebar',
           position: 'left',
           label: 'ReAct Agent',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'extensionsSidebar',
+          position: 'left',
+          label: 'Extensions',
         },
         {
           type: 'docSidebar',
@@ -337,27 +349,34 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
       links: [
         {
-          title: '文档',
+          title: '文档与架构',
           items: [
             {
-              label: '快速开始',
+              label: '项目架构概述',
               to: '/docs/overview',
+            },
+            {
+              label: '项目版本说明',
+              to: '/docs/versions',
             },
           ],
         },
         {
-          title: '开发框架',
+          title: '核心框架',
           items: [
             {
-              label: 'ReAct Agent',
-              to: '/docs/frameworks/agent-framework/quick-start',
+              label: 'Graph Core',
+              to: '/docs/frameworks/graph-core/workflow-orchestration',
             },
             {
-              label: 'Graph Core',
-              to: '/docs/frameworks/graph-core/quick-start',
+              label: 'ReAct Agent',
+              to: '/docs/frameworks/agent-framework/agents-intro',
+            },
+            {
+              label: 'Extensions',
+              to: '/docs/frameworks/extensions/overview',
             },
             {
               label: 'Studio',
