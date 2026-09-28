@@ -30,24 +30,6 @@ export default function FooterWrapper(props: Props): React.ReactElement {
           }}>
             {projectConfig.description}
           </p>
-          <p style={{
-            fontSize: '0.85rem',
-            marginTop: '0.75rem',
-            marginBottom: 0,
-            opacity: 0.75,
-          }}>
-            <a
-              href="https://beian.miit.gov.cn/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              浙ICP备2021005855号-33
-            </a>
-          </p>
         </div>
       </div>
     </>

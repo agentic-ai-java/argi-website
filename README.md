@@ -1,6 +1,6 @@
-# Spring AI Alibaba Documentation Website
+# Agentic AI Documentation Website
 
-The official documentation website for the Spring AI Alibaba project, built with Docusaurus.
+The official documentation website for the Agentic AI project, built with Docusaurus.
 
 ## Quick Start
 
@@ -17,7 +17,7 @@ English: `make preview-en`
 
 ## GitHub Pages Deployment
 
-After `main` is updated, GitHub Actions publishes the `build` directory once lint and build checks pass. Before the first deployment, set the publishing source to `GitHub Actions` under `Settings > Pages`. The site is available at <https://agentic-spring-ai.github.io/website/>.
+After the publishing branch is updated, GitHub Actions publishes the `build` directory once lint and build checks pass. Before the first deployment, set the publishing source to `GitHub Actions` under `Settings > Pages`. The site is available at <https://agentic-spring-ai.github.io/website/>.
 
 ## Before Committing
 

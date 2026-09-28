@@ -1,23 +1,24 @@
 ---
-title: PlantUML 图表可视化
-description: 使用PlantUML可视化 Spring AI Alibaba Graph 工作流结构
-keywords: [PlantUML, 图表, 可视化, UML, 流程图, Graph 可视化]
+title: plantUML 输出
+sidebar_label: plantUML 输出
+description: 使用 PlantUML 导出并可视化 Graph 工作流拓扑结构。
+keywords: [PlantUML, plantUML 输出, 图表, 可视化, UML, 流程图, Graph 可视化]
 ---
 
-# PlantUML 图表可视化
+# plantUML 输出
 
-Spring AI Alibaba Graph 支持将工作流导出为 PlantUML 格式，方便可视化和文档化。
+Agentic AI Graph 支持将工作流导出为 PlantUML 格式，方便可视化和文档化。
 
 ## PlantUML 工具函数
 
 <Code
   language="java"
-  title="PlantUML 工具函数" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/graph/examples/PlantUmlExample.java"
+  title="PlantUML 工具函数"
 >
 {`import net.sourceforge.plantuml.SourceStringReader;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.FileFormat;
-import com.alibaba.cloud.ai.graph.GraphRepresentation;
+import io.github.agentic.spring.ai.graph.GraphRepresentation;
 import java.io.IOException;
 
 static java.awt.Image plantUML2PNG(String code) throws IOException {
@@ -41,11 +42,11 @@ static void displayDiagram(GraphRepresentation representation) throws IOExceptio
 
 <Code
   language="java"
-  title="简单示例" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/graph/examples/PlantUmlExample.java"
+  title="简单示例"
 >
 {`var code = """
     @startuml
-    title Spring AI Alibaba Graph
+    title Agentic AI Graph
     START --> NodeA
     NodeA --> NodeB
     NodeB --> END
@@ -59,22 +60,22 @@ display(plantUML2PNG(code));`}
 
 <Code
   language="java"
-  title="从 Graph 生成 PlantUML" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/graph/examples/PlantUmlExample.java"
+  title="从 Graph 生成 PlantUML"
 >
-{`import com.alibaba.cloud.ai.graph.CompiledGraph;
-import com.alibaba.cloud.ai.graph.GraphRepresentation;
-import com.alibaba.cloud.ai.graph.KeyStrategy;
-import com.alibaba.cloud.ai.graph.KeyStrategyFactory;
-import com.alibaba.cloud.ai.graph.StateGraph;
-import com.alibaba.cloud.ai.graph.exception.GraphStateException;
-import com.alibaba.cloud.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.spring.ai.graph.CompiledGraph;
+import io.github.agentic.spring.ai.graph.GraphRepresentation;
+import io.github.agentic.spring.ai.graph.KeyStrategy;
+import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
+import io.github.agentic.spring.ai.graph.StateGraph;
+import io.github.agentic.spring.ai.graph.exception.GraphStateException;
+import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.alibaba.cloud.ai.graph.StateGraph.END;
-import static com.alibaba.cloud.ai.graph.StateGraph.START;
-import static com.alibaba.cloud.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.spring.ai.graph.StateGraph.END;
+import static io.github.agentic.spring.ai.graph.StateGraph.START;
+import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * 从 Graph 生成 PlantUML

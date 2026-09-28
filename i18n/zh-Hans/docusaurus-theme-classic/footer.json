@@ -3,6 +3,10 @@
     "message": "文档",
     "description": "The title of the footer links column with title=文档 in the footer"
   },
+  "link.title.开发框架": {
+    "message": "开发框架",
+    "description": "The title of the footer links column with title=开发框架 in the footer"
+  },
   "link.title.社区": {
     "message": "社区",
     "description": "The title of the footer links column with title=社区 in the footer"
@@ -15,9 +19,29 @@
     "message": "快速开始",
     "description": "The label of footer link with label=快速开始 linking to /docs/intro"
   },
-  "link.item.label.API 参考": {
-    "message": "API 参考",
-    "description": "The label of footer link with label=API 参考 linking to /docs/api/overview"
+  "link.item.label.ReAct Agent": {
+    "message": "ReAct Agent",
+    "description": "The label of footer link with label=ReAct Agent linking to /docs/frameworks/agent-framework/quick-start"
+  },
+  "link.item.label.Graph Core": {
+    "message": "Graph Core",
+    "description": "The label of footer link with label=Graph Core linking to /docs/frameworks/graph-core/quick-start"
+  },
+  "link.item.label.Studio": {
+    "message": "Studio",
+    "description": "The label of footer link with label=Studio linking to /docs/frameworks/studio/quick-start"
+  },
+  "link.item.label.社区协议": {
+    "message": "社区协议",
+    "description": "The label of footer link with label=社区协议 linking to /docs/community/policies"
+  },
+  "link.item.label.贡献指南": {
+    "message": "贡献指南",
+    "description": "The label of footer link with label=贡献指南"
+  },
+  "link.item.label.安全策略": {
+    "message": "安全策略",
+    "description": "The label of footer link with label=安全策略"
   },
   "link.item.label.GitHub": {
     "message": "GitHub",
@@ -31,12 +55,8 @@
     "message": "许可证",
     "description": "The label of footer link with label=许可证 linking to https://github.com/your-username/your-repo-name/blob/main/LICENSE"
   },
-  "link.item.label.贡献": {
-    "message": "贡献",
-    "description": "The label of footer link with label=贡献 linking to https://github.com/your-username/your-repo-name/blob/main/CONTRIBUTING.md"
-  },
   "copyright": {
-    "message": "版权所有 © 2025 Spring AI Alibaba Team。使用 Docusaurus 构建。",
+    "message": "© 2026 Agentic AI",
     "description": "The footer copyright"
   }
 }

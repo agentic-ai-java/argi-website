@@ -1,227 +1,160 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
+import { useLocation } from '@docusaurus/router'
+import useBaseUrl from '@docusaurus/useBaseUrl'
 import BackToTop from '../components/BackToTop'
 import AnnouncementBar from '../components/AnnouncementBar'
 
 interface RootProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function Root({ children }: RootProps) {
-  const [isHomePage, setIsHomePage] = useState(false)
+  const location = useLocation()
+  const rootUrl = useBaseUrl('/')
+  const zhUrl = useBaseUrl('/zh-Hans/')
+  const enUrl = useBaseUrl('/en/')
 
-  useEffect(() => {
-    // Check if we're on homepage
-    const checkPath = () => {
-      const path = window.location.pathname
-      
-      // Homepage paths: /, /zh-Hans/, /en/
-      const normalizedPath = path.replace(/\/$/, '') || '/'
-      const isHome = normalizedPath === '/' || 
-                     normalizedPath === '/zh-Hans' || 
-                     normalizedPath === '/en'
-      
-      setIsHomePage(isHome)
-    }
+  const isHomePage = useMemo(() => {
+    const normalize = (value: string) => value.replace(/\/+$/, '') || '/'
+    const current = normalize(location.pathname)
+    return (
+      current === normalize(rootUrl) ||
+      current === normalize(zhUrl) ||
+      current === normalize(enUrl) ||
+      current === '/' ||
+      current === '/zh-Hans' ||
+      current === '/en'
+    )
+  }, [location.pathname, rootUrl, zhUrl, enUrl])
 
-    checkPath()
-
-    // Listen for route changes
-    const handleLocationChange = () => {
-      checkPath()
-    }
-
-    window.addEventListener('popstate', handleLocationChange)
-
-    // Throttle function to limit frequency
-    let timeoutId: NodeJS.Timeout | null = null
-    const throttledCheckPath = () => {
-      if (timeoutId) return
-      timeoutId = setTimeout(() => {
-        checkPath()
-        timeoutId = null
-      }, 500)
-    }
-
-    // Use more specific MutationObserver configuration
-    const observer = new MutationObserver(throttledCheckPath)
-
-    // Only observe the main content area, not entire body
-    const mainContent = document.querySelector('main') || document.body
-    observer.observe(mainContent, {
-      childList: true,
-      subtree: false, // Changed from true to false to reduce overhead
-    })
-
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange)
-      observer.disconnect()
-      if (timeoutId) {
-        clearTimeout(timeoutId)
-      }
-    }
-  }, [])
-
-  // 在 navbar 右侧添加版本选择器
+  // Add the version selector portal to the right side of the navbar once.
   useEffect(() => {
     const navbar = document.querySelector('.navbar__items--right')
-    if (navbar) {
-      // 检查是否已添加
-      let versionContainer = document.querySelector('.navbar__version-dropdown')
-      if (!versionContainer) {
-        versionContainer = document.createElement('div')
-        versionContainer.className = 'navbar__version-dropdown'
-        versionContainer.id = 'version-dropdown-portal'
-        // 插入到语言选择器之前
-        const localeDropdown = navbar.querySelector('.navbar__item.dropdown')
-        if (localeDropdown) {
-          navbar.insertBefore(versionContainer, localeDropdown)
-        } else {
-          navbar.appendChild(versionContainer)
-        }
+    if (!navbar) return
+
+    let versionContainer = document.querySelector('.navbar__version-dropdown')
+    if (!versionContainer) {
+      versionContainer = document.createElement('div')
+      versionContainer.className = 'navbar__version-dropdown'
+      versionContainer.id = 'version-dropdown-portal'
+      const localeDropdown = navbar.querySelector('.navbar__item.dropdown')
+      if (localeDropdown) {
+        navbar.insertBefore(versionContainer, localeDropdown)
+      } else {
+        navbar.appendChild(versionContainer)
       }
     }
   }, [])
 
-  // 加载图片放大功能的 JavaScript
+  // Enable lightweight image zoom and native lazy-loading for article images on route change.
   useEffect(() => {
-    const processedImages = new WeakSet<HTMLImageElement>()
-    
-    // 图片放大功能
-    function initImageZoom() {
-      // 查找博客文章容器
-      const blogArticle = document.querySelector('article')
-      if (!blogArticle) return
+    const article = document.querySelector('article')
+    if (!article) return
 
-      // 查找所有博客文章中的图片
-      const images = blogArticle.querySelectorAll('img')
+    const images = article.querySelectorAll<HTMLImageElement>('img')
+    images.forEach((img) => {
+      if (!img.hasAttribute('loading')) {
+        img.setAttribute('loading', 'lazy')
+      }
+      if (!img.hasAttribute('decoding')) {
+        img.setAttribute('decoding', 'async')
+      }
 
-      images.forEach((img) => {
-        // 跳过已经处理过的图片
-        if (processedImages.has(img as HTMLImageElement) || img.closest('.image-zoom-wrapper')) return
-        
-        processedImages.add(img as HTMLImageElement)
+      if (img.closest('.image-zoom-wrapper')) return
+      const src = img.getAttribute('src')
+      if (!src) return
 
-        const src = img.getAttribute('src')
-        const alt = img.getAttribute('alt') || ''
-        const className = img.getAttribute('class') || ''
+      const wrapper = document.createElement('div')
+      wrapper.className = 'image-zoom-wrapper'
 
-        if (src) {
-          // 使用DocumentFragment减少重排
-          const fragment = document.createDocumentFragment()
-          
-          // 创建包装器
-          const wrapper = document.createElement('div')
-          wrapper.className = 'image-zoom-wrapper'
+      img.setAttribute('data-zoom-src', src)
+      img.setAttribute('data-zoom-alt', img.getAttribute('alt') || '')
+      img.style.cursor = 'pointer'
 
-          // 复制原始图片的所有属性
-          const newImg = document.createElement('img')
-          newImg.src = src
-          newImg.alt = alt
-          newImg.className = className
-          newImg.setAttribute('data-zoom-src', src)
-          newImg.setAttribute('data-zoom-alt', alt)
-
-          // 复制所有其他属性 (优化版)
-          Array.from(img.attributes).forEach(attr => {
-            if (!['src', 'alt', 'class'].includes(attr.name)) {
-              newImg.setAttribute(attr.name, attr.value)
-            }
-          })
-
-          // 添加点击事件来模拟放大功能
-          newImg.style.cursor = 'pointer'
-
-          wrapper.appendChild(newImg)
-
-          // 添加悬浮放大按钮
-          const zoomButton = document.createElement('div')
-          zoomButton.className = 'image-zoom-button'
-          zoomButton.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              <line x1="11" y1="8" x2="11" y2="14"></line>
-              <line x1="8" y1="11" x2="14" y2="11"></line>
-            </svg>
-          `
-
-          wrapper.appendChild(zoomButton)
-          fragment.appendChild(wrapper)
-
-          // 插入到原始图片位置
-          img.parentNode?.insertBefore(fragment, img)
-          img.remove()
-        }
-      })
-    }
-
-    // 打开图片放大模态框
-    function openImageZoom(src: string, alt: string) {
-      // 创建模态框
-      const modal = document.createElement('div')
-      modal.className = 'image-zoom-modal'
-
-      const modalContent = document.createElement('div')
-      modalContent.className = 'image-zoom-modal-content'
-
-      const closeButton = document.createElement('button')
-      closeButton.className = 'image-zoom-close'
-      closeButton.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
+      const zoomButton = document.createElement('div')
+      zoomButton.className = 'image-zoom-button'
+      zoomButton.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="11" y1="8" x2="11" y2="14"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
         </svg>
       `
 
-      const zoomedImg = document.createElement('img')
-      zoomedImg.className = 'image-zoom-zoomed'
-      zoomedImg.src = src
-      zoomedImg.alt = alt
+      img.parentNode?.insertBefore(wrapper, img)
+      wrapper.appendChild(img)
+      wrapper.appendChild(zoomButton)
+    })
+  }, [location.pathname])
 
-      const caption = alt ? document.createElement('div') : null
-      if (caption) {
-        caption.className = 'image-zoom-caption'
-        caption.textContent = alt
-      }
-
-      closeButton.addEventListener('click', () => {
-        document.body.removeChild(modal)
-        document.body.classList.remove('modal-open')
-      })
-
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          document.body.removeChild(modal)
-          document.body.classList.remove('modal-open')
-        }
-      })
-
-      // 添加键盘事件支持
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          document.body.removeChild(modal)
-          document.body.classList.remove('modal-open')
-          document.removeEventListener('keydown', handleKeyDown)
-        }
-      }
-
-      document.addEventListener('keydown', handleKeyDown)
-
-      modalContent.appendChild(closeButton)
-      modalContent.appendChild(zoomedImg)
-      if (caption) modalContent.appendChild(caption)
-      modal.appendChild(modalContent)
+  useEffect(() => {
+    function openImageZoom(src: string, alt: string) {
+      const modal = document.createElement('div')
+      modal.className = 'image-zoom-modal'
+      modal.innerHTML = `
+        <div class="image-zoom-backdrop">
+          <div class="image-zoom-container">
+            <img src="${src}" alt="${alt}" class="image-zoom-image" decoding="async" />
+            <button class="image-zoom-close" aria-label="Close image preview">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            ${alt ? `<div class="image-zoom-caption">${alt}</div>` : ''}
+          </div>
+        </div>
+      `
 
       document.body.appendChild(modal)
-      document.body.classList.add('modal-open')
+      document.body.style.overflow = 'hidden'
+
+      const closeModal = () => {
+        modal.remove()
+        document.body.style.overflow = ''
+        document.removeEventListener('keydown', handleKeyDown)
+      }
+
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          closeModal()
+        }
+      }
+
+      modal.addEventListener('click', (event) => {
+        if (
+          event.target === modal ||
+          (event.target as Element).classList.contains('image-zoom-backdrop') ||
+          (event.target as Element).closest('.image-zoom-close')
+        ) {
+          closeModal()
+        }
+      })
+
+      document.addEventListener('keydown', handleKeyDown)
+      requestAnimationFrame(() => {
+        modal.classList.add('image-zoom-modal--open')
+      })
     }
 
-    // 使用事件委托处理图片点击
-    const handleImageClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      const img = target.closest('.image-zoom-wrapper img, .image-zoom-button')
-      if (img) {
-        const imgElement = target.closest('.image-zoom-wrapper')?.querySelector('img')
+    function handleImageClick(event: Event) {
+      const target = event.target as HTMLElement
+      if (!target) return
+
+      if (target.tagName === 'IMG' && target.closest('.image-zoom-wrapper')) {
+        event.preventDefault()
+        const imgElement = target as HTMLImageElement
+        const src = imgElement.getAttribute('data-zoom-src') || imgElement.src
+        const alt = imgElement.getAttribute('data-zoom-alt') || imgElement.alt
+        openImageZoom(src, alt)
+        return
+      }
+
+      if (target.closest('.image-zoom-button')) {
+        event.preventDefault()
+        const wrapper = target.closest('.image-zoom-wrapper')
+        const imgElement = wrapper?.querySelector('img') as HTMLImageElement | null
         if (imgElement) {
           const src = imgElement.getAttribute('data-zoom-src') || imgElement.src
           const alt = imgElement.getAttribute('data-zoom-alt') || imgElement.alt
@@ -231,44 +164,8 @@ export default function Root({ children }: RootProps) {
     }
 
     document.addEventListener('click', handleImageClick)
-
-    // 页面加载完成后初始化
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initImageZoom)
-    } else {
-      initImageZoom()
-    }
-
-    // 监听路由变化（适用于 SPA）
-    let currentPath = window.location.pathname
-    let debounceTimer: NodeJS.Timeout | null = null
-
-    const observeUrlChange = () => {
-      const newPath = window.location.pathname
-      if (newPath !== currentPath) {
-        currentPath = newPath
-        // 使用防抖延迟执行
-        if (debounceTimer) clearTimeout(debounceTimer)
-        debounceTimer = setTimeout(initImageZoom, 300)
-      }
-    }
-
-    // 使用更优化的 MutationObserver 配置
-    const observer = new MutationObserver(() => {
-      if (debounceTimer) clearTimeout(debounceTimer)
-      debounceTimer = setTimeout(observeUrlChange, 200)
-    })
-
-    const mainContent = document.querySelector('main') || document.body
-    observer.observe(mainContent, {
-      childList: true,
-      subtree: false, // 减少监听深度
-    })
-
     return () => {
-      observer.disconnect()
       document.removeEventListener('click', handleImageClick)
-      if (debounceTimer) clearTimeout(debounceTimer)
     }
   }, [])
 

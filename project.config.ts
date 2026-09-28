@@ -4,10 +4,10 @@ export interface ProjectConfig {
   tagline: string
   description: string
 
-  // Author information
+  // Project owner information
   author: {
     name: string
-    email: string
+    email?: string
     website?: string
   }
 
@@ -40,21 +40,20 @@ export interface ProjectConfig {
 
 const projectConfig: ProjectConfig = {
   // Basic project information
-  title: 'Spring AI Alibaba',
-  tagline: 'Agentic AI Framework for Java Developers. Built on the core concept of DAG Graph, it can easily achieve single agent, multi-agent, and complex workflow orchestration.',
-  description: 'Spring AI Alibaba 开源项目基于 Spring AI 构建，是阿里云通义系列模型及服务在 Java AI 应用开发领域的最佳实践，提供高层次的 AI API 抽象与云原生基础设施集成方案，帮助开发者快速构建 AI 应用。',
+  title: 'Agentic AI',
+  tagline: 'Agentic AI Runtime for Java Developers. Build ReAct agents, graph workflows, and multi-agent applications with durable execution.',
+  description: 'Agentic AI 是面向 Java 开发者的智能体运行时与工作流框架，提供 ReAct Agent、Graph 编排、上下文工程、持久化执行和人机协同能力。',
 
-  // Author information
+  // Project owner information
   author: {
-    name: 'spring-ai-alibaba-team',
-    email: 'your.email@example.com',
-    website: 'https://java2ai.com', // optional
+    name: 'Agentic AI',
+    website: 'https://agentic-spring-ai.github.io/website/',
   },
 
   // GitHub repository information (project code repo)
   github: {
-    username: 'alibaba',
-    repoName: 'spring-ai-alibaba',
+    username: 'agentic-spring-ai',
+    repoName: 'agentic-spring-ai',
   },
 
   // Docs/website repository information
@@ -67,13 +66,6 @@ const projectConfig: ProjectConfig = {
   deployment: {
     url: 'https://agentic-spring-ai.github.io',
     baseUrl: '/website/', // 项目站点部署在 GitHub Pages 的仓库子路径下
-  },
-
-  // Social media links (optional)
-  social: {
-    twitter: 'https://twitter.com/your-username',
-    // discord: 'https://discord.gg/your-server',
-    // linkedin: 'https://linkedin.com/in/your-profile',
   },
 
 }
@@ -96,7 +88,6 @@ export const getGitHubUrls = (config: ProjectConfig) => {
     license: `${baseUrl}/blob/main/LICENSE`,
     contributing: `${baseUrl}/blob/main/CONTRIBUTING.md`,
     editDocs: `${docsBaseUrl}/tree/main/`,
-    editBlog: `${docsBaseUrl}/tree/main/blog/`,
     docsRepo: docsBaseUrl,
   }
 }
@@ -107,6 +98,8 @@ export const getAuthorInfo = (config: ProjectConfig) => {
   return {
     name,
     email,
-    full: website ? `${name} <${email}> (${website})` : `${name} <${email}>`,
+    full: [name, email ? `<${email}>` : undefined, website ? `(${website})` : undefined]
+      .filter(Boolean)
+      .join(' '),
   }
 }

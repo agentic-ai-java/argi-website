@@ -11,13 +11,21 @@
     "message": "Docs",
     "description": "Navbar item with label 文档"
   },
-  "item.label.智能体": {
-    "message": "Agents",
-    "description": "Navbar item with label 智能体"
+  "item.label.Graph Core": {
+    "message": "Graph Core",
+    "description": "Navbar item with label Graph Core"
   },
-  "item.label.博客": {
-    "message": "Blog",
-    "description": "Navbar item with label 博客"
+  "item.label.ReAct Agent": {
+    "message": "ReAct Agent",
+    "description": "Navbar item with label ReAct Agent"
+  },
+  "item.label.Studio": {
+    "message": "Studio",
+    "description": "Navbar item with label Studio"
+  },
+  "item.label.社区协议": {
+    "message": "Community Policies",
+    "description": "Navbar item with label 社区协议"
   },
   "item.label.社区": {
     "message": "Community",
@@ -26,14 +34,6 @@
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"
-  },
-  "item.label.团队": {
-    "message": "Team",
-    "description": "Navbar item with label 团队"
-  },
-  "item.label.贡献指南": {
-    "message": "Contributing Guide",
-    "description": "Navbar item with label 贡献指南"
   },
   "item.label.行为准则": {
     "message": "Code of Conduct",

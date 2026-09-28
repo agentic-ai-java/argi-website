@@ -1,9 +1,9 @@
 {
-  "name": "spring-ai-alibaba-website",
+  "name": "agentic-ai-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Spring AI Alibaba Website",
-  "author": "Spring AI Alibaba Contributors",
+  "description": "Agentic AI documentation website",
+  "author": "Agentic AI",
   "license": "Apache-2.0",
   "scripts": {
     "docusaurus": "docusaurus",
@@ -18,6 +18,7 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
+    "preview": "node scripts/preview-build.mjs",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-translations:en": "docusaurus write-translations --locale en",

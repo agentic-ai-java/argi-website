@@ -1,12 +1,13 @@
 ---
-title: Graph 执行取消
-description: 使用 Spring AI Alibaba Graph 框架取消工作流执行，支持优雅停止和立即中断
-keywords: [Spring AI Alibaba, Graph, 取消执行, AsyncGenerator, 流式处理, 工作流取消]
+title: graph 执行取消
+sidebar_label: graph 执行取消
+description: 使用 Graph 框架取消工作流执行，支持优雅停止和立即中断。
+keywords: [Graph, 取消执行, AsyncGenerator, 流式处理, 工作流取消]
 ---
 
-# Spring AI Alibaba Graph - 图执行取消
+# graph 执行取消
 
-Spring AI Alibaba Graph 提供了强大的图执行取消机制，这对于长时间运行的工作流程特别有用。此功能基于 `java-async-generator` 库的取消能力构建。
+Agentic AI Graph 提供了强大的图执行取消机制，这对于长时间运行的工作流程特别有用。此功能基于 `java-async-generator` 库的取消能力构建。
 
 ## 取消图流
 
@@ -28,11 +29,11 @@ Spring AI Alibaba Graph 提供了强大的图执行取消机制，这对于长�
 
 <Code
   language="java"
-  title="立即取消示例" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/graph/examples/CancellationExample.java"
+  title="立即取消示例"
 >
-{`import com.alibaba.cloud.ai.graph.CompiledGraph;
-import com.alibaba.cloud.ai.graph.NodeOutput;
-import com.alibaba.cloud.ai.graph.RunnableConfig;
+{`import io.github.agentic.spring.ai.graph.CompiledGraph;
+import io.github.agentic.spring.ai.graph.NodeOutput;
+import io.github.agentic.spring.ai.graph.RunnableConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,11 +98,11 @@ System.out.println("是否已取消: " + disposable.isDisposed());`}
 
 <Code
   language="java"
-  title="使用迭代器消费流示例" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/graph/examples/CancellationExample.java"
+  title="使用迭代器消费流示例"
 >
-{`import com.alibaba.cloud.ai.graph.CompiledGraph;
-import com.alibaba.cloud.ai.graph.NodeOutput;
-import com.alibaba.cloud.ai.graph.RunnableConfig;
+{`import io.github.agentic.spring.ai.graph.CompiledGraph;
+import io.github.agentic.spring.ai.graph.NodeOutput;
+import io.github.agentic.spring.ai.graph.RunnableConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -167,7 +168,7 @@ System.out.println("是否已取消: " + disposable.isDisposed());`}
 
 <Code
   language="java"
-  title="检查取消状态" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/graph/examples/CancellationExample.java"
+  title="检查取消状态"
 >
 {`import reactor.core.Disposable;
 

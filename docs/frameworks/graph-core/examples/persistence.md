@@ -1,25 +1,26 @@
 ---
-title: 为图添加持久化（记忆）
-description: 学习如何使用Checkpointer为StateGraph提供持久化记忆，跨多个交互共享上下文
+title: 为图添加持久化能力
+sidebar_label: 为图添加持久化能力
+description: 学习如何使用 Checkpointer 为 StateGraph 提供持久化能力，跨多个交互共享上下文。
 keywords: [持久化, Persistence, 记忆, Checkpointer, MemorySaver, StateGraph, 状态持久化]
 ---
 
-# 为图添加持久化（"记忆"）
+# 为图添加持久化能力
 
-许多 AI 应用程序需要记忆来跨多个交互共享上下文。在 Spring AI Alibaba 中，通过 [`Checkpointer`] 为任何 [`StateGraph`] 提供记忆。
+许多 AI 应用程序需要记忆来跨多个交互共享上下文。在 Agentic AI 中，通过 [`Checkpointer`] 为任何 [`StateGraph`] 提供记忆。
 
 ## 核心概念
 
-在创建任何 Spring AI Alibaba 工作流时，可以通过以下方式设置持久化：
+在创建任何 Agentic AI 工作流时，可以通过以下方式设置持久化：
 
 1. 创建一个 [`Checkpointer`]，例如 [`MemorySaver`]
 2. 在编译图时通过 [`CompileConfig`] 传递 Checkpointer
 3. 使用 `threadId` 来标识不同的会话
 
-[`StateGraph`]: https://github.com/alibaba/spring-ai-alibaba/blob/main/spring-ai-alibaba-graph-core/src/main/java/com/alibaba/cloud/ai/graph/StateGraph.java
-[`Checkpointer`]: https://github.com/alibaba/spring-ai-alibaba/blob/main/spring-ai-alibaba-graph-core/src/main/java/com/alibaba/cloud/ai/graph/checkpoint/Checkpoint.java
-[`MemorySaver`]: https://github.com/alibaba/spring-ai-alibaba/blob/main/spring-ai-alibaba-graph-core/src/main/java/com/alibaba/cloud/ai/graph/checkpoint/savers/MemorySaver.java
-[`CompileConfig`]: https://github.com/alibaba/spring-ai-alibaba/blob/main/spring-ai-alibaba-graph-core/src/main/java/com/alibaba/cloud/ai/graph/CompileConfig.java
+[`StateGraph`]: https://github.com/agentic-spring-ai/agentic-spring-ai/blob/refactor/agentic-ai-graph-core/src/main/java/io/github/agentic/ai/graph/StateGraph.java
+[`Checkpointer`]: https://github.com/agentic-spring-ai/agentic-spring-ai/blob/refactor/agentic-ai-graph-core/src/main/java/io/github/agentic/ai/graph/checkpoint/Checkpoint.java
+[`MemorySaver`]: https://github.com/agentic-spring-ai/agentic-spring-ai/blob/refactor/agentic-ai-graph-core/src/main/java/io/github/agentic/ai/graph/checkpoint/savers/MemorySaver.java
+[`CompileConfig`]: https://github.com/agentic-spring-ai/agentic-spring-ai/blob/refactor/agentic-ai-graph-core/src/main/java/io/github/agentic/ai/graph/CompileConfig.java
 
 ## 初始化配置
 
@@ -33,14 +34,14 @@ private static final Logger log = LoggerFactory.getLogger("Persistence");
 
 ## 定义状态和策略
 
-状态是在图中所有节点之间共享的数据结构。Spring AI Alibaba 使用 `KeyStrategyFactory` 来定义状态键的行为。
+状态是在图中所有节点之间共享的数据结构。Agentic AI 使用 `KeyStrategyFactory` 来定义状态键的行为。
 
 ```java
-import com.alibaba.cloud.ai.graph.OverAllState;
-import com.alibaba.cloud.ai.graph.KeyStrategy;
-import com.alibaba.cloud.ai.graph.KeyStrategyFactory;
-import com.alibaba.cloud.ai.graph.state.strategy.ReplaceStrategy;
-import com.alibaba.cloud.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.spring.ai.graph.OverAllState;
+import io.github.agentic.spring.ai.graph.KeyStrategy;
+import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
+import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -98,7 +99,7 @@ public class SearchTool implements Function<SearchTool.Request, String> {
 ### 创建 Agent 节点
 
 ```java
-import com.alibaba.cloud.ai.graph.action.NodeAction;
+import io.github.agentic.spring.ai.graph.action.NodeAction;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.model.function.FunctionCallback;
 import org.springframework.ai.model.function.FunctionCallbackWrapper;
@@ -143,7 +144,7 @@ class AgentNode implements NodeAction {
 ### 定义路由逻辑
 
 ```java
-import com.alibaba.cloud.ai.graph.action.EdgeAction;
+import io.github.agentic.spring.ai.graph.action.EdgeAction;
 
 class RouteMessage implements EdgeAction {
 
@@ -178,10 +179,10 @@ class RouteMessage implements EdgeAction {
 首先，让我们看看不使用持久化时的行为：
 
 ```java
-import com.alibaba.cloud.ai.graph.StateGraph;
-import com.alibaba.cloud.ai.graph.CompiledGraph;
-import static com.alibaba.cloud.ai.graph.action.AsyncNodeAction.nodeasync;
-import static com.alibaba.cloud.ai.graph.action.AsyncEdgeAction.edgeasync;
+import io.github.agentic.spring.ai.graph.StateGraph;
+import io.github.agentic.spring.ai.graph.CompiledGraph;
+import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.nodeasync;
+import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edgeasync;
 
 // 配置 ChatClient
 ChatClient.Builder chatClientBuilder = ChatClient.builder(chatModel);
@@ -238,9 +239,9 @@ Response: I don't have information about your name. Could you please tell me?
 现在让我们添加 `MemorySaver` 来实现持久化：
 
 ```java
-import com.alibaba.cloud.ai.graph.checkpoint.MemorySaver;
-import com.alibaba.cloud.ai.graph.CompileConfig;
-import com.alibaba.cloud.ai.graph.RunnableConfig;
+import io.github.agentic.spring.ai.graph.checkpoint.MemorySaver;
+import io.github.agentic.spring.ai.graph.CompileConfig;
+import io.github.agentic.spring.ai.graph.RunnableConfig;
 
 // 创建 Checkpointer
 var checkpointer = new MemorySaver();
@@ -346,7 +347,7 @@ log.info("Bob: {}", bobResult.data().get("messages"));
 ### 获取当前状态
 
 ```java
-import com.alibaba.cloud.ai.graph.StateSnapshot;
+import io.github.agentic.spring.ai.graph.StateSnapshot;
 
 // 获取当前状态快照
 StateSnapshot snapshot = persistentGraph.getState(config);
@@ -390,7 +391,7 @@ checkpointer.delete(checkpointId);
 ## 完整示例：带工具调用的持久化对话
 
 ```java
-import com.alibaba.cloud.ai.graph.*;
+import io.github.agentic.spring.ai.graph.*;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.model.function.FunctionCallbackWrapper;
 
@@ -480,6 +481,5 @@ public class PersistenceExample {
 
 ## 相关文档
 
-- [等待用户输入](./human-in-the-loop) - 中断和恢复示例
-- [时光旅行](./time-travel) - 状态历史导航
-- [快速入门](../quick-start) - Graph 基础使用
+- [人类反馈 HITL](./hitl.md) - 中断和恢复示例
+- [Workflow 编排指南](../workflow-orchestration.md) - Graph 基础使用

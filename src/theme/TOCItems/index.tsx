@@ -12,7 +12,7 @@ type Props = WrapperProps<typeof TOCItemsType>
 function DocPageLinks(): ReactNode {
   const { metadata } = useDoc()
   const { editUrl } = metadata
-  const issuesUrl = 'https://github.com/alibaba/spring-ai-alibaba/issues/new'
+  const issuesUrl = 'https://github.com/agentic-spring-ai/agentic-spring-ai/issues/new'
 
   return (
     <div className={styles.docPageLinks}>

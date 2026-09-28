@@ -11,9 +11,21 @@
     "message": "文档",
     "description": "Navbar item with label 文档"
   },
-  "item.label.博客": {
-    "message": "博客",
-    "description": "Navbar item with label 博客"
+  "item.label.Graph Core": {
+    "message": "Graph Core",
+    "description": "Navbar item with label Graph Core"
+  },
+  "item.label.ReAct Agent": {
+    "message": "ReAct Agent",
+    "description": "Navbar item with label ReAct Agent"
+  },
+  "item.label.Studio": {
+    "message": "Studio",
+    "description": "Navbar item with label Studio"
+  },
+  "item.label.社区协议": {
+    "message": "社区协议",
+    "description": "Navbar item with label 社区协议"
   },
   "item.label.社区": {
     "message": "社区",
@@ -22,14 +34,6 @@
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"
-  },
-  "item.label.团队": {
-    "message": "团队",
-    "description": "Navbar item with label 团队"
-  },
-  "item.label.贡献指南": {
-    "message": "贡献指南",
-    "description": "Navbar item with label 贡献指南"
   },
   "item.label.行为准则": {
     "message": "行为准则",
