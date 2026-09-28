@@ -2,9 +2,6 @@
 User-agent: *
 Allow: /
 
-# Disallow admin or private pages (if any in the future)
-# Disallow: /admin/
-
 # Main sitemap - includes all content
 Sitemap: https://java2ai.com/sitemap.xml
 

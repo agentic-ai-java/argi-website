@@ -1,6 +1,6 @@
-# Spring AI Alibaba Documentation Website
+# Agentic AI Documentation Website
 
-Spring AI Alibaba 项目的官方文档网站，基于 Docusaurus 构建。
+Agentic AI 项目的官方文档网站，基于 Docusaurus 构建。
 
 ## 快速开始
 
@@ -17,7 +17,7 @@ Spring AI Alibaba 项目的官方文档网站，基于 Docusaurus 构建。
 
 ## GitHub Pages 部署
 
-`main` 分支更新后，GitHub Actions 会在 lint 和构建通过后自动发布 `build` 目录。首次部署前，需要在仓库的 `Settings > Pages` 中将发布源设置为 `GitHub Actions`。站点地址为 <https://agentic-spring-ai.github.io/website/>。
+发布分支更新后，GitHub Actions 会在 lint 和构建通过后自动发布 `build` 目录。首次部署前，需要在仓库的 `Settings > Pages` 中将发布源设置为 `GitHub Actions`。站点地址为 <https://agentic-spring-ai.github.io/website/>。
 
 ## 提交之前
 
