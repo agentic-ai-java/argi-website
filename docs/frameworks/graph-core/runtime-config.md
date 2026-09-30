@@ -26,11 +26,11 @@ Graph Core 把配置分为两层：`CompileConfig` 作用于图编译后的执�
 | 长期 Store | `store(Store)` | 配置长期记忆 Store。Store 与 checkpoint saver 是两类不同组件。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.GraphLifecycleListener;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.store.stores.MemoryStore;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.GraphLifecycleListener;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.store.stores.MemoryStore;
 
 SaverConfig saverConfig = SaverConfig.builder()
     .register(new MemorySaver())
@@ -67,9 +67,9 @@ CompiledGraph graph = stateGraph.compile(compileConfig);
 | 长期 Store | `store(Store)` | 为本次运行提供 Store，会覆盖或补充编译期配置。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.NodeAggregationStrategy;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.store.stores.MemoryStore;
+import io.github.agentic.ai.graph.NodeAggregationStrategy;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.store.stores.MemoryStore;
 
 RunnableConfig config = RunnableConfig.builder()
     .threadId("user-123")

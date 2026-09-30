@@ -7,7 +7,7 @@ keywords: [持久化支持, Checkpoint, 检查点, 持久化, 状态管理, 工�
 
 # 持久化支持
 
-Agentic AI Graph 具有内置的持久化层，通过检查点（Checkpointers）实现。当您使用检查点编译图时，检查点会在每个超级步骤（super-step）保存图状态的`检查点`。这些检查点保存到一个`会话`（thread）中，可以在图执行后访问。
+ARGI Graph 具有内置的持久化层，通过检查点（Checkpointers）实现。当您使用检查点编译图时，检查点会在每个超级步骤（super-step）保存图状态的`检查点`。这些检查点保存到一个`会话`（thread）中，可以在图执行后访问。
 
 由于`会话`允许在执行后访问图的状态，因此几个强大的功能都成为可能，包括人在回路中（human-in-the-loop）、内存、时间旅行和容错能力。下面，我们将详细讨论这些概念。
 
@@ -61,25 +61,25 @@ refactor 分支当前可确认的 checkpoint saver 如下：
   language="java"
   title="检查点示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.exception.GraphStateException;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 定义状态策略
 KeyStrategyFactory keyStrategyFactory = () -> {
@@ -146,9 +146,9 @@ graph.invoke(input, config);`}
   language="java"
   title="获取状态"
 >
-{`import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.state.StateSnapshot;
+{`import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.state.StateSnapshot;
 
 // 获取最新的状态快照
 RunnableConfig config = RunnableConfig.builder()
@@ -176,9 +176,9 @@ System.out.println("Specific checkpoint state: " + specificSnapshot.state());`}
   language="java"
   title="获取状态历史"
 >
-{`import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.state.StateSnapshot;
+{`import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.state.StateSnapshot;
 
 import java.util.List;
 
@@ -210,8 +210,8 @@ for (int i = 0; i < history.size(); i++) {
   language="java"
   title="重放图执行"
 >
-{`import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
+{`import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
 
 // 获取最新的状态快照
 RunnableConfig config = RunnableConfig.builder()
@@ -228,7 +228,7 @@ graph.invoke(Map.of(), config);
 System.out.println("Replay executed");`}
 </Code>
 
-重要的是，Agentic AI Graph 知道某个特定步骤是否之前已执行过。如果已执行，框架只是*重放*图中的该特定步骤，而不重新执行该步骤，但仅适用于提供的 `checkpoint_id` *之前*的步骤。`checkpoint_id` *之后*的所有步骤都将被执行（即新的分支），即使它们之前已被执行。
+重要的是，ARGI Graph 知道某个特定步骤是否之前已执行过。如果已执行，框架只是*重放*图中的该特定步骤，而不重新执行该步骤，但仅适用于提供的 `checkpoint_id` *之前*的步骤。`checkpoint_id` *之后*的所有步骤都将被执行（即新的分支），即使它们之前已被执行。
 
 ### 获取状态
 
@@ -304,12 +304,12 @@ var updatedConfig = graph.updateState(config, Map.of("the_key_to", "newValue"), 
   language="java"
   title="更新状态示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.List;
@@ -344,7 +344,7 @@ System.out.println("State updated successfully");`}
 
 ## 检查点器实现
 
-Agentic AI 提供了多种检查点器实现：
+ARGI 提供了多种检查点器实现：
 
 ### MemorySaver
 
@@ -354,9 +354,9 @@ Agentic AI 提供了多种检查点器实现：
   language="java"
   title="MemorySaver 配置"
 >
-{`import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.constant.SaverConstant;
+{`import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.constant.SaverConstant;
 
 SaverConfig saverConfig = SaverConfig.builder()
     .register(SaverConstant.MEMORY, new MemorySaver())

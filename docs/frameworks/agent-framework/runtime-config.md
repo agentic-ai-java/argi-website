@@ -43,8 +43,8 @@ refactor 分支中 `ReactAgent.Builder` 可确认的配置入口如下：
 | `call(..., RunnableConfig)` | 输入 + 运行配置 | 为本次调用指定 thread、checkpoint、metadata 等。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 
 RunnableConfig config = RunnableConfig.builder()
     .threadId("case-1001")

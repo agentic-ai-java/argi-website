@@ -10,7 +10,7 @@ keywords: [Spring AI, LLM Streaming, 流式输出, Graph, 智能体图]
 
 ## 使用流式 ChatClient
 
-Agentic AI 支持通过 `ChatClient` 进行流式输出。
+ARGI 支持通过 `ChatClient` 进行流式输出。
 
 <Code
   language="java"
@@ -73,8 +73,8 @@ Stream completed
   language="java"
   title="创建带流式输出的 Graph 节点"
 >
-{`import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
 import org.springframework.ai.chat.client.ChatClient;
 import reactor.core.publisher.Flux;
 
@@ -109,9 +109,9 @@ public class StreamingAgentNode implements NodeAction {
   language="java"
   title="配置和运行流式 Graph"
 >
-{`import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
+{`import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.CompiledGraph;
 import org.springframework.ai.chat.client.ChatClient;
 
 // 配置 Graph

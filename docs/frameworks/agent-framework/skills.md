@@ -76,7 +76,7 @@ ReactAgent agent = ReactAgent.builder()
 agent.call("请介绍你有哪些技能");`}
 </Code>
 
-目录配置：`userSkillsDirectory(String|Resource)`、`projectSkillsDirectory(String|Resource)`；不设置时用户级默认 `~/saa/skills`，项目级默认 `./skills`，同名技能“项目级别”覆盖“用户级别”。
+目录配置：`userSkillsDirectory(String|Resource)`、`projectSkillsDirectory(String|Resource)`；不设置时用户级默认 `~/argi/skills`，项目级默认 `./skills`，同名技能“项目级别”覆盖“用户级别”。
 
 ### 使用 ClasspathSkillRegistry
 
@@ -103,14 +103,14 @@ ReactAgent agent = ReactAgent.builder()
 技能常需配合脚本执行（如技能目录下的 Python 脚本）和 Shell 命令。下面示例使用 **ClasspathSkillRegistry** 加载技能、**SkillsAgentHook** 提供 `read_skill`、**ShellToolAgentHook** 提供 Shell 工具、**PythonTool** 提供 Python 执行能力，Agent 可根据技能说明读取并处理技能目录下的文件。
 
 <Code language="java" title="Skills + Python + Shell 完整集成">
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.skills.SkillsAgentHook;
-import io.github.agentic.spring.ai.graph.agent.hook.shelltool.ShellToolAgentHook;
-import io.github.agentic.spring.ai.graph.agent.tools.PythonTool;
-import io.github.agentic.spring.ai.graph.agent.tools.ShellTool2;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.skills.registry.classpath.ClasspathSkillRegistry;
-import io.github.agentic.spring.ai.graph.skills.registry.SkillRegistry;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.skills.SkillsAgentHook;
+import io.github.agentic.ai.graph.agent.hook.shelltool.ShellToolAgentHook;
+import io.github.agentic.ai.graph.agent.tools.PythonTool;
+import io.github.agentic.ai.graph.agent.tools.ShellTool2;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.skills.registry.classpath.ClasspathSkillRegistry;
+import io.github.agentic.ai.graph.skills.registry.SkillRegistry;
 
 // 1. 技能注册表：从 classpath:skills 加载（如 src/main/resources/skills/）
 SkillRegistry registry = ClasspathSkillRegistry.builder()
@@ -138,7 +138,7 @@ ReactAgent agent = ReactAgent.builder()
     .build();
 
 // 5. 调用示例：用户请求处理技能目录下的文件时，模型可先 read_skill 再按技能说明调用 Python/Shell
-String skillFilePath = "/path/to/skills/pdf-extractor/agentic-ai-roadmap.pdf";  // 实际路径来自技能目录或 hook.listSkills()
+String skillFilePath = "/path/to/skills/pdf-extractor/argi-roadmap.pdf";  // 实际路径来自技能目录或 hook.listSkills()
 AssistantMessage response = agent.call("请从 " + skillFilePath + " 文件中提取关键信息。");`}
 </Code>
 
@@ -187,7 +187,7 @@ SkillsAgentHook hook = SkillsAgentHook.builder()
 
 <Code language="java" title="用户级与项目级技能目录">
 {`SkillRegistry registry = FileSystemSkillRegistry.builder()
-    .userSkillsDirectory("/home/user/agentic-ai/skills")
+    .userSkillsDirectory("/home/user/argi/skills")
     .projectSkillsDirectory("/app/project/skills")
     .build();`}
 </Code>
@@ -196,7 +196,7 @@ SkillsAgentHook hook = SkillsAgentHook.builder()
 
 #### 自定义系统提示模板
 
-Agentic AI 框架内置了 Skill Prompt 模板，用来引导实现 Skill 的渐进式披露。用户可结合自己系统的 Skill 组织方式定制 Prompt 模板。
+ARGI 框架内置了 Skill Prompt 模板，用来引导实现 Skill 的渐进式披露。用户可结合自己系统的 Skill 组织方式定制 Prompt 模板。
 
 <Code language="java" title="自定义技能系统提示模板">
 {`SystemPromptTemplate customTemplate = SystemPromptTemplate.builder()
@@ -219,7 +219,7 @@ FileSystemSkillRegistry registry = FileSystemSkillRegistry.builder()
 
 ## 在 Graph 中使用 Skills
 
-除在 **ReactAgent** 上通过 **SkillsAgentHook** 使用 Skills 外，在基于 **Graph** 或 **ChatClient** 的链路中，可通过 **ChatClient** 配合 **SkillPromptAugmentAdvisor**（`agentic-ai-graph-core`）将技能列表注入系统提示，实现渐进式披露的「技能发现」部分。
+除在 **ReactAgent** 上通过 **SkillsAgentHook** 使用 Skills 外，在基于 **Graph** 或 **ChatClient** 的链路中，可通过 **ChatClient** 配合 **SkillPromptAugmentAdvisor**（`argi-graph-core`）将技能列表注入系统提示，实现渐进式披露的「技能发现」部分。
 
 ### 使用 ChatClient + SkillPromptAugmentAdvisor
 
@@ -227,12 +227,12 @@ FileSystemSkillRegistry registry = FileSystemSkillRegistry.builder()
 
 <Code language="java" title="ChatClient + SkillPromptAugmentAdvisor">
 {`import org.springframework.ai.chat.client.ChatClient;
-import io.github.agentic.spring.ai.graph.advisors.SkillPromptAugmentAdvisor;
+import io.github.agentic.ai.graph.advisors.SkillPromptAugmentAdvisor;
 
 // 方式一：指定技能目录（字符串路径），Advisor 内部创建 FileSystemSkillRegistry
 SkillPromptAugmentAdvisor skillAdvisor = SkillPromptAugmentAdvisor.builder()
     .projectSkillsDirectory("./skills")       // 或绝对路径 /path/to/skills
-    // .userSkillsDirectory("~/saa/skills")  // 可选，默认 ~/saa/skills
+    // .userSkillsDirectory("~/argi/skills")  // 可选，默认 ~/argi/skills
     .lazyLoad(false)                          // 可选，true 则首次请求时再加载技能
     .build();
 
@@ -248,8 +248,8 @@ String response = chatClient.prompt()
 </Code>
 
 <Code language="java" title="使用已有 SkillRegistry 构建 SkillPromptAugmentAdvisor">
-{`import io.github.agentic.spring.ai.graph.skills.registry.SkillRegistry;
-import io.github.agentic.spring.ai.graph.skills.registry.filesystem.FileSystemSkillRegistry;
+{`import io.github.agentic.ai.graph.skills.registry.SkillRegistry;
+import io.github.agentic.ai.graph.skills.registry.filesystem.FileSystemSkillRegistry;
 
 SkillRegistry registry = FileSystemSkillRegistry.builder()
     .projectSkillsDirectory("./skills")

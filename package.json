@@ -1,9 +1,9 @@
 {
-  "name": "agentic-ai-website",
+  "name": "argi-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Agentic AI documentation website",
-  "author": "Agentic AI",
+  "description": "ARGI documentation website",
+  "author": "ARGI",
   "license": "Apache-2.0",
   "scripts": {
     "docusaurus": "docusaurus",

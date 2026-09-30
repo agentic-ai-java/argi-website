@@ -22,8 +22,8 @@ Graph Core 在执行过程中提供两类观测入口：轻量生命周期监听
 | `onComplete(nodeId, state, config)` | 节点成功完成时。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.GraphLifecycleListener;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.GraphLifecycleListener;
 
 GraphLifecycleListener listener = new GraphLifecycleListener() {
     @Override
@@ -54,8 +54,8 @@ CompiledGraph graph = stateGraph.compile(
 | `new GraphObservationLifecycleListener(observationRegistry, captureContent, maxContentLength)` | 可选择采集输入/输出内容，并限制内容长度。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.observation.GraphObservationLifecycleListener;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.observation.GraphObservationLifecycleListener;
 import io.micrometer.observation.ObservationRegistry;
 
 ObservationRegistry registry = ObservationRegistry.create();
@@ -79,6 +79,6 @@ refactor 分支中可以确认以下 observation 扩展类型：
 | Graph | `GraphObservationContext`、`GraphObservationConvention`、`DefaultGraphObservationConvention`、`GraphObservationHandler`、`GraphObservationDocumentation` |
 | Node | `GraphNodeObservationContext`、`GraphNodeObservationConvention`、`DefaultGraphNodeObservationConvention`、`GraphNodeObservationHandler`、`GraphNodeObservationDocumentation` |
 | Edge | `GraphEdgeObservationContext`、`GraphEdgeObservationConvention`、`DefaultGraphEdgeObservationConvention`、`GraphEdgeObservationHandler`、`GraphEdgeObservationDocumentation` |
-| 指标与清理 | `GraphMetricsGenerator`、`ObservationContentSanitizer`、`SpringAiAlibabaObservationMetricNames`、`SpringAiAlibabaObservationMetricAttributes` |
+| 指标与清理 | `GraphMetricsGenerator`、`ObservationContentSanitizer`、`ArgiObservationMetricNames`、`ArgiObservationMetricAttributes` |
 
-当前 metric 名称中仍保留 `spring.ai.alibaba.*` 兼容标识，这是 refactor 分支中的现状。不要在应用侧自行改名，否则可能与框架的 public 配置或观测约定不一致。
+当前 metric 名称使用 `argi.*`。应用侧应使用框架公开的配置与观测约定，避免自行拼接指标名。

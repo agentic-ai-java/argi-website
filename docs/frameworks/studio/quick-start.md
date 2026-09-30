@@ -1,11 +1,11 @@
 ---
 title: Studio
-description: Inspect Agentic AI agent and graph executions visually.
+description: Inspect ARGI agent and graph executions visually.
 ---
 
 # Studio
 
-Agentic AI Studio is an embedded debugging interface for agent conversations and graph workflows.
+ARGI Studio is an embedded debugging interface for agent conversations and graph workflows.
 
 Studio helps developers inspect:
 

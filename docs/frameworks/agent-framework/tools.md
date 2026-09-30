@@ -1049,9 +1049,9 @@ import java.util.function.BiFunction;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.agent.tools.ToolContextConstants.AGENT_STATE_CONTEXT_KEY;
-import static io.github.agentic.spring.ai.graph.agent.tools.ToolContextConstants.AGENT_CONFIG_CONTEXT_KEY;
-import static io.github.agentic.spring.ai.graph.agent.tools.ToolContextConstants.AGENT_STATE_FOR_UPDATE_CONTEXT_KEY;
+import static io.github.agentic.ai.graph.agent.tools.ToolContextConstants.AGENT_STATE_CONTEXT_KEY;
+import static io.github.agentic.ai.graph.agent.tools.ToolContextConstants.AGENT_CONFIG_CONTEXT_KEY;
+import static io.github.agentic.ai.graph.agent.tools.ToolContextConstants.AGENT_STATE_FOR_UPDATE_CONTEXT_KEY;
 
 // 访问当前对话状态
 public class ConversationSummaryTool implements BiFunction<String, ToolContext, String> {
@@ -1099,17 +1099,17 @@ ToolCallback summaryTool = FunctionToolCallback
 
 **更新状态**：
 
-在 Agentic AI 中，你可以通过 Hook 或在工具执行后返回的信息来更新 Agent 的状态。
+在 ARGI 中，你可以通过 Hook 或在工具执行后返回的信息来更新 Agent 的状态。
 
 <Code
   language="java"
   title="在 Hook 中更新状态示例"
 >
 {`// 在 Hook 中更新状态
-import io.github.agentic.spring.ai.graph.agent.hook.ModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.agent.hook.ModelHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
 import java.util.concurrent.CompletableFuture;
 
 public class UpdateStateHook extends ModelHook {
@@ -1147,7 +1147,7 @@ public class UpdateStateHook extends ModelHook {
 import java.util.function.BiFunction;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.agent.tools.ToolContextConstants.AGENT_CONFIG_CONTEXT_KEY;
+import static io.github.agentic.ai.graph.agent.tools.ToolContextConstants.AGENT_CONFIG_CONTEXT_KEY;
 
 public class AccountInfoTool implements BiFunction<String, ToolContext, String> {
 
@@ -1214,13 +1214,13 @@ agent.call("question", config);`}
 
 ### Memory（存储）
 
-使用存储访问跨对话的持久数据。在 Agentic AI 中，你可以使用 checkpointer 来实现长期记忆。
+使用存储访问跨对话的持久数据。在 ARGI 中，你可以使用 checkpointer 来实现长期记忆。
 
 <Code
   language="java"
   title="使用 Memory 存储示例"
 >
-{`import io.github.agentic.spring.ai.graph.checkpoint.savers.RedisSaver;
+{`import io.github.agentic.ai.graph.checkpoint.savers.RedisSaver;
 
 // 配置持久化存储
 RedisSaver redisSaver = new RedisSaver(redissonClient);
@@ -1269,7 +1269,7 @@ ReactAgent 提供了多种方式来提供和使用工具。根据你的使用场
   language="java"
   title="使用 tools() 方法提供工具"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
 
@@ -1309,7 +1309,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="使用 methodTools() 方法提供工具"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 
@@ -1364,7 +1364,7 @@ ReactAgent multiAgent = ReactAgent.builder()
   language="java"
   title="使用 toolCallbackProviders() 方法提供工具"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.function.FunctionToolCallback;
@@ -1417,7 +1417,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="使用 toolNames() 和 resolver() 方法提供工具"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
 import org.springframework.ai.tool.resolution.StaticToolCallbackResolver;
@@ -1465,7 +1465,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="使用 resolver() 方法提供工具"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
 import org.springframework.ai.tool.resolution.StaticToolCallbackResolver;
@@ -1506,7 +1506,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="组合使用多种工具提供方式"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.function.FunctionToolCallback;
@@ -1563,7 +1563,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="在 ReactAgent 中使用工具示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
 
@@ -1596,7 +1596,7 @@ System.out.println(response.getText());`}
 
 ### React Agent 远程 MCP 工具调用示例
 
-在实际应用中，工具通常来自独立的 MCP Server。Agentic AI 的 ReAct Agent 不直接绑定某个模型厂商：只要应用中已经有 Spring AI `ChatModel` 和 `ToolCallbackProvider`，就可以把 MCP 工具挂到 `ReactAgent` 或 `ChatClient` 上。
+在实际应用中，工具通常来自独立的 MCP Server。ARGI 的 ReAct Agent 不直接绑定某个模型厂商：只要应用中已经有 Spring AI `ChatModel` 和 `ToolCallbackProvider`，就可以把 MCP 工具挂到 `ReactAgent` 或 `ChatClient` 上。
 
 #### 1. 通过 Spring AI MCP Client 接入远程工具
 
@@ -1606,7 +1606,7 @@ System.out.println(response.getText());`}
 <dependencies>
     <dependency>
         <groupId>io.github.agentic-ai</groupId>
-        <artifactId>agentic-ai-agent-framework</artifactId>
+        <artifactId>argi-agent-framework</artifactId>
     </dependency>
     <dependency>
         <groupId>org.springframework.ai</groupId>
@@ -1631,7 +1631,7 @@ spring:
     mcp:
       client:
         enabled: true
-        name: agentic-ai-mcp-client
+        name: argi-mcp-client
         type: async
         toolcallback:
           enabled: true
@@ -1653,9 +1653,9 @@ spring:
   language="java"
   title="通过 ToolCallbackProvider 为 ReactAgent 提供 MCP 工具"
 >
-{`import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
+{`import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallbackProvider;
@@ -1734,7 +1734,7 @@ public class RemoteMcpChatService {
 }`}
 </Code>
 
-## Agentic AI 扩展工具能力
+## ARGI 扩展工具能力
 
 除 Spring AI 的基础工具抽象外，Agent Framework refactor 分支还提供了面向 Agent 运行时的工具扩展。
 
@@ -1759,7 +1759,7 @@ ReactAgent agent = ReactAgent.builder()
 已实现 `AsyncToolCallback` 的工具可以直接异步执行。实现 `CancellableAsyncToolCallback` 的工具还能响应取消；同步工具可通过 `wrapSyncToolsAsAsync(true)` 适配为异步执行。
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.tool.AsyncToolCallback;
+import io.github.agentic.ai.graph.agent.tool.AsyncToolCallback;
 import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.tool.definition.ToolDefinition;
 
@@ -1812,7 +1812,7 @@ ReactAgent agent = ReactAgent.builder()
 `ToolMultimodalResult` 用于让工具返回文本加图片、音频等 Spring AI `Media` 内容。它支持 URL、URI、字节数组、`Resource`、Base64，以及同时携带 URL 与 Base64 的结果。
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.tool.multimodal.ToolMultimodalResult;
+import io.github.agentic.ai.graph.agent.tool.multimodal.ToolMultimodalResult;
 import org.springframework.util.MimeTypeUtils;
 
 ToolMultimodalResult result = ToolMultimodalResult.builder()
@@ -1836,10 +1836,10 @@ refactor 分支当前可确认的内置工具包括：
 | `TaskTool` / `TaskOutputTool` | 启动子 Agent 任务并获取任务输出。 | `TaskToolsBuilder.builder().subAgent(...).build()` 或加载 Agent spec 后 `build()` |
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.tools.GlobSearchTool;
-import io.github.agentic.spring.ai.graph.agent.tools.GrepSearchTool;
-import io.github.agentic.spring.ai.graph.agent.tools.ShellTool;
-import io.github.agentic.spring.ai.graph.agent.tools.task.TaskToolsBuilder;
+import io.github.agentic.ai.graph.agent.tools.GlobSearchTool;
+import io.github.agentic.ai.graph.agent.tools.GrepSearchTool;
+import io.github.agentic.ai.graph.agent.tools.ShellTool;
+import io.github.agentic.ai.graph.agent.tools.task.TaskToolsBuilder;
 import org.springframework.ai.tool.ToolCallback;
 
 ToolCallback shellTool = ShellTool.builder("/workspace/project")

@@ -7,7 +7,7 @@ keywords: [Graph, 取消执行, AsyncGenerator, 流式处理, 工作流取消]
 
 # graph 执行取消
 
-Agentic AI Graph 提供了强大的图执行取消机制，这对于长时间运行的工作流程特别有用。此功能基于 `java-async-generator` 库的取消能力构建。
+ARGI Graph 提供了强大的图执行取消机制，这对于长时间运行的工作流程特别有用。此功能基于 `java-async-generator` 库的取消能力构建。
 
 ## 取消图流
 
@@ -31,9 +31,9 @@ Agentic AI Graph 提供了强大的图执行取消机制，这对于长时间运
   language="java"
   title="立即取消示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.RunnableConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -100,9 +100,9 @@ System.out.println("是否已取消: " + disposable.isDisposed());`}
   language="java"
   title="使用迭代器消费流示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.RunnableConfig;
 
 import java.util.HashMap;
 import java.util.Map;

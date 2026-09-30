@@ -1,7 +1,7 @@
 ---
 title: 应用可观测性与 ARMS 集成 (Observation)
 sidebar_label: 应用可观测性
-description: 了解 Agentic AI Extensions 可观测性套件：阿里云 ARMS 监控无缝集成、OpenTelemetry 与 Langfuse 双模支持、LLM 输入输出合规采集与工具调用精细化指标。
+description: 了解 ARGI Extensions 可观测性套件：阿里云 ARMS 监控无缝集成、OpenTelemetry 与 Langfuse 双模支持、LLM 输入输出合规采集与工具调用精细化指标。
 keywords: [Extensions, Observation, ARMS, OpenTelemetry, Langfuse, Micrometer, 可观测性, 链路追踪, 指标监控]
 ---
 
@@ -9,7 +9,7 @@ keywords: [Extensions, Observation, ARMS, OpenTelemetry, Langfuse, Micrometer, �
 
 AI 智能体应用具有高度不确定性、多轮循环决策以及复杂的工具调用拓扑。当线上出现回答延迟大、死循环或工具执行失败时，传统的以 HTTP 接口为核心的监控往往只能看到总体耗时，无法透视智能体内部的思维链（Reasoning Chain）、单次 LLM 推理延迟与各个工具调用的执行状态。
 
-**`agentic-ai-starter-arms-observation`** 为 Spring AI 与 Agentic AI 提供了面向**阿里云 ARMS（应用实时监控服务）**与 **OpenTelemetry** 标准生态的全链路可观测性扩展。
+**`argi-starter-arms-observation`** 为 Spring AI 与 ARGI 提供了面向**阿里云 ARMS（应用实时监控服务）**与 **OpenTelemetry** 标准生态的全链路可观测性扩展。
 
 ---
 
@@ -38,7 +38,7 @@ AI 智能体应用具有高度不确定性、多轮循环决策以及复杂的�
 ```xml
 <dependency>
     <groupId>io.github.agentic-ai</groupId>
-    <artifactId>agentic-ai-starter-arms-observation</artifactId>
+    <artifactId>argi-starter-arms-observation</artifactId>
 </dependency>
 ```
 
@@ -47,21 +47,19 @@ AI 智能体应用具有高度不确定性、多轮循环决策以及复杂的�
 在 `application.yml` 中开启 ARMS 监控并配置采集策略：
 
 ```yaml
-spring:
-  ai:
-    alibaba:
-      arms:
-        enabled: true
-        # 工具调用度量与拦截管理
-        tool:
-          enabled: true
-        # 大模型调用观测与追踪
-        model:
-          enabled: true
-          message-mode: OPEN_TELEMETRY  # 可选: OPEN_TELEMETRY / LANGFUSE
-          # 生产环境合规配置：是否采集原始输入与输出文本到监控链路中
-          capture-input: false
-          capture-output: false
+argi:
+  arms:
+    enabled: true
+    # 工具调用度量与拦截管理
+    tool:
+      enabled: true
+    # 大模型调用观测与追踪
+    model:
+      enabled: true
+      message-mode: OPEN_TELEMETRY  # 可选: OPEN_TELEMETRY / LANGFUSE
+      # 生产环境合规配置：是否采集原始输入与输出文本到监控链路中
+      capture-input: false
+      capture-output: false
 ```
 
 :::warning 生产隐私与数据合规建议
@@ -76,7 +74,7 @@ spring:
 `ReactAgent.Builder` 原生支持注入 Micrometer `ObservationRegistry`：
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 import io.micrometer.observation.ObservationRegistry;
 import org.springframework.stereotype.Service;
 
@@ -105,15 +103,13 @@ public class MonitoredAgentService {
 ```
 
 ### 2. 结合 Graph Core 观测
-核心图引擎本身也支持生命周期与观测扩展（对应前缀 `spring.ai.alibaba.graph.observation`）：
+核心图引擎本身也支持生命周期与观测扩展（对应前缀 `argi.graph.observation`）：
 
 ```yaml
-spring:
-  ai:
-    alibaba:
-      graph:
-        observation:
-          enabled: true
+argi:
+  graph:
+    observation:
+      enabled: true
 ```
 
 图工作流中的每个节点（Node）执行和边（Edge）条件跳转都会自动产生嵌套 Span，与外部 ARMS 监控串联为一条完整的树状调用追踪链（Trace Tree）。
@@ -124,10 +120,10 @@ spring:
 
 | 配置项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `spring.ai.alibaba.arms.enabled` | Boolean | `false` | 是否全局开启 ARMS 观测增强 |
-| `spring.ai.alibaba.arms.tool.enabled` | Boolean | `true` | 是否开启工具调用的性能度量与追踪（自动装配 `ObservableToolCallingManager`） |
-| `spring.ai.alibaba.arms.model.enabled` | Boolean | `true` | 是否开启大模型交互观测 |
-| `spring.ai.alibaba.arms.model.message-mode` | String | `OPEN_TELEMETRY` | 语义导出规范模式（`OPEN_TELEMETRY` 或 `LANGFUSE`） |
-| `spring.ai.alibaba.arms.model.capture-input` | Boolean | `false` | 是否上报并记录用户输入的 Prompt 内容 |
-| `spring.ai.alibaba.arms.model.capture-output` | Boolean | `false` | 是否上报并记录模型生成的回答内容 |
-| `spring.ai.alibaba.graph.observation.enabled` | Boolean | `true` | 是否开启底层 Graph 节点与边流转观测 |
+| `argi.arms.enabled` | Boolean | `false` | 是否全局开启 ARMS 观测增强 |
+| `argi.arms.tool.enabled` | Boolean | `true` | 是否开启工具调用的性能度量与追踪（自动装配 `ObservableToolCallingManager`） |
+| `argi.arms.model.enabled` | Boolean | `true` | 是否开启大模型交互观测 |
+| `argi.arms.model.message-mode` | String | `OPEN_TELEMETRY` | 语义导出规范模式（`OPEN_TELEMETRY` 或 `LANGFUSE`） |
+| `argi.arms.model.capture-input` | Boolean | `false` | 是否上报并记录用户输入的 Prompt 内容 |
+| `argi.arms.model.capture-output` | Boolean | `false` | 是否上报并记录模型生成的回答内容 |
+| `argi.graph.observation.enabled` | Boolean | `true` | 是否开启底层 Graph 节点与边流转观测 |

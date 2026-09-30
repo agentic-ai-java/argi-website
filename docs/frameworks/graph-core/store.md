@@ -31,14 +31,14 @@ refactor 分支当前可确认的实现如下：
 | `FileSystemStore` | 将 `StoreItem` 作为 JSON 文件保存在本地目录中，适合单节点文件系统持久化。 |
 | `RedisStore` | Redis-like 内存实现，当前代码使用内存 Map 模拟 Redis 行为。生产 Redis 集成应替换为真实 Redis 客户端实现。 |
 | `MongoStore` | MongoDB-like 内存实现，当前代码使用内存 Map 模拟 MongoDB 行为。生产 MongoDB 集成应替换为真实 MongoDB 客户端实现。 |
-| `DatabaseStore` | JDBC 实现，源码中已标记 `@Deprecated(since = "2.1.0", forRemoval = true)`，注释建议迁移到 `agentic-ai-graph-persistence-jdbc` 中的替代实现。 |
+| `DatabaseStore` | JDBC 实现，源码中已标记 `@Deprecated(since = "2.1.0", forRemoval = true)`，注释建议迁移到 `argi-graph-persistence-jdbc` 中的替代实现。 |
 
 ## 写入与读取
 
 ```java
-import io.github.agentic.spring.ai.graph.store.Store;
-import io.github.agentic.spring.ai.graph.store.StoreItem;
-import io.github.agentic.spring.ai.graph.store.stores.MemoryStore;
+import io.github.agentic.ai.graph.store.Store;
+import io.github.agentic.ai.graph.store.StoreItem;
+import io.github.agentic.ai.graph.store.stores.MemoryStore;
 
 import java.util.List;
 import java.util.Map;
@@ -61,9 +61,9 @@ Optional<StoreItem> item = store.getItem(
 ## 搜索与列出 namespace
 
 ```java
-import io.github.agentic.spring.ai.graph.store.NamespaceListRequest;
-import io.github.agentic.spring.ai.graph.store.StoreSearchRequest;
-import io.github.agentic.spring.ai.graph.store.StoreSearchResult;
+import io.github.agentic.ai.graph.store.NamespaceListRequest;
+import io.github.agentic.ai.graph.store.StoreSearchRequest;
+import io.github.agentic.ai.graph.store.StoreSearchResult;
 
 StoreSearchRequest searchRequest = StoreSearchRequest.builder()
     .namespace("users", "alice")
@@ -86,9 +86,9 @@ List<String> namespaces = store.listNamespaces(
 Store 可以在编译期配置，也可以在单次运行中通过 `RunnableConfig` 提供。
 
 ```java
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.store.stores.MemoryStore;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.store.stores.MemoryStore;
 
 MemoryStore store = new MemoryStore();
 
@@ -109,7 +109,7 @@ graph.invoke(Map.of("input", "remember my preference"), config);
 如果节点需要读取 Store，可以使用带 `RunnableConfig` 的节点动作，并从 `config.store()` 取得当前 Store。
 
 ```java
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeActionWithConfig.node_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeActionWithConfig.node_async;
 
 stateGraph.addNode("load_memory", node_async((state, config) -> {
     return config.store()

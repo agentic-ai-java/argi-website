@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Welcome to Agentic AI
+# Welcome to ARGI
 
-Agentic AI provides a Java framework for building stateful agents, graph workflows, and multi-agent applications.
+ARGI stands for **Agent Runtime and Graph Intelligence** and is pronounced **"AR-jee"** (`/ˈɑːr.dʒiː/`). It provides a Java framework for building stateful agents, graph workflows, and multi-agent applications.
 
 ## Development Frameworks
 

@@ -1,19 +1,19 @@
 ---
 title: Community Policies
-description: Agentic AI community contribution, security, and conduct policies.
-keywords: [Agentic AI, community, contribution, security, code of conduct]
+description: ARGI community contribution, security, and conduct policies.
+keywords: [ARGI, community, contribution, security, code of conduct]
 ---
 
 # Community Policies
 
-Agentic AI was forked from Spring AI Alibaba. The project keeps some legacy Maven coordinates, package names, configuration prefixes, and class names for compatibility, and it follows the Spring AI Alibaba formatting and check rules.
+ARGI was forked from Spring AI Alibaba. The refactor branch has migrated the core Maven group to `io.github.agentic-ai`, core artifact names to `argi-*`, and Java packages to `io.github.agentic.ai.*`. Use the POM files, source packages, and module directories in the current branch as the source of truth when contributing.
 
 ## Contribution
 
 Issues, Discussions, and Pull Requests are welcome. Before contributing, read the repository contribution guides:
 
-- [CONTRIBUTING.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/CONTRIBUTING.md)
-- [CONTRIBUTING-zh.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/CONTRIBUTING-zh.md)
+- [CONTRIBUTING.md](https://github.com/agentic-ai-java/argi/blob/main/CONTRIBUTING.md)
+- [CONTRIBUTING-zh.md](https://github.com/agentic-ai-java/argi/blob/main/CONTRIBUTING-zh.md)
 
 Run the required local checks before submitting code, including build, tests, formatting, Checkstyle, license checks, and spelling checks. Use the `type(scope): description` format for PR titles and commit messages, such as `docs(site): update community policies`.
 
@@ -25,14 +25,14 @@ Maintainers will assess the impact and coordinate the fix, release, and disclosu
 
 See the full security policies:
 
-- [SECURITY.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/SECURITY.md)
-- [SECURITY-zh.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/SECURITY-zh.md)
+- [SECURITY.md](https://github.com/agentic-ai-java/argi/blob/main/SECURITY.md)
+- [SECURITY-zh.md](https://github.com/agentic-ai-java/argi/blob/main/SECURITY-zh.md)
 
 ## Code of Conduct
 
-The Agentic AI community aims to provide an open, welcoming, respectful, and issue-focused collaboration environment. Use inclusive language, respect different viewpoints and experiences, accept constructive feedback, and protect the safety and privacy of community members and users.
+The ARGI community aims to provide an open, welcoming, respectful, and issue-focused collaboration environment. Use inclusive language, respect different viewpoints and experiences, accept constructive feedback, and protect the safety and privacy of community members and users.
 
 See the full code of conduct:
 
-- [CODE_OF_CONDUCT.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/CODE_OF_CONDUCT.md)
-- [CODE_OF_CONDUCT-zh.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/CODE_OF_CONDUCT-zh.md)
+- [CODE_OF_CONDUCT.md](https://github.com/agentic-ai-java/argi/blob/main/CODE_OF_CONDUCT.md)
+- [CODE_OF_CONDUCT-zh.md](https://github.com/agentic-ai-java/argi/blob/main/CODE_OF_CONDUCT-zh.md)

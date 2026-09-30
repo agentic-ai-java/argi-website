@@ -56,7 +56,7 @@
     "description": "The label of footer link with label=许可证 linking to https://github.com/your-username/your-repo-name/blob/main/LICENSE"
   },
   "copyright": {
-    "message": "© 2026 Agentic AI",
+    "message": "© 2026 ARGI",
     "description": "The footer copyright"
   }
 }

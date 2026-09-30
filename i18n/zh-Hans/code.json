@@ -410,7 +410,7 @@
     "description": "Observability feature description"
   },
   "ecosystem.title": {
-    "message": "Agentic AI 生态系统",
+    "message": "ARGI 生态系统",
     "description": "Ecosystem section title"
   },
   "ecosystem.subtitle": {
@@ -426,7 +426,7 @@
     "description": "Framework section description"
   },
   "ecosystem.product.title": {
-    "message": "基于 Agentic AI 构建",
+    "message": "基于 ARGI 构建",
     "description": "Product section title"
   },
   "ecosystem.product.description": {
@@ -442,7 +442,7 @@
     "description": "View documentation link text"
   },
   "ecosystem.framework.agent.name": {
-    "message": "Agentic AI ReAct Agent",
+    "message": "ARGI ReAct Agent",
     "description": "Agent framework name"
   },
   "ecosystem.framework.agent.description": {
@@ -450,7 +450,7 @@
     "description": "Agent framework description"
   },
   "ecosystem.framework.graph.name": {
-    "message": "Agentic AI Graph Core",
+    "message": "ARGI Graph Core",
     "description": "Graph framework name"
   },
   "ecosystem.framework.graph.description": {
@@ -458,7 +458,7 @@
     "description": "Graph framework description"
   },
   "ecosystem.framework.graphCommunity.name": {
-    "message": "Agentic AI Studio",
+    "message": "ARGI Studio",
     "description": "Agent Chat UI"
   },
   "ecosystem.framework.graphCommunity.description": {
@@ -486,7 +486,7 @@
     "description": "Code playground section subtitle"
   },
   "announcement.message": {
-    "message": "Agentic AI 智能体运行时现已全面支持 ReAct 循环、Graph 状态编排与 Studio 实时观测",
+    "message": "ARGI 智能体运行时现已全面支持 ReAct 循环、Graph 状态编排与 Studio 实时观测",
     "description": "Announcement bar main message"
   },
   "announcement.cta": {
@@ -494,7 +494,7 @@
     "description": "Announcement bar CTA link"
   },
   "ecosystem.framework.extensions.name": {
-    "message": "Agentic AI Extensions",
+    "message": "ARGI Extensions",
     "description": "Extensions framework name"
   },
   "ecosystem.framework.extensions.description": {

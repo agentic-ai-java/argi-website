@@ -297,7 +297,7 @@ durableGraph.invoke(null, resumedConfig);`,
     highlights: [
       '零线程阻塞挂起：工作流状态落盘，进程重启后仍可跨实例恢复',
       '支持 updateState 动态注入人工修正参数或回退至任意历史快照',
-      '内嵌 Agentic AI Studio，实时可视化 DAG 节点耗时与 Token 流',
+      '内嵌 ARGI Studio，实时可视化 DAG 节点耗时与 Token 流',
     ],
   },
 ]
@@ -337,7 +337,7 @@ function HomepageHeader() {
                 width="38"
                 height="38"
               />
-              <span className={styles.brandText}>Agentic AI</span>
+              <span className={styles.brandText}>ARGI</span>
               <span className={styles.brandDivider} aria-hidden="true" />
               <span className={styles.runtimeStatusTag}>
                 <span className={styles.liveDot} />
@@ -346,9 +346,13 @@ function HomepageHeader() {
             </div>
 
             <h1 className={clsx('hero__title', styles.heroTitle)}>
-              <span className={styles.heroTitlePrimary}>Agent Runtime</span>
-              <span className={styles.heroTitleAccent}>for Java Builders</span>
+              <span className={styles.heroTitlePrimary}>ARGI</span>
             </h1>
+
+            <p className={styles.brandExpansion}>
+              <span>Agent Runtime and Graph Intelligence</span>
+              <span className={styles.pronunciation}>Pronounced "AR-jee" · /ˈɑːr.dʒiː/</span>
+            </p>
 
             <p className={clsx('hero__subtitle', styles.heroSubtitle)}>
               <Translate id="homepage.hero.subtitle" description="Homepage hero subtitle">
@@ -422,7 +426,7 @@ function HomepageHeader() {
             </div>
           </div>
 
-          <div className={styles.runtimeConsole} aria-label="Interactive Agentic AI Runtime Telemetry Console">
+          <div className={styles.runtimeConsole} aria-label="Interactive ARGI Runtime Telemetry Console">
             <div className={styles.consoleTopBar}>
               <div className={styles.consoleWindowDots} aria-hidden="true">
                 <span className={styles.windowDotRed} />
@@ -471,7 +475,7 @@ function HomepageHeader() {
                 viewBox="0 0 480 210"
                 className={styles.topologySvg}
                 role="img"
-                aria-label="Agentic AI Neural Graph Execution Topology"
+                aria-label="ARGI Neural Graph Execution Topology"
               >
                 <defs>
                   <linearGradient id="edgeCyanAmber" x1="0%" y1="0%" x2="100%" y2="0%">

@@ -1,7 +1,7 @@
 ---
 title: Agent Framework 快速开始
 sidebar_label: 快速开始
-description: 使用 Agentic AI Agent Framework 创建一个基于 ReactAgent 的智能体。
+description: 使用 ARGI Agent Framework 创建一个基于 ReactAgent 的智能体。
 ---
 
 # Agent Framework 快速开始
@@ -15,18 +15,18 @@ Agent Framework 提供面向智能体应用的上层 API。当前核心入口是
 ```xml
 <dependency>
     <groupId>io.github.agentic-ai</groupId>
-    <artifactId>agentic-ai-agent-framework</artifactId>
+    <artifactId>argi-agent-framework</artifactId>
 </dependency>
 ```
 
-`agentic-ai-agent-framework` 依赖 `agentic-ai-graph-core`。如果应用只直接使用 `ReactAgent`，通常不需要再显式声明 Graph Core 依赖。
+`argi-agent-framework` 依赖 `argi-graph-core`。如果应用只直接使用 `ReactAgent`，通常不需要再显式声明 Graph Core 依赖。
 
 ## 创建 ReactAgent
 
 `ReactAgent` 使用 Spring AI 的 `ChatModel`。模型实例由应用按所选模型提供方创建或注入。
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.annotation.Tool;

@@ -30,9 +30,9 @@ Hooks 和 Interceptors 在这些步骤的前后暴露了钩子点，允许你：
   language="java"
   title="添加 Hooks 和 Interceptors 到 ReactAgent"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.*;
-import io.github.agentic.spring.ai.graph.agent.interceptor.*;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.*;
+import io.github.agentic.ai.graph.agent.interceptor.*;
 
 ReactAgent agent = ReactAgent.builder()
     .name("my_agent")
@@ -55,7 +55,7 @@ ReactAgent agent = ReactAgent.builder()
 
 ## 内置实现
 
-Agentic AI 为常见用例提供了预构建的 Hooks 和 Interceptors 实现：
+ARGI 为常见用例提供了预构建的 Hooks 和 Interceptors 实现：
 
 ### 消息压缩（Summarization）
 
@@ -70,7 +70,7 @@ Agentic AI 为常见用例提供了预构建的 Hooks 和 Interceptors 实现：
   language="java"
   title="SummarizationHook 消息压缩示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.summarization.SummarizationHook;
+{`import io.github.agentic.ai.graph.agent.hook.summarization.SummarizationHook;
 
 // 创建消息压缩 Hook
 SummarizationHook summarizationHook = SummarizationHook.builder()
@@ -105,8 +105,8 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="HumanInTheLoopHook 人机协同示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.hip.HumanInTheLoopHook;
-import io.github.agentic.spring.ai.graph.agent.hook.hip.ToolConfig;
+{`import io.github.agentic.ai.graph.agent.hook.hip.HumanInTheLoopHook;
+import io.github.agentic.ai.graph.agent.hook.hip.ToolConfig;
 
 // 创建 Human-in-the-Loop Hook
 HumanInTheLoopHook humanReviewHook = HumanInTheLoopHook.builder()
@@ -159,9 +159,9 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="PIIDetectionHook PII 检测示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.pii.PIIDetectionHook;
-import io.github.agentic.spring.ai.graph.agent.hook.pii.PIIType;
-import io.github.agentic.spring.ai.graph.agent.hook.pii.RedactionStrategy;
+{`import io.github.agentic.ai.graph.agent.hook.pii.PIIDetectionHook;
+import io.github.agentic.ai.graph.agent.hook.pii.PIIType;
+import io.github.agentic.ai.graph.agent.hook.pii.RedactionStrategy;
 
 PIIDetectionHook pii = PIIDetectionHook.builder()
     .piiType(PIIType.EMAIL)
@@ -190,7 +190,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ToolRetryInterceptor 工具重试示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.toolretry.ToolRetryInterceptor;
+{`import io.github.agentic.ai.graph.agent.interceptor.toolretry.ToolRetryInterceptor;
 
 // 使用
 ReactAgent agent = ReactAgent.builder()
@@ -212,7 +212,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ToolErrorInterceptor 工具异常处理示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.toolerror.ToolErrorInterceptor;
+{`import io.github.agentic.ai.graph.agent.interceptor.toolerror.ToolErrorInterceptor;
 
 ReactAgent agent = ReactAgent.builder()
     .name("tool_error_agent")
@@ -230,7 +230,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ModelRetryInterceptor 模型重试示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.modelretry.ModelRetryInterceptor;
+{`import io.github.agentic.ai.graph.agent.interceptor.modelretry.ModelRetryInterceptor;
 
 ReactAgent agent = ReactAgent.builder()
     .name("model_retry_agent")
@@ -252,7 +252,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ModelFallbackInterceptor 模型回退示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.modelfallback.ModelFallbackInterceptor;
+{`import io.github.agentic.ai.graph.agent.interceptor.modelfallback.ModelFallbackInterceptor;
 
 ReactAgent agent = ReactAgent.builder()
     .name("fallback_agent")
@@ -271,7 +271,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ToolCallLimitHook 工具调用限制示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.toolcalllimit.ToolCallLimitHook;
+{`import io.github.agentic.ai.graph.agent.hook.toolcalllimit.ToolCallLimitHook;
 
 ReactAgent agent = ReactAgent.builder()
     .name("limited_tool_agent")
@@ -291,7 +291,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ReturnDirectModelHook 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.returndirect.ReturnDirectModelHook;
+{`import io.github.agentic.ai.graph.agent.hook.returndirect.ReturnDirectModelHook;
 
 ReactAgent agent = ReactAgent.builder()
     .name("return_direct_agent")
@@ -326,7 +326,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="TodoListInterceptor 规划示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.todolist.TodoListInterceptor;
+{`import io.github.agentic.ai.graph.agent.interceptor.todolist.TodoListInterceptor;
 
 // 使用
 ReactAgent agent = ReactAgent.builder()
@@ -350,7 +350,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ToolSelectionInterceptor LLM 工具选择器示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.toolselection.ToolSelectionInterceptor;
+{`import io.github.agentic.ai.graph.agent.interceptor.toolselection.ToolSelectionInterceptor;
 
 // 使用
 ReactAgent agent = ReactAgent.builder()
@@ -374,7 +374,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ToolEmulatorInterceptor LLM 工具模拟器示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.toolemulator.ToolEmulatorInterceptor;
+{`import io.github.agentic.ai.graph.agent.interceptor.toolemulator.ToolEmulatorInterceptor;
 
 // 使用
 ReactAgent agent = ReactAgent.builder()
@@ -398,7 +398,7 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ContextEditingInterceptor 上下文编辑示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.contextediting.ContextEditingInterceptor;
+{`import io.github.agentic.ai.graph.agent.interceptor.contextediting.ContextEditingInterceptor;
 
 // 使用
 ReactAgent agent = ReactAgent.builder()
@@ -447,12 +447,12 @@ Agent Framework 的 `extension/interceptor` 包中还提供了若干面向复杂
   language="java"
   title="MessageTrimmingHook 消息修剪示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 
 @HookPositions({HookPosition.BEFORE_MODEL})
@@ -492,12 +492,12 @@ public class MessageTrimmingHook extends MessagesModelHook {
   language="java"
   title="使用不同策略的 MessagesModelHook 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
@@ -537,12 +537,12 @@ public class ContextEnhancementHook extends MessagesModelHook {
   language="java"
   title="MessagesModelHook 跳转控制示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.JumpTo;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.JumpTo;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import java.util.List;
 
@@ -583,9 +583,9 @@ public class EarlyExitHook extends MessagesModelHook {
   language="java"
   title="CustomModelHook 自定义 ModelHook 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.ModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
+{`import io.github.agentic.ai.graph.agent.hook.ModelHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
 import java.util.concurrent.CompletableFuture;
 
 @HookPositions({HookPosition.BEFORE_MODEL, HookPosition.AFTER_MODEL})
@@ -625,12 +625,12 @@ public class CustomModelHook extends ModelHook {
   language="java"
   title="使用 RemoveByHash 删除消息示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.ModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.state.RemoveByHash;
+{`import io.github.agentic.ai.graph.agent.hook.ModelHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.state.RemoveByHash;
 import org.springframework.ai.chat.messages.Message;
 import java.util.ArrayList;
 import java.util.List;
@@ -708,12 +708,12 @@ public class MessageDeletionHook extends ModelHook {
   language="java"
   title="使用 MessagesModelHook 实现消息修剪"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import java.util.List;
 
@@ -746,12 +746,12 @@ public class SimpleMessageTrimmingHook extends MessagesModelHook {
   language="java"
   title="使用 ModelHook 实现消息修剪（可访问状态）"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.ModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.state.ReplaceAllWith;
+{`import io.github.agentic.ai.graph.agent.hook.ModelHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.state.ReplaceAllWith;
 import org.springframework.ai.chat.messages.Message;
 import java.util.List;
 import java.util.Map;
@@ -812,9 +812,9 @@ public class AdvancedMessageTrimmingHook extends ModelHook {
   language="java"
   title="CustomAgentHook 自定义 AgentHook 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.AgentHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
+{`import io.github.agentic.ai.graph.agent.hook.AgentHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
 import java.util.concurrent.CompletableFuture;
 
 @HookPositions({HookPosition.BEFORE_AGENT, HookPosition.AFTER_AGENT})
@@ -854,10 +854,10 @@ public class CustomAgentHook extends AgentHook {
   language="java"
   title="LoggingInterceptor 自定义 ModelInterceptor 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.ModelInterceptor;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelRequest;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelResponse;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelCallHandler;
+{`import io.github.agentic.ai.graph.agent.interceptor.ModelInterceptor;
+import io.github.agentic.ai.graph.agent.interceptor.ModelRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ModelResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ModelCallHandler;
 
 public class LoggingInterceptor extends ModelInterceptor {
 
@@ -896,10 +896,10 @@ public class LoggingInterceptor extends ModelInterceptor {
   language="java"
   title="DynamicToolInterceptor 动态工具管理示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.ModelInterceptor;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelRequest;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelResponse;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelCallHandler;
+{`import io.github.agentic.ai.graph.agent.interceptor.ModelInterceptor;
+import io.github.agentic.ai.graph.agent.interceptor.ModelRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ModelResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ModelCallHandler;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
 import java.util.ArrayList;
@@ -971,10 +971,10 @@ public class DynamicToolInterceptor extends ModelInterceptor {
   language="java"
   title="ToolMonitoringInterceptor 自定义 ToolInterceptor 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.ToolInterceptor;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ToolCallRequest;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ToolCallResponse;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ToolCallHandler;
+{`import io.github.agentic.ai.graph.agent.interceptor.ToolInterceptor;
+import io.github.agentic.ai.graph.agent.interceptor.ToolCallRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ToolCallResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ToolCallHandler;
 
 public class ToolMonitoringInterceptor extends ToolInterceptor {
 
@@ -1027,11 +1027,11 @@ public class ToolMonitoringInterceptor extends ToolInterceptor {
   language="java"
   title="ModelCallCounterHook 调用计数器示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.ModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.OverAllState;
+{`import io.github.agentic.ai.graph.agent.hook.ModelHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.OverAllState;
 import java.util.concurrent.CompletableFuture;
 import java.util.Map;
 
@@ -1095,10 +1095,10 @@ public class ModelCallCounterHook extends ModelHook {
   language="java"
   title="ModelCallLimiterHook 调用次数限制示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.ModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.hook.JumpTo;
+{`import io.github.agentic.ai.graph.agent.hook.ModelHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.hook.JumpTo;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import java.util.List;
 import java.util.ArrayList;
@@ -1242,7 +1242,7 @@ public class ModelCallLimiterHook extends ModelHook {
 <!-- 要从 Hook 中提前退出，返回包含 `jump_to` 的字典： -->
 
 <!-- ```java -->
-<!-- import io.github.agentic.spring.ai.graph.agent.hook.JumpTo; -->
+<!-- import io.github.agentic.ai.graph.agent.hook.JumpTo; -->
 
 <!-- public class EarlyExitHook implements ModelHook { -->
 
@@ -1465,7 +1465,7 @@ ReactAgent agent = ReactAgent.builder()
 
 ## 与 Interceptor 的区别
 
-在 Agentic AI 中，Hook 和 Interceptor 都可以用于干预 Agent 执行：
+在 ARGI 中，Hook 和 Interceptor 都可以用于干预 Agent 执行：
 
 | 特性         | Hook                                                 | Interceptor                   |
 | ------------ | ---------------------------------------------------- | ----------------------------- |

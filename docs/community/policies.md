@@ -1,19 +1,19 @@
 ---
 title: 社区协议
-description: Agentic AI community contribution, security, and conduct policies.
-keywords: [Agentic AI, community, contribution, security, code of conduct]
+description: ARGI community contribution, security, and conduct policies.
+keywords: [ARGI, community, contribution, security, code of conduct]
 ---
 
 # 社区协议
 
-Agentic AI fork 自 Spring AI Alibaba。refactor 分支已经将核心 Maven 坐标迁移到 `io.github.agentic-ai`，核心模块名迁移到 `agentic-ai-*`，Java 包名迁移到 `io.github.agentic.spring.ai.*`。贡献代码时请以当前分支中的 POM、源码包名和模块目录为准。
+ARGI fork 自 Spring AI Alibaba。refactor 分支已经将核心 Maven 坐标迁移到 `io.github.agentic-ai`，核心模块名迁移到 `argi-*`，Java 包名迁移到 `io.github.agentic.ai.*`。贡献代码时请以当前分支中的 POM、源码包名和模块目录为准。
 
 ## 贡献协议
 
-欢迎通过 Issue、Discussion 和 Pull Request 参与 Agentic AI。提交贡献前，请先阅读仓库中的贡献指南：
+欢迎通过 Issue、Discussion 和 Pull Request 参与 ARGI。提交贡献前，请先阅读仓库中的贡献指南：
 
-- [CONTRIBUTING.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/CONTRIBUTING.md)
-- [CONTRIBUTING-zh.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/CONTRIBUTING-zh.md)
+- [CONTRIBUTING.md](https://github.com/agentic-ai-java/argi/blob/main/CONTRIBUTING.md)
+- [CONTRIBUTING-zh.md](https://github.com/agentic-ai-java/argi/blob/main/CONTRIBUTING-zh.md)
 
 贡献代码前请在本地完成必要检查，包括构建、测试、格式化、Checkstyle、License 与拼写检查。PR 标题和提交信息使用 `type(scope): description` 格式，例如 `docs(site): update community policies`。
 
@@ -25,14 +25,14 @@ Agentic AI fork 自 Spring AI Alibaba。refactor 分支已经将核心 Maven 坐
 
 完整安全策略请参考：
 
-- [SECURITY.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/SECURITY.md)
-- [SECURITY-zh.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/SECURITY-zh.md)
+- [SECURITY.md](https://github.com/agentic-ai-java/argi/blob/main/SECURITY.md)
+- [SECURITY-zh.md](https://github.com/agentic-ai-java/argi/blob/main/SECURITY-zh.md)
 
 ## 行为准则
 
-Agentic AI 社区希望保持开放、友善、尊重和聚焦问题本身的协作环境。请使用包容性语言，尊重不同经验与观点，接受建设性反馈，并保护社区成员和用户的安全与隐私。
+ARGI 社区希望保持开放、友善、尊重和聚焦问题本身的协作环境。请使用包容性语言，尊重不同经验与观点，接受建设性反馈，并保护社区成员和用户的安全与隐私。
 
 完整行为准则请参考：
 
-- [CODE_OF_CONDUCT.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/CODE_OF_CONDUCT.md)
-- [CODE_OF_CONDUCT-zh.md](https://github.com/agentic-spring-ai/agentic-spring-ai/blob/main/CODE_OF_CONDUCT-zh.md)
+- [CODE_OF_CONDUCT.md](https://github.com/agentic-ai-java/argi/blob/main/CODE_OF_CONDUCT.md)
+- [CODE_OF_CONDUCT-zh.md](https://github.com/agentic-ai-java/argi/blob/main/CODE_OF_CONDUCT-zh.md)

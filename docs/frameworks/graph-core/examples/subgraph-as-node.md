@@ -7,7 +7,7 @@ keywords: [子图, Subgraph, NodeAction, 子图作为节点, 模块化, 工作�
 
 # 子图作为节点
 
-在 Agentic AI Graph 中，可以将一个完整的 Graph 作为另一个 Graph 的节点，实现工作流的模块化设计。
+在 ARGI Graph 中，可以将一个完整的 Graph 作为另一个 Graph 的节点，实现工作流的模块化设计。
 
 ## 概念
 
@@ -25,19 +25,19 @@ keywords: [子图, Subgraph, NodeAction, 子图作为节点, 模块化, 工作�
   language="java"
   title="定义子图"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.exception.GraphStateException;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * 定义子图
@@ -66,10 +66,10 @@ public static CompiledGraph createSubGraph(KeyStrategyFactory keyStrategyFactory
   language="java"
   title="将子图包装为 NodeAction"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.action.NodeAction;
 
 import java.util.Map;
 import java.util.Optional;
@@ -107,12 +107,12 @@ public static class SubGraphNode implements NodeAction {
   language="java"
   title="在父图中使用"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.StateGraph;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.StateGraph;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * 在父图中使用
