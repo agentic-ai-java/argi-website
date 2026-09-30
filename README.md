@@ -1,6 +1,6 @@
-# Agentic AI Documentation Website
+# ARGI Documentation Website
 
-The official documentation website for the Agentic AI project, built with Docusaurus.
+The official documentation website for ARGI (Agent Runtime and Graph Intelligence, pronounced "AR-jee"), built with Docusaurus.
 
 ## Quick Start
 
@@ -17,7 +17,7 @@ English: `make preview-en`
 
 ## GitHub Pages Deployment
 
-After the publishing branch is updated, GitHub Actions publishes the `build` directory once lint and build checks pass. Before the first deployment, set the publishing source to `GitHub Actions` under `Settings > Pages`. The site is available at <https://agentic-spring-ai.github.io/website/>.
+After the publishing branch is updated, GitHub Actions publishes the `build` directory once lint and build checks pass. Before the first deployment, set the publishing source to `GitHub Actions` under `Settings > Pages`. The site is available at <https://agentic-ai-java.github.io/argi-website/>.
 
 ## Before Committing
 

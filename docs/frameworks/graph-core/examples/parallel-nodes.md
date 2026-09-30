@@ -7,7 +7,7 @@ keywords: [并行节点, 并行输出, Graph并发, Executor, RunnableConfig, As
 
 # 并行节点定义/输出
 
-Agentic AI Graph 允许您定义并行节点以加速总图执行。
+ARGI Graph 允许您定义并行节点以加速总图执行。
 
 ## 图管理的并发执行
 
@@ -17,7 +17,7 @@ Agentic AI Graph 允许您定义并行节点以加速总图执行。
   language="java"
   title="配置并行节点 Executor"
 >
-{`import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.RunnableConfig;
 import java.util.concurrent.ForkJoinPool;
 
 RunnableConfig runnableConfig = RunnableConfig.builder()
@@ -89,21 +89,21 @@ RunnableConfig runnableConfig = RunnableConfig.builder()
   language="java"
   title="定义并行节点"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.action.AsyncNodeAction;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.AsyncNodeAction;
+import io.github.agentic.ai.graph.exception.GraphStateException;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 定义状态策略
 KeyStrategyFactory keyStrategyFactory = () -> {
@@ -176,11 +176,11 @@ compiledGraph.stream(Map.of())
   language="java"
   title="条件返回到并行节点"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.StateGraph;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
 
 StateGraph workflow = new StateGraph(keyStrategyFactory)
         .addNode("A", makeNode("A"))
@@ -224,11 +224,11 @@ CompiledGraph graph = workflow.compile();`}
   language="java"
   title="混合节点和子图"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.StateGraph;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 创建子图 A3
 StateGraph subgraphA3Builder = new StateGraph(keyStrategyFactory)
@@ -342,8 +342,8 @@ CompiledGraph graph = workflow.compile();`}
   language="java"
   title="完整示例：并行数据处理"
 >
-{`import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
+{`import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.CompiledGraph;
 import java.util.concurrent.ForkJoinPool;
 
 // 定义状态

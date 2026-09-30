@@ -19,8 +19,8 @@ keywords: [ReactAgent, inputSchema, inputType, outputSchema, outputType, outputK
 当使用 `AgentTool.create(agent)` 或 `AgentTool.getFunctionToolCallback(agent)` 时，`AgentTool` 会读取子 Agent 的 `inputSchema` 或 `inputType`，并把原始 schema 包装到名为 `input` 的工具参数中。
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.AgentTool;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.AgentTool;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 
 record ResearchRequest(String topic, int maxItems) {}
 

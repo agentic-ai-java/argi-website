@@ -26,8 +26,8 @@ Graph 将智能体工作流建模为有向图。通过组合状态、节点与�
 `StateGraph` 是图的声明式拓扑定义载体。开发者在 `StateGraph` 中注册状态键、更新合并策略（KeyStrategy）、添加节点和边，完成对智能体工作流结构的建模。
 
 ```java
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 // 初始化 StateGraph 并定义状态键的更新策略
 StateGraph stateGraph = new StateGraph()
@@ -49,7 +49,7 @@ StateGraph stateGraph = new StateGraph()
 - 注入运行时参数，如持久化检查点管理器（Checkpointer）、人工介入中断点（Interrupts）等。
 
 ```java
-import io.github.agentic.spring.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.CompiledGraph;
 
 // 编译图生成可执行的 CompiledGraph 实例
 CompiledGraph graph = stateGraph.compile();

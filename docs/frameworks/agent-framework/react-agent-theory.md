@@ -67,7 +67,7 @@ flowchart TD
 
 ---
 
-## 在 Agentic AI 中的工程映射
+## 在 ARGI 中的工程映射
 
 在框架底层，`ReactAgent` 被设计为一个自包含的图工作流节点拓扑：
 - **Model 节点**：负责生成 Thought 与 Tool Calls。

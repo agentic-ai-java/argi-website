@@ -50,7 +50,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'keywords',
-        content: 'Agentic AI, Agent Framework, ReactAgent, Graph Core, Multi-Agent, Java AI, 智能体, 工作流编排, Context Engineering, AI Agent开发',
+        content: 'ARGI, Agent Framework, ReactAgent, Graph Core, Multi-Agent, Java AI, 智能体, 工作流编排, Context Engineering, AI Agent开发',
       },
     },
     // Open Graph / Facebook
@@ -72,7 +72,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:title',
-        content: 'Agentic AI - Agentic AI Framework for Java Developers',
+        content: 'ARGI - ARGI Framework for Java Developers',
       },
     },
     {
@@ -93,7 +93,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:site_name',
-        content: 'Agentic AI',
+        content: 'ARGI',
       },
     },
     {
@@ -115,7 +115,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'twitter:title',
-        content: 'Agentic AI - Agentic AI Framework for Java Developers',
+        content: 'ARGI - ARGI Framework for Java Developers',
       },
     },
     {
@@ -177,7 +177,7 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        name: 'Agentic AI',
+        name: 'ARGI',
         url: siteUrl,
         logo: siteAssetUrl('img/logo.svg'),
         description: projectConfig.description,
@@ -194,7 +194,7 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: 'Agentic AI',
+        name: 'ARGI',
         url: siteUrl,
         description: projectConfig.description,
         potentialAction: {
@@ -286,7 +286,7 @@ const config: Config = {
     image: 'img/social-card.jpg',
     // Enhanced metadata for SEO
     metadata: [
-      { name: 'keywords', content: 'Agentic AI, Agent Framework, ReactAgent, Graph Core, Multi-Agent, Java AI, 智能体, AI开发框架' },
+      { name: 'keywords', content: 'ARGI, Agent Framework, ReactAgent, Graph Core, Multi-Agent, Java AI, 智能体, AI开发框架' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { property: 'og:type', content: 'website' },
     ],

@@ -7,7 +7,7 @@ keywords: [Graph, 流式输出, AsyncGenerator, Streaming, 节点流式]
 
 # 流式输出
 
-Agentic AI Graph 内置了对流式处理的原生支持，框架统一是使用 Flux 来在框架中定义和传递流，与 Spring 生态的流式处理保持一致。以下是从 Graph 运行中流式返回输出的不同方式。
+ARGI Graph 内置了对流式处理的原生支持，框架统一是使用 Flux 来在框架中定义和传递流，与 Spring 生态的流式处理保持一致。以下是从 Graph 运行中流式返回输出的不同方式。
 
 ## 输出类型
 
@@ -38,7 +38,7 @@ Flux 支持多个流的合并、转换、组合等操作，具备非常强大的
 
 ## 在节点操作中整合流式输出
 
-在 Agentic AI Graph 中，您可以在节点操作中直接返回 `Flux` 对象，框架会自动处理流式输出。
+在 ARGI Graph 中，您可以在节点操作中直接返回 `Flux` 对象，框架会自动处理流式输出。
 
 ### 流式节点实现
 
@@ -46,8 +46,8 @@ Flux 支持多个流的合并、转换、组合等操作，具备非常强大的
   language="java"
   title="流式节点实现"
 >
-{`import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 
@@ -90,8 +90,8 @@ public static class StreamingNode implements NodeAction {
   language="java"
   title="处理流式输出的节点"
 >
-{`import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
 
 import java.util.Map;
 
@@ -117,24 +117,24 @@ public static class ProcessStreamingNode implements NodeAction {
   language="java"
   title="使用流式输出的完整示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.action.AsyncNodeAction;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
-import io.github.agentic.spring.ai.graph.streaming.StreamingOutput;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.AsyncNodeAction;
+import io.github.agentic.ai.graph.exception.GraphStateException;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.streaming.StreamingOutput;
 
 import org.springframework.ai.chat.client.ChatClient;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 
 /**
  * 使用 StateGraph 实现流式输出的完整示例
@@ -246,7 +246,7 @@ chatResponseFlux.subscribe(
 
 ## 理解 Graph 中的流
 
-在 Agentic AI Graph 中，流式输出通过以下方式工作：
+在 ARGI Graph 中，流式输出通过以下方式工作：
 
 ### 流式输出的层次结构
 

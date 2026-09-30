@@ -7,7 +7,7 @@ description: "在构建 Agent 工作流中，利用 Graph 构建工作流中断�
 
 # 人类反馈 HITL
 
-在实际业务场景中，经常会遇到人类介入的场景，人类的不同操作将影响工作流不同的走向。Agentic AI Graph 提供了两种方式来实现人类反馈：
+在实际业务场景中，经常会遇到人类介入的场景，人类的不同操作将影响工作流不同的走向。ARGI Graph 提供了两种方式来实现人类反馈：
 
 1. **InterruptionMetadata 模式**：可以在任意节点随时中断，通过实现 `InterruptableAction` 接口来控制中断时机
 2. **interruptBefore 模式**：需要提前在编译配置中定义中断点，在指定节点执行前中断
@@ -28,31 +28,31 @@ InterruptionMetadata 模式允许节点在运行时动态决定是否需要中�
   language="java"
   title="定义带中断的 Graph"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.action.AsyncNodeActionWithConfig;
-import io.github.agentic.spring.ai.graph.action.InterruptableAction;
-import io.github.agentic.spring.ai.graph.action.InterruptionMetadata;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.AsyncNodeActionWithConfig;
+import io.github.agentic.ai.graph.action.InterruptableAction;
+import io.github.agentic.ai.graph.action.InterruptionMetadata;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.exception.GraphStateException;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * 定义带中断的 Graph
@@ -163,10 +163,10 @@ public static class InterruptableNodeAction implements AsyncNodeActionWithConfig
   language="java"
   title="执行 Graph 直到中断"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.action.InterruptionMetadata;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.action.InterruptionMetadata;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -313,24 +313,24 @@ interruptBefore 模式需要在编译 Graph 时提前指定中断点，在指定
   language="java"
   title="定义带中断的 Graph (interruptBefore 模式)"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.exception.GraphStateException;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * 定义带中断的 Graph
@@ -395,8 +395,8 @@ public static CompiledGraph createGraphWithInterrupt() throws GraphStateExceptio
   language="java"
   title="执行 Graph 直到中断 (interruptBefore 模式)"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.RunnableConfig;
 
 import java.util.Map;
 
@@ -436,8 +436,8 @@ NodeOutput{node=step_1, state={messages=[Step 0, Step 1]}}
   language="java"
   title="等待用户输入并更新状态 (interruptBefore 模式)"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.RunnableConfig;
 
 import java.util.Map;
 
@@ -576,11 +576,11 @@ NodeOutput{node=__END__, state={messages=[Step 0, Step 1, Step 3], human_feedbac
 >
 {`package com.spring.ai.tutorial.graph.human.node;
 
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.async.AsyncGenerator;
-import io.github.agentic.spring.ai.graph.streaming.StreamingChatGenerator;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.async.AsyncGenerator;
+import io.github.agentic.ai.graph.streaming.StreamingChatGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
@@ -652,11 +652,11 @@ public class ExpanderNode implements NodeAction {
 >
 {`package com.spring.ai.tutorial.graph.human.node;
 
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.async.AsyncGenerator;
-import io.github.agentic.spring.ai.graph.streaming.StreamingChatGenerator;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.async.AsyncGenerator;
+import io.github.agentic.ai.graph.streaming.StreamingChatGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
@@ -725,9 +725,9 @@ public class TranslateNode implements NodeAction {
 >
 {`package com.spring.ai.tutorial.graph.human.dispatcher;
 
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.action.EdgeAction;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.EdgeAction;
 
 public class HumanFeedbackDispatcher implements EdgeAction {
     @Override

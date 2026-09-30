@@ -40,32 +40,32 @@ export interface ProjectConfig {
 
 const projectConfig: ProjectConfig = {
   // Basic project information
-  title: 'Agentic AI',
-  tagline: 'Agentic AI Runtime for Java Developers. Build ReAct agents, graph workflows, and multi-agent applications with durable execution.',
-  description: 'Agentic AI 是面向 Java 开发者的智能体运行时与工作流框架，提供 ReAct Agent、Graph 编排、上下文工程、持久化执行和人机协同能力。',
+  title: 'ARGI',
+  tagline: 'Agent Runtime and Graph Intelligence for Java developers.',
+  description: 'ARGI（Agent Runtime and Graph Intelligence）是面向 Java 开发者的智能体运行时与工作流框架。',
 
   // Project owner information
   author: {
-    name: 'Agentic AI',
-    website: 'https://agentic-spring-ai.github.io/website/',
+    name: 'ARGI',
+    website: 'https://agentic-ai-java.github.io/argi-website/',
   },
 
   // GitHub repository information (project code repo)
   github: {
-    username: 'agentic-spring-ai',
-    repoName: 'agentic-spring-ai',
+    username: 'agentic-ai-java',
+    repoName: 'argi',
   },
 
   // Docs/website repository information
   docsGithub: {
-    username: 'agentic-spring-ai',
-    repoName: 'website',
+    username: 'agentic-ai-java',
+    repoName: 'argi-website',
   },
 
   // Website deployment configuration
   deployment: {
-    url: 'https://agentic-spring-ai.github.io',
-    baseUrl: '/website/', // 项目站点部署在 GitHub Pages 的仓库子路径下
+    url: 'https://agentic-ai-java.github.io',
+    baseUrl: '/argi-website/', // 项目站点部署在 GitHub Pages 的仓库子路径下
   },
 
 }

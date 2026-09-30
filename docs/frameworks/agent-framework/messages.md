@@ -7,7 +7,7 @@ keywords: [Message, Message 定义, 消息, Role, Content, Metadata, UserMessage
 
 # Message 定义
 
-Messages 是 Agentic AI 中模型交互的基本单元。它们代表模型的输入和输出，携带在与 LLM 交互时表示对话状态所需的内容和元数据。
+Messages 是 ARGI 中模型交互的基本单元。它们代表模型的输入和输出，携带在与 LLM 交互时表示对话状态所需的内容和元数据。
 
 Messages 是包含以下内容的对象：
 
@@ -15,7 +15,7 @@ Messages 是包含以下内容的对象：
 * **Content（内容）** - 表示消息的实际内容（如文本、图像、音频、文档等）
 * **Metadata（元数据）** - 可选字段，如响应信息、消息 ID 和 token 使用情况
 
-Agentic AI 提供了一个标准的消息类型系统，可在所有模型提供商之间工作，确保无论调用哪个模型都具有一致的行为。
+ARGI 提供了一个标准的消息类型系统，可在所有模型提供商之间工作，确保无论调用哪个模型都具有一致的行为。
 
 ## 基础使用
 
@@ -265,7 +265,7 @@ if (aiMessage.hasToolCalls()) {
 
 #### Token 使用
 
-Agentic AI 的 `ChatResponse` 可以在其元数据中保存 token 计数和其他使用元数据：
+ARGI 的 `ChatResponse` 可以在其元数据中保存 token 计数和其他使用元数据：
 
 <Code
   language="java"
@@ -358,7 +358,7 @@ ChatResponse response = chatModel.call(new Prompt(messages));`}
 
 ## 多模态内容
 
-**多模态性**指的是处理不同形式数据的能力，如文本、音频、图像和视频。Agentic AI 包含这些数据的标准类型，可以跨提供商使用。
+**多模态性**指的是处理不同形式数据的能力，如文本、音频、图像和视频。ARGI 包含这些数据的标准类型，可以跨提供商使用。
 
 聊天模型可以接受多模态数据作为输入并生成它作为输出。下面我们展示包含多模态数据的输入消息的简短示例。
 
@@ -470,7 +470,7 @@ ChatResponse response3 = chatModel.call(new Prompt(conversationHistory));`}
 
 ### 使用 Builder 模式
 
-Agentic AI 的消息类提供了 builder 模式以便于构建：
+ARGI 的消息类提供了 builder 模式以便于构建：
 
 <Code
   language="java"
@@ -478,7 +478,7 @@ Agentic AI 的消息类提供了 builder 模式以便于构建：
 >
 {`// UserMessage with builder
 UserMessage userMsg = UserMessage.builder()
-    .text("你好，我想学习 Agentic AI")
+    .text("你好，我想学习 ARGI")
     .metadata(Map.of("user_id", "user_123"))
     .build();
 
@@ -490,7 +490,7 @@ SystemMessage systemMsg = SystemMessage.builder()
 
 // AssistantMessage with builder
 AssistantMessage assistantMsg = AssistantMessage.builder()
-    .content("我很乐意帮助你学习 Agentic AI！")
+    .content("我很乐意帮助你学习 ARGI！")
     .build();`}
 </Code>
 
@@ -519,7 +519,7 @@ ReactAgent 自动管理消息历史，但你也可以直接使用消息：
   language="java"
   title="在 ReactAgent 中使用消息"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.messages.AssistantMessage;
 

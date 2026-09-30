@@ -1,34 +1,34 @@
 ---
 title: A2A Agent
 sidebar_label: A2A Agent
-description: 了解如何使用 A2A 协议把远程 Agent 接入 Agentic AI，包括 AgentCard 获取、远程调用和作为图节点编排。
+description: 了解如何使用 A2A 协议把远程 Agent 接入 ARGI，包括 AgentCard 获取、远程调用和作为图节点编排。
 keywords: [A2A, A2A Agent, Agent-to-Agent, 分布式Agent, 远程Agent, AgentCard, 远程调用]
 ---
 
 # A2A Agent
 
-Agent2Agent（A2A）协议用于描述和调用远程智能体。Agentic AI 在 `agentic-ai-agent-framework` 中提供了 A2A 客户端侧封装，可以把远程 Agent 包装成 `A2aRemoteAgent`，再像本地 Agent 一样调用或放入 Graph 编排。
+Agent2Agent（A2A）协议用于描述和调用远程智能体。ARGI 在 `argi-agent-framework` 中提供了 A2A 客户端侧封装，可以把远程 Agent 包装成 `A2aRemoteAgent`，再像本地 Agent 一样调用或放入 Graph 编排。
 
 当前 refactor 分支可确认的核心类型包括：
 
-- `A2aRemoteAgent`：把远程 A2A Agent 包装为 Agentic AI Agent。
+- `A2aRemoteAgent`：把远程 A2A Agent 包装为 ARGI Agent。
 - `AgentCardProvider`：抽象 AgentCard 的获取方式。
 - `RemoteAgentCardProvider`：从远程 URL 获取 AgentCard。
 - `AgentCardWrapper`：封装 A2A SDK 的 `AgentCard`，暴露名称、描述、能力、技能等元数据。
 
-> 说明：当前 refactor 分支没有发现 `agentic-ai-starter-a2a-nacos` 或同等 A2A Nacos starter。Nacos MCP starter 存在，但它面向 MCP 注册、发现、网关和路由，不等同于 A2A AgentCard 的自动注册与发现。
+> 说明：当前 refactor 分支没有发现 `argi-starter-a2a-nacos` 或同等 A2A Nacos starter。Nacos MCP starter 存在，但它面向 MCP 注册、发现、网关和路由，不等同于 A2A AgentCard 的自动注册与发现。
 
 ## 添加依赖
 
-`A2aRemoteAgent` 位于 Agent Framework 模块中。通过 Agentic AI BOM 管理版本后，引入 `agentic-ai-agent-framework` 即可使用。
+`A2aRemoteAgent` 位于 Agent Framework 模块中。通过 ARGI BOM 管理版本后，引入 `argi-agent-framework` 即可使用。
 
 ```xml
 <dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>io.github.agentic-ai</groupId>
-            <artifactId>agentic-ai-bom</artifactId>
-            <version>${agentic-ai.version}</version>
+            <artifactId>argi-bom</artifactId>
+            <version>${argi.version}</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -38,7 +38,7 @@ Agent2Agent（A2A）协议用于描述和调用远程智能体。Agentic AI 在 
 <dependencies>
     <dependency>
         <groupId>io.github.agentic-ai</groupId>
-        <artifactId>agentic-ai-agent-framework</artifactId>
+        <artifactId>argi-agent-framework</artifactId>
     </dependency>
 </dependencies>
 ```
@@ -51,10 +51,10 @@ Agent2Agent（A2A）协议用于描述和调用远程智能体。Agentic AI 在 
   language="java"
   title="通过远程 AgentCard 调用 A2A Agent"
 >
-{`import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.agent.a2a.A2aRemoteAgent;
-import io.github.agentic.spring.ai.graph.agent.a2a.AgentCardProvider;
-import io.github.agentic.spring.ai.graph.agent.a2a.RemoteAgentCardProvider;
+{`import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.agent.a2a.A2aRemoteAgent;
+import io.github.agentic.ai.graph.agent.a2a.AgentCardProvider;
+import io.github.agentic.ai.graph.agent.a2a.RemoteAgentCardProvider;
 
 import java.util.Optional;
 
@@ -104,9 +104,9 @@ public class RemoteA2aAgentExample {
   language="java"
   title="把 A2A Remote Agent 加入 StateGraph"
 >
-{`import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.agent.a2a.A2aRemoteAgent;
-import io.github.agentic.spring.ai.graph.agent.a2a.RemoteAgentCardProvider;
+{`import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.agent.a2a.A2aRemoteAgent;
+import io.github.agentic.ai.graph.agent.a2a.RemoteAgentCardProvider;
 
 A2aRemoteAgent remoteAgent = A2aRemoteAgent.builder()
         .name("research_agent")

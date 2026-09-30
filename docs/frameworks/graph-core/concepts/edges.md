@@ -25,8 +25,8 @@ keywords: [Edges, 边, 条件边, ConditionalEdges, 路由控制, 工作流分�
 如果节点 A 总是无条件流向节点 B，可以使用 `addEdge` 方法直接建立单向连接：
 
 ```java
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.StateGraph.END;
 
 // 从 START 到流程第一步，再固定流转至总结节点并结束
 stateGraph.addEdge(START, "classifier_node")
@@ -41,7 +41,7 @@ stateGraph.addEdge(START, "classifier_node")
 当流程需要根据大模型输出、业务规则或异常状态动态分支时，使用 `addConditionalEdges` 方法：
 
 ```java
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
 import java.util.Map;
 
 // 动态路由函数：根据状态中的 intent 决定下一个节点
@@ -101,8 +101,8 @@ stateGraph.addEdge("node_a", "end_node")
 `MultiCommand` 可以在一次条件判断中返回多个目标节点。框架会将这些目标节点作为并行分支执行，并按状态键策略合并结果。
 
 ```java
-import io.github.agentic.spring.ai.graph.action.MultiCommand;
-import static io.github.agentic.spring.ai.graph.action.AsyncMultiCommandAction.node_async;
+import io.github.agentic.ai.graph.action.MultiCommand;
+import static io.github.agentic.ai.graph.action.AsyncMultiCommandAction.node_async;
 
 stateGraph.addParallelConditionalEdges(
     "planner",

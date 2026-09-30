@@ -7,7 +7,7 @@ keywords: [上下文管理, 内存管理, 短期内存, 长期内存, 检查点,
 
 # 上下文管理
 
-AI 应用程序需要支持在同一轮会话的多条消息间共享上下文，或者在不同的会话场景先共享上下文。在 Agentic AI Graph 中，您可以添加两种类型的内存：
+AI 应用程序需要支持在同一轮会话的多条消息间共享上下文，或者在不同的会话场景先共享上下文。在 ARGI Graph 中，您可以添加两种类型的内存：
 
 * [添加短期内存](#添加短期内存)作为智能体状态的一部分，支持与智能体进行多轮聊天对话。
 * [添加长期内存](#添加长期内存)是指跨会话存储的用户特定或应用程序级别的数据。
@@ -71,9 +71,9 @@ graph.invoke(input, config);`}
   language="java"
   title="Redis 检查点器配置"
 >
-{`import io.github.agentic.spring.ai.graph.checkpoint.savers.RedisSaver;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.constant.SaverConstant;
+{`import io.github.agentic.ai.graph.checkpoint.savers.RedisSaver;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.constant.SaverConstant;
 
 // Redis 配置
 String redisHost = "localhost";
@@ -98,15 +98,15 @@ CompiledGraph graph = stateGraph.compile(
   language="java"
   title="使用短期内存的多轮对话示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
 
 import org.springframework.ai.chat.client.ChatClient;
 
@@ -114,9 +114,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 定义状态策略
 KeyStrategyFactory keyStrategyFactory = () -> {
@@ -178,15 +178,15 @@ graph.invoke(Map.of("messages", List.of(
 
 ### 在子图中使用
 
-如果您的图包含子图，您只需在编译父图时提供检查点器。Agentic AI Graph 将自动将检查点器传播到子图。
+如果您的图包含子图，您只需在编译父图时提供检查点器。ARGI Graph 将自动将检查点器传播到子图。
 
 <Code
   language="java"
   title="在子图中使用检查点器"
 >
-{`import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
+{`import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.CompiledGraph;
+import static io.github.agentic.ai.graph.StateGraph.START;
 
 // 定义状态
 KeyStrategyFactory keyStrategyFactory = () -> {
@@ -235,7 +235,7 @@ CompiledGraph graph = parentBuilder.compile(
 
 使用长期内存跨对话存储用户特定或应用程序特定的数据。
 
-Agentic AI 借助 Store 组件来实现记忆的写入或读取管理。Store 是一个抽象接口，可以有不同的实现（如 `MemoryStore`、`RedisStore` 等），用于持久化存储跨会话的数据。
+ARGI 借助 Store 组件来实现记忆的写入或读取管理。Store 是一个抽象接口，可以有不同的实现（如 `MemoryStore`、`RedisStore` 等），用于持久化存储跨会话的数据。
 
 ### 使用 Store 存储用户信息
 
@@ -245,26 +245,26 @@ Agentic AI 借助 Store 组件来实现记忆的写入或读取管理。Store �
   language="java"
   title="使用 Store 存储用户信息"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
-import io.github.agentic.spring.ai.graph.store.Store;
-import io.github.agentic.spring.ai.graph.store.StoreItem;
-import io.github.agentic.spring.ai.graph.store.stores.MemoryStore;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.store.Store;
+import io.github.agentic.ai.graph.store.StoreItem;
+import io.github.agentic.ai.graph.store.stores.MemoryStore;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeActionWithConfig.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeActionWithConfig.node_async;
 
 // 在节点中使用 Store 存储用户信息
 var userProfileNode = node_async((state, config) -> {
@@ -338,26 +338,26 @@ System.out.println("加载的用户配置: " + result.get("userProfile"));`}
   language="java"
   title="使用 Store 实现缓存"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
-import io.github.agentic.spring.ai.graph.store.Store;
-import io.github.agentic.spring.ai.graph.store.StoreItem;
-import io.github.agentic.spring.ai.graph.store.stores.MemoryStore;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.store.Store;
+import io.github.agentic.ai.graph.store.StoreItem;
+import io.github.agentic.ai.graph.store.stores.MemoryStore;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeActionWithConfig.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeActionWithConfig.node_async;
 
 var cacheNode = node_async((state, config) -> {
     String key = (String) state.value("cacheKey").orElse("");
@@ -449,19 +449,19 @@ private static Object performExpensiveOperation(String key) {
   language="java"
   title="结合短期和长期内存的完整示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
-import io.github.agentic.spring.ai.graph.store.Store;
-import io.github.agentic.spring.ai.graph.store.StoreItem;
-import io.github.agentic.spring.ai.graph.store.stores.MemoryStore;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.store.Store;
+import io.github.agentic.ai.graph.store.StoreItem;
+import io.github.agentic.ai.graph.store.stores.MemoryStore;
 
 import org.springframework.ai.chat.client.ChatClient;
 
@@ -470,10 +470,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeActionWithConfig.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeActionWithConfig.node_async;
 
 // 定义状态
 KeyStrategyFactory keyStrategyFactory = () -> {

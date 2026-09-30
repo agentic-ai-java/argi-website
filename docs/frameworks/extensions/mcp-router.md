@@ -1,7 +1,7 @@
 ---
 title: MCP 智能路由与服务管理 (Router)
 sidebar_label: MCP 路由
-description: 了解 Agentic AI MCP Router：基于向量存储的 MCP Server 语义搜索、Nacos/DB/File 三重服务发现、定时监控 Watcher 与智能请求代理。
+description: 了解 ARGI MCP Router：基于向量存储的 MCP Server 语义搜索、Nacos/DB/File 三重服务发现、定时监控 Watcher 与智能请求代理。
 keywords: [Extensions, MCP Router, 语义搜索, 向量存储, 服务代理, 服务发现, 动态路由]
 ---
 
@@ -9,7 +9,7 @@ keywords: [Extensions, MCP Router, 语义搜索, 向量存储, 服务代理, 服
 
 在包含几十乃至上百个 MCP Server 的大规模智能体应用集群中，如果将所有 Server 里的所有工具无差别全部注入给大模型，会导致严重的上下文膨胀、工具选错（Tool Selection Failure）以及单次请求 Token 暴增。
 
-**`agentic-ai-starter-mcp-router`** 提供了**语义感知型智能路由**：根据用户任务的目标语义，在大规模 MCP Server 注册表中精准召回最契合的 Server 与工具子集，并提供统一的反向代理转发。
+**`argi-starter-mcp-router`** 提供了**语义感知型智能路由**：根据用户任务的目标语义，在大规模 MCP Server 注册表中精准召回最契合的 Server 与工具子集，并提供统一的反向代理转发。
 
 ---
 
@@ -63,7 +63,7 @@ keywords: [Extensions, MCP Router, 语义搜索, 向量存储, 服务代理, 服
 <dependencies>
     <dependency>
         <groupId>io.github.agentic-ai</groupId>
-        <artifactId>agentic-ai-starter-mcp-router</artifactId>
+        <artifactId>argi-starter-mcp-router</artifactId>
     </dependency>
     <!-- 需要引入 EmbeddingModel 提供语义向量计算支持 -->
     <dependency>
@@ -82,23 +82,23 @@ spring:
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
-    alibaba:
-      mcp:
-        nacos:
-          server-addr: 127.0.0.1:8848
-          namespace: public
-        router:
-          enabled: true
-          # 发现顺序：按优先级排列
-          discovery-order:
-            - nacos
-            - database
-            - file
-          # 由 Watcher 定时监听同步的 MCP 服务列表
-          service-names:
-            - mcp-weather-service
-            - mcp-stock-service
-            - mcp-payment-service
+argi:
+  mcp:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: public
+    router:
+      enabled: true
+      # 发现顺序：按优先级排列
+      discovery-order:
+        - nacos
+        - database
+        - file
+      # 由 Watcher 定时监听同步的 MCP 服务列表
+      service-names:
+        - mcp-weather-service
+        - mcp-stock-service
+        - mcp-payment-service
 ```
 
 ### 3. 配置数据库服务发现源（可选）
@@ -106,21 +106,19 @@ spring:
 若希望通过数据库集中维护各团队注册的 MCP Server 拓扑：
 
 ```yaml
-spring:
-  ai:
-    alibaba:
-      mcp:
-        router:
-          database:
-            enabled: true
-            url: jdbc:mysql://localhost:3306/mcp_registry
-            username: root
-            password: secret
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            table-name: mcp_server_info
-            max-pool-size: 10
-            min-idle: 2
-            connection-timeout: 30000
+argi:
+  mcp:
+    router:
+      database:
+        enabled: true
+        url: jdbc:mysql://localhost:3306/mcp_registry
+        username: root
+        password: secret
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        table-name: mcp_server_info
+        max-pool-size: 10
+        min-idle: 2
+        connection-timeout: 30000
 ```
 
 ---
@@ -130,7 +128,7 @@ spring:
 由于 Starter 已将 `routerTools` 注册为 `ToolCallbackProvider`，你可以直接将其绑定给 Agent：
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -169,7 +167,7 @@ public class MetaRouterAgentService {
 
 ## 配置属性参考
 
-### `spring.ai.alibaba.mcp.router`
+### `argi.mcp.router`
 | 配置项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `true` | 是否启用 MCP Router 自动装配 |
@@ -177,7 +175,7 @@ public class MetaRouterAgentService {
 | `discovery-order` | List | `["nacos"]` | 服务发现源查找优先级（支持 `nacos`、`database`、`file`） |
 | `services` | List | `[]` | 静态声明的文件型 MCP Server 清单 |
 
-### `spring.ai.alibaba.mcp.router.database`
+### `argi.mcp.router.database`
 | 配置项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `false` | 是否开启数据库服务发现 |

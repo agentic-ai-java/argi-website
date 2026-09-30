@@ -37,9 +37,9 @@ Graph Core 提供了本地定时执行图的基础类。`ScheduleConfig` 描述�
 ## 创建定时任务
 
 ```java
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.scheduling.ScheduleConfig;
-import io.github.agentic.spring.ai.graph.scheduling.ScheduledAgentTask;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.scheduling.ScheduleConfig;
+import io.github.agentic.ai.graph.scheduling.ScheduledAgentTask;
 
 import java.time.Duration;
 import java.util.Map;
@@ -83,8 +83,8 @@ ScheduleConfig config = ScheduleConfig.builder()
 ## 管理任务
 
 ```java
-import io.github.agentic.spring.ai.graph.scheduling.ScheduledAgentManager;
-import io.github.agentic.spring.ai.graph.scheduling.ScheduledAgentManagerFactory;
+import io.github.agentic.ai.graph.scheduling.ScheduledAgentManager;
+import io.github.agentic.ai.graph.scheduling.ScheduledAgentManagerFactory;
 
 ScheduledAgentManager manager = ScheduledAgentManagerFactory.getInstance().getManager();
 
