@@ -1,13 +1,13 @@
 ---
 title: Graph Core 快速开始
 sidebar_label: 快速开始
-description: 使用 Agentic AI Graph Core 创建、编译并执行一个状态图。
-keywords: [Graph Core, StateGraph, CompiledGraph, OverAllState, Agentic AI]
+description: 使用 ARGI Graph Core 创建、编译并执行一个状态图。
+keywords: [Graph Core, StateGraph, CompiledGraph, OverAllState, ARGI]
 ---
 
 # Graph Core 快速开始
 
-Agentic AI Graph Core 是状态图工作流运行时。它将工作流建模为节点、边和共享状态：节点执行工作并返回状态更新，边决定下一步执行哪个节点，状态在图执行过程中持续合并和传递。
+ARGI Graph Core 是状态图工作流运行时。它将工作流建模为节点、边和共享状态：节点执行工作并返回状态更新，边决定下一步执行哪个节点，状态在图执行过程中持续合并和传递。
 
 ## 添加依赖
 
@@ -16,7 +16,7 @@ Agentic AI Graph Core 是状态图工作流运行时。它将工作流建模为�
 ```xml
 <dependency>
     <groupId>io.github.agentic-ai</groupId>
-    <artifactId>agentic-ai-graph-core</artifactId>
+    <artifactId>argi-graph-core</artifactId>
 </dependency>
 ```
 
@@ -25,18 +25,18 @@ Agentic AI Graph Core 是状态图工作流运行时。它将工作流建模为�
 下面示例定义一个只有一个业务节点的图。图从 `START` 进入 `greet` 节点，节点读取输入状态并写入 `message`，最后流转到 `END`。
 
 ```java
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 KeyStrategyFactory strategies = () -> Map.of(
     "message", new ReplaceStrategy()
@@ -52,7 +52,7 @@ StateGraph graph = new StateGraph(strategies)
 
 CompiledGraph compiledGraph = graph.compile();
 
-Optional<OverAllState> result = compiledGraph.invoke(Map.of("name", "Agentic AI"));
+Optional<OverAllState> result = compiledGraph.invoke(Map.of("name", "ARGI"));
 String message = (String) result.orElseThrow().value("message").orElseThrow();
 System.out.println(message);
 ```

@@ -1,12 +1,12 @@
 ---
 title: Quick Start
-description: Start building with Agentic AI.
-keywords: [Agentic AI, Quick Start, ReAct Agent, Graph Core]
+description: Start building with ARGI.
+keywords: [ARGI, Quick Start, ReAct Agent, Graph Core]
 ---
 
 # Quick Start
 
-Use this path when starting a new Agentic AI application:
+Use this path when starting a new ARGI application:
 
 1. Choose the runtime shape.
    - Use **Agent Framework** for ReAct Agent and multi-agent applications.
@@ -23,4 +23,4 @@ Use this path when starting a new Agentic AI application:
 
 ## Repository
 
-The source code is maintained at [github.com/agentic-spring-ai/agentic-spring-ai](https://github.com/agentic-spring-ai/agentic-spring-ai).
+The source code is maintained at [github.com/agentic-ai-java/argi](https://github.com/agentic-ai-java/argi).

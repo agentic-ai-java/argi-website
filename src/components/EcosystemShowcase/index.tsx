@@ -17,47 +17,47 @@ interface EcosystemItem {
 
 const frameworkItems: EcosystemItem[] = [
   {
-    name: 'Agentic AI ReAct Agent',
+    name: 'ARGI ReAct Agent',
     nameId: 'ecosystem.framework.agent.name',
     layer: 'LAYER 01 // AGENT RUNTIME',
     description: 'Upper-layer framework for ReAct Agent, stateful agent loops, context engineering, and multi-agent coordination.',
     descriptionId: 'ecosystem.framework.agent.description',
     tags: ['ReAct Loop', 'Hooks & Guardrails', 'Context Compression', 'Multi-Agent'],
     iconType: 'agent',
-    repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai',
+    repoUrl: 'https://github.com/agentic-ai-java/argi',
     docUrl: '/docs/frameworks/agent-framework/agents-intro',
   },
   {
-    name: 'Agentic AI Graph Core',
+    name: 'ARGI Graph Core',
     nameId: 'ecosystem.framework.graph.name',
     layer: 'LAYER 02 // STATEFUL GRAPH',
     description: 'Graph runtime for workflow orchestration, state checkpoints, time-travel recovery, and human-in-the-loop execution.',
     descriptionId: 'ecosystem.framework.graph.description',
     tags: ['StateGraph', 'Conditional Edges', 'Durable Checkpoints', 'HITL'],
     iconType: 'graph',
-    repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai',
+    repoUrl: 'https://github.com/agentic-ai-java/argi',
     docUrl: '/docs/frameworks/graph-core/workflow-orchestration',
   },
   {
-    name: 'Agentic AI Studio',
+    name: 'ARGI Studio',
     nameId: 'ecosystem.framework.graphCommunity.name',
     layer: 'LAYER 03 // VISUAL DEBUGGER',
     description: 'Embedded visual debugging studio for agent conversations, live DAG execution traces, and state inspection.',
     descriptionId: 'ecosystem.framework.graphCommunity.description',
     tags: ['Visual DAG', 'Trace Replay', 'State Mutation', 'Token Telemetry'],
     iconType: 'studio',
-    repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai',
+    repoUrl: 'https://github.com/agentic-ai-java/argi',
     docUrl: '/docs/frameworks/studio/quick-start',
   },
   {
-    name: 'Agentic AI Extensions',
+    name: 'ARGI Extensions',
     nameId: 'ecosystem.framework.extensions.name',
     layer: 'LAYER 04 // PROTOCOL & MESH',
     description: 'Pluggable ecosystem for model adapters, distributed persistence backends, A2A discovery, MCP registry, and sandboxed tools.',
     descriptionId: 'ecosystem.framework.extensions.description',
     tags: ['MCP Registry', 'A2A Protocol', 'Redis / Postgres Saver', 'Sandbox'],
     iconType: 'extensions',
-    repoUrl: 'https://github.com/agentic-spring-ai/agentic-spring-ai-extensions',
+    repoUrl: 'https://github.com/agentic-ai-java/argi-extensions',
     docUrl: '/docs/overview',
   },
 ]
@@ -175,7 +175,7 @@ export default function EcosystemShowcase(): React.JSX.Element {
             MODULAR STACK // 全栈智能体模块矩阵
           </span>
           <h2 className={styles.ecosystemTitle}>
-            <Translate id="ecosystem.title">Agentic AI Ecosystem</Translate>
+            <Translate id="ecosystem.title">ARGI Ecosystem</Translate>
           </h2>
           <p className={styles.ecosystemSubtitle}>
             <Translate id="ecosystem.subtitle">

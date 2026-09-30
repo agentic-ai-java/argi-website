@@ -1,7 +1,7 @@
 ---
 title: Agents 介绍
 sidebar_label: Agents 介绍
-description: 了解 Agentic AI 中的 ReactAgent、ReAct 循环、工具调用、Hook 与 Interceptor。
+description: 了解 ARGI 中的 ReactAgent、ReAct 循环、工具调用、Hook 与 Interceptor。
 keywords: [Agents, ReactAgent, ReAct, ToolCallback, Hook, Interceptor, Agent Framework]
 ---
 
@@ -9,7 +9,7 @@ keywords: [Agents, ReactAgent, ReAct, ToolCallback, Hook, Interceptor, Agent Fra
 
 Agent 将语言模型、工具和运行时控制逻辑组合在一起，用于处理需要多步推理、外部工具调用和状态管理的任务。
 
-Agentic AI Agent Framework 的核心实现是 `ReactAgent`。它构建在 Graph Core 之上：底层由 `StateGraph` 表示执行拓扑，模型节点负责推理和生成工具调用，工具节点执行工具并把观察结果写回状态，然后由图边决定继续循环还是结束。
+ARGI Agent Framework 的核心实现是 `ReactAgent`。它构建在 Graph Core 之上：底层由 `StateGraph` 表示执行拓扑，模型节点负责推理和生成工具调用，工具节点执行工具并把观察结果写回状态，然后由图边决定继续循环还是结束。
 
 ## ReAct 循环
 
@@ -26,7 +26,7 @@ ReAct 表示 Reasoning + Acting。`ReactAgent` 的典型执行过程包括：
 `ReactAgent` 不绑定特定模型厂商。应用只需要提供 Spring AI 的 `ChatModel`，并按需配置工具。
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.annotation.Tool;
@@ -102,9 +102,9 @@ ReactAgent agent = ReactAgent.builder()
 `ReactAgent` 基于 Graph Core 执行。调用 `saver(...)` 可以为 Agent 配置检查点存储，用于跨会话保存状态或支持恢复。
 
 ```java
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
 
 ReactAgent agent = ReactAgent.builder()
     .name("stateful_agent")
@@ -127,9 +127,9 @@ Hook 用于在 Agent 或模型调用阶段注入运行时逻辑。Interceptor �
 refactor 分支提供了内置的 `ModelCallLimitHook` 与 `ToolErrorInterceptor`：
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.modelcalllimit.ModelCallLimitHook;
-import io.github.agentic.spring.ai.graph.agent.interceptor.toolerror.ToolErrorInterceptor;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.modelcalllimit.ModelCallLimitHook;
+import io.github.agentic.ai.graph.agent.interceptor.toolerror.ToolErrorInterceptor;
 
 ReactAgent agent = ReactAgent.builder()
     .name("guarded_agent")

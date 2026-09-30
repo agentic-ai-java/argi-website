@@ -19,7 +19,7 @@ keywords:
 
 人工介入（HITL）Hook 允许你为 Agent 工具调用添加人工监督。当模型提出需要审查的操作时——例如写入文件或执行 SQL——Hook 可以暂停执行并等待人工决策。
 
-它通过检查每个工具调用并与可配置的策略进行比对来实现。如果需要人工干预，Hook 会发出中断（interrupt）来暂停执行。图的状态会通过 Agentic AI 的检查点机制保存，因此执行可以安全暂停并在之后恢复。
+它通过检查每个工具调用并与可配置的策略进行比对来实现。如果需要人工干预，Hook 会发出中断（interrupt）来暂停执行。图的状态会通过 ARGI 的检查点机制保存，因此执行可以安全暂停并在之后恢复。
 
 人工决策决定接下来发生什么：操作可以被原样批准（`approve`）、修改后运行（`edit`）或拒绝并提供反馈（`reject`）。
 
@@ -49,10 +49,10 @@ Hook 定义了三种人工响应中断的内置方式：
   language="java"
   title="HumanInTheLoopHook 配置示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.hip.HumanInTheLoopHook;
-import io.github.agentic.spring.ai.graph.agent.hook.hip.ToolConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.hip.HumanInTheLoopHook;
+import io.github.agentic.ai.graph.agent.hook.hip.ToolConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
 
 // 配置检查点保存器（人工介入需要检查点来处理中断）
 MemorySaver memorySaver = new MemorySaver();
@@ -92,9 +92,9 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="响应中断示例"
 >
-{`import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.action.InterruptionMetadata;
+{`import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.action.InterruptionMetadata;
 
 // 人工介入利用检查点机制。
 // 你必须提供线程ID以将执行与会话线程关联，
@@ -306,13 +306,13 @@ Hook 定义了一个在模型生成响应后但在执行任何工具调用之前
   language="java"
   title="HumanInTheLoop 完整示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.hip.HumanInTheLoopHook;
-import io.github.agentic.spring.ai.graph.agent.hook.hip.ToolConfig;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.action.InterruptionMetadata;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.hip.HumanInTheLoopHook;
+import io.github.agentic.ai.graph.agent.hook.hip.ToolConfig;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.action.InterruptionMetadata;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
 
 public class HumanInTheLoopExample {
 
@@ -413,22 +413,22 @@ public class HumanInTheLoopExample {
   language="java"
   title="Workflow 中嵌套 Agent 的人工中断示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.action.InterruptionMetadata;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.hip.HumanInTheLoopHook;
-import io.github.agentic.spring.ai.graph.agent.hook.hip.ToolConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.InterruptionMetadata;
+import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.hip.HumanInTheLoopHook;
+import io.github.agentic.ai.graph.agent.hook.hip.ToolConfig;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.tool.ToolCallback;
@@ -439,8 +439,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 1. 创建工具回调
 ToolCallback searchTool = FunctionToolCallback

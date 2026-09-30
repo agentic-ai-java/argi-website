@@ -16,7 +16,7 @@ keywords: [Memory, 短期记忆, Short-term Memory, 对话历史, 线程, Thread
 > **注意**：会话可以隔离同一个 Agent 实例中的多个不同交互，类似于电子邮件在单个对话中分组消息的方式。
 
 ## 理解 ReactAgent 中的短期记忆
-Agentic AI 将短期记忆作为 Agent 状态的一部分进行管理。
+ARGI 将短期记忆作为 Agent 状态的一部分进行管理。
 
 
 通过将这些存储在 Graph 的状态中，Agent 可以访问给定对话的完整上下文，同时保持不同对话之间的分离。状态使用 checkpointer 持久化到数据库（或内存），以便可以随时恢复线程。短期记忆在调用 Agent 或完成步骤（如工具调用）时更新，并在每个步骤开始时读取状态。
@@ -26,21 +26,21 @@ Agentic AI 将短期记忆作为 Agent 状态的一部分进行管理。
 
 即使你在使用的大模型上下文长度足够大，大多数模型在处理较长上下文时的表现仍然很差。因为很多模型会被过时或偏离主题的内容"分散注意力"。同时，过长的上下文，还会带来响应时间变长、Token 成本增加等问题。
 
-在 Agentic AI 中，ReactAgent 使用 [messages](./messages.md) 记录和传递上下文，其中包括指令（SystemMessage）和输入（UserMessage）。在 ReactAgent 中，消息（Message）在用户输入和模型响应之间交替，导致消息列表随着时间的推移变得越来越长。由于上下文窗口有限，许多应用程序可以从使用技术来移除或"忘记"过时信息中受益，即 “上下文工程”。
+在 ARGI 中，ReactAgent 使用 [messages](./messages.md) 记录和传递上下文，其中包括指令（SystemMessage）和输入（UserMessage）。在 ReactAgent 中，消息（Message）在用户输入和模型响应之间交替，导致消息列表随着时间的推移变得越来越长。由于上下文窗口有限，许多应用程序可以从使用技术来移除或"忘记"过时信息中受益，即 “上下文工程”。
 
 
 ## 使用方法
 
-在 Agentic AI 中，要向 Agent 添加短期记忆（会话级持久化），你需要在创建 Agent 时指定 `checkpointer`。
+在 ARGI 中，要向 Agent 添加短期记忆（会话级持久化），你需要在创建 Agent 时指定 `checkpointer`。
 
 <Code
   language="java"
   title="配置短期记忆示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.RunnableConfig;
 
 // 配置 checkpointer
 ReactAgent agent = ReactAgent.builder()
@@ -81,7 +81,7 @@ Graph Core 的 refactor 分支提供了多种 checkpoint saver。它们用于保
   language="java"
   title="使用 Redis Checkpointer 示例"
 >
-{`import io.github.agentic.spring.ai.graph.checkpoint.savers.RedisSaver;
+{`import io.github.agentic.ai.graph.checkpoint.savers.RedisSaver;
 import org.redisson.api.RedissonClient;
 
 // 配置 Redis checkpointer
@@ -105,10 +105,10 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="自定义记忆 Hook 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.ModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.ModelHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import java.util.List;
 import java.util.Map;
@@ -178,12 +178,12 @@ public class CustomMemoryHook extends ModelHook {
   language="java"
   title="MessageTrimmingHook 修剪消息示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import java.util.ArrayList;
 import java.util.List;
@@ -255,12 +255,12 @@ System.out.println(finalResponse.getText());
   language="java"
   title="MessageDeletionHook 删除消息示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import java.util.List;
 
@@ -291,12 +291,12 @@ public class MessageDeletionHook extends MessagesModelHook {
   language="java"
   title="ClearAllMessagesHook 删除所有消息示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import java.util.ArrayList;
 import java.util.List;
@@ -326,12 +326,12 @@ public class ClearAllMessagesHook extends MessagesModelHook {
   language="java"
   title="DeleteOldMessagesHook 删除旧消息示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import java.util.List;
 
@@ -386,12 +386,12 @@ agent.call("我叫什么名字？", config);
   language="java"
   title="MessageSummarizationHook 总结消息示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.messages.Message;
@@ -524,12 +524,12 @@ System.out.println(finalResponse.getText());
   language="java"
   title="在工具中读取短期记忆示例"
 >
-{`import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
 import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.chat.messages.AssistantMessage;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
 import java.util.function.BiFunction;
 
 public class UserInfoTool implements BiFunction<String, ToolContext, String> {
@@ -586,10 +586,10 @@ System.out.println(response.getText());`}
   language="java"
   title="DynamicPromptInterceptor 动态提示示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.interceptor.ModelInterceptor;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelRequest;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelResponse;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelCallHandler;
+{`import io.github.agentic.ai.graph.agent.interceptor.ModelInterceptor;
+import io.github.agentic.ai.graph.agent.interceptor.ModelRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ModelResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ModelCallHandler;
 
 public class DynamicPromptInterceptor extends ModelInterceptor {
 
@@ -643,12 +643,12 @@ Map<String, Object> context = Map.of("user_name", "John Smith");`}
   language="java"
   title="TrimMessagesHook Before Model 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.Message;
 import java.util.ArrayList;
 import java.util.List;
@@ -700,12 +700,12 @@ ReactAgent agent = ReactAgent.builder()
   language="java"
   title="ValidateResponseHook After Model 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
 import java.util.ArrayList;

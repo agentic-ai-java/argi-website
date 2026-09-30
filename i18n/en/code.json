@@ -243,7 +243,7 @@
     "description": "Observability feature description"
   },
   "ecosystem.title": {
-    "message": "Agentic AI Ecosystem"
+    "message": "ARGI Ecosystem"
   },
   "ecosystem.subtitle": {
     "message": "A comprehensive ecosystem for building intelligent applications"
@@ -255,7 +255,7 @@
     "message": "Runtime modules for building agentic Java applications"
   },
   "ecosystem.product.title": {
-    "message": "Built with Agentic AI"
+    "message": "Built with ARGI"
   },
   "ecosystem.product.description": {
     "message": "Production-ready applications powered by our framework"
@@ -267,7 +267,7 @@
     "message": "View Docs"
   },
   "ecosystem.framework.agent.name": {
-    "message": "Agentic AI ReAct Agent",
+    "message": "ARGI ReAct Agent",
     "description": "Agent framework name"
   },
   "ecosystem.framework.agent.description": {
@@ -275,7 +275,7 @@
     "description": "Agent framework description"
   },
   "ecosystem.framework.graph.name": {
-    "message": "Agentic AI Graph Core",
+    "message": "ARGI Graph Core",
     "description": "Graph framework name"
   },
   "ecosystem.framework.graph.description": {
@@ -283,7 +283,7 @@
     "description": "Graph framework description"
   },
   "ecosystem.framework.graphCommunity.name": {
-    "message": "Agentic AI Studio",
+    "message": "ARGI Studio",
     "description": "Graph Community name"
   },
   "ecosystem.framework.graphCommunity.description": {
@@ -291,7 +291,7 @@
     "description": "Graph Community description"
   },
   "ecosystem.framework.extensions.name": {
-    "message": "Agentic AI Extensions",
+    "message": "ARGI Extensions",
     "description": "Extensions framework name"
   },
   "theme.SearchBar.label": {
@@ -354,7 +354,7 @@
     "description": "Code playground section subtitle"
   },
   "announcement.message": {
-    "message": "Agentic AI Runtime now supports full ReAct loops, StateGraph orchestration, and real-time Studio trace debugging",
+    "message": "ARGI Runtime now supports full ReAct loops, StateGraph orchestration, and real-time Studio trace debugging",
     "description": "Announcement bar main message"
   },
   "announcement.cta": {

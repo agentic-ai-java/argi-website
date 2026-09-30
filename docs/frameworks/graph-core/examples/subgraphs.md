@@ -7,7 +7,7 @@ keywords: [Subgraphs, 子图, 多智能体, Multi-agent, 组件复用, 模块化
 
 # 子图 subgraphs
 
-子图是在另一个图中用作节点的图，Agentic AI Graph 支持多种不同的模式来使用子图，不同的使用方式会决定图之间是否共享上下文、。
+子图是在另一个图中用作节点的图，ARGI Graph 支持多种不同的模式来使用子图，不同的使用方式会决定图之间是否共享上下文、。
 
 ## 使用子图的原因
 
@@ -29,18 +29,18 @@ keywords: [Subgraphs, 子图, 多智能体, Multi-agent, 组件复用, 模块化
   language="java"
   title="直接添加编译的子图作为节点"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 创建并编译子图
 KeyStrategyFactory subKeyFactory = () -> {
@@ -93,20 +93,20 @@ CompiledGraph compiledParent = parentGraph.compile();`}
   language="java"
   title="在节点操作中调用子图"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 定义子图
 KeyStrategyFactory childKeyFactory = () -> {
@@ -190,19 +190,19 @@ CompiledGraph compiledParent = parentGraph.compile();`}
   language="java"
   title="直接嵌入 StateGraph"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 定义子图（返回 StateGraph）
 KeyStrategyFactory keyFactory = () -> {
@@ -277,18 +277,18 @@ CompiledGraph compiledParent = parentGraph.compile();`}
   language="java"
   title="共享状态的子图"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 定义共享状态策略
 KeyStrategyFactory sharedKeyStrategyFactory = () -> {
@@ -383,20 +383,20 @@ CompiledGraph compiledMain = mainGraph.compile();`}
   language="java"
   title="不同状态的子图"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 父图状态
 KeyStrategyFactory parentKeyStrategyFactory = () -> {
@@ -507,13 +507,13 @@ ConfigurableSubGraphNode configurableNode = new ConfigurableSubGraphNode(
 
 ## 可视化
 
-能够可视化图是很重要的，特别是当它们变得更加复杂时。Agentic AI Graph 提供了 `StateGraph.getGraph()` 方法来获取可视化格式（即图即代码表示，如 PlantUML）：
+能够可视化图是很重要的，特别是当它们变得更加复杂时。ARGI Graph 提供了 `StateGraph.getGraph()` 方法来获取可视化格式（即图即代码表示，如 PlantUML）：
 
 <Code
   language="java"
   title="可视化图"
 >
-{`import io.github.agentic.spring.ai.graph.GraphRepresentation;
+{`import io.github.agentic.ai.graph.GraphRepresentation;
 
 StateGraph stateGraph = new StateGraph(keyStrategyFactory)
     .addNode("node1", node1)
@@ -539,7 +539,7 @@ System.out.println(representation.content());`}
   language="java"
   title="流式处理"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
+{`import io.github.agentic.ai.graph.CompiledGraph;
 import reactor.core.publisher.Flux;
 
 // 执行子图并获取流式输出
@@ -561,18 +561,18 @@ stream.subscribe(
   language="java"
   title="多智能体系统示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 // 定义智能体状态策略
 KeyStrategyFactory agentKeyStrategyFactory = () -> {
@@ -651,11 +651,11 @@ Map<String, Object> result = multiAgentSystem.invoke(
   language="java"
   title="状态隔离示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.exception.GraphStateException;
 
 import java.util.Map;
 import java.util.Optional;

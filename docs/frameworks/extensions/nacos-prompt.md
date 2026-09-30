@@ -9,7 +9,7 @@ keywords: [Extensions, Nacos Prompt, Prompt Template, 提示词管理, 热更新
 
 在传统的 LLM 应用开发中，系统提示词（System Prompt）和指令模板通常硬编码在 Java 代码中或写在静态资源文件里。一旦需要调优提示词、修复边界 Bad Case 或针对线上节日活动临时变更，通常需要重新编译、打包并灰度发布整个应用，运维成本极高。
 
-**`agentic-ai-starter-nacos-prompt`** 提供了基于 **Nacos 配置中心**的 Prompt 模板动态管理与热更新能力，允许运营与算法工程师在 Nacos 控制台上实时调整提示词，应用秒级生效，无需重启任何服务。
+**`argi-starter-nacos-prompt`** 提供了基于 **Nacos 配置中心**的 Prompt 模板动态管理与热更新能力，允许运营与算法工程师在 Nacos 控制台上实时调整提示词，应用秒级生效，无需重启任何服务。
 
 ---
 
@@ -18,7 +18,7 @@ keywords: [Extensions, Nacos Prompt, Prompt Template, 提示词管理, 热更新
 ```
 ┌─────────────────────────────────┐
 │     Nacos 配置中心 (控制台)     │
-│ DataId: spring.ai.alibaba.      │
+│ DataId: argi.      │
 │         configurable.prompt     │
 └────────────────┬────────────────┘
                  │ (配置发布 / 变更推送)
@@ -38,7 +38,7 @@ keywords: [Extensions, Nacos Prompt, Prompt Template, 提示词管理, 热更新
 ```
 
 1. **统一模板工厂（`ConfigurablePromptTemplateFactory`）**：在应用启动时加载默认模板或本地资源模板（`.st` 格式）。
-2. **Nacos 监听器机制**：工厂内部通过 `@NacosConfigListener` 持续监听指定的 Nacos 配置集（默认 Data ID 为 `spring.ai.alibaba.configurable.prompt`，Group 为 `DEFAULT_GROUP`）。
+2. **Nacos 监听器机制**：工厂内部通过 `@NacosConfigListener` 持续监听指定的 Nacos 配置集（默认 Data ID 为 `argi.configurable.prompt`，Group 为 `DEFAULT_GROUP`）。
 3. **零停机无缝切换**：当 Nacos 配置被发布时，工厂自动解析最新配置模型列表并刷新内部 `ConcurrentHashMap`，所有正在执行或后续发起的智能体请求将立即读取最新渲染模板。
 
 ---
@@ -50,7 +50,7 @@ keywords: [Extensions, Nacos Prompt, Prompt Template, 提示词管理, 热更新
 ```xml
 <dependency>
     <groupId>io.github.agentic-ai</groupId>
-    <artifactId>agentic-ai-starter-nacos-prompt</artifactId>
+    <artifactId>argi-starter-nacos-prompt</artifactId>
 </dependency>
 ```
 
@@ -59,12 +59,11 @@ keywords: [Extensions, Nacos Prompt, Prompt Template, 提示词管理, 热更新
 在 `application.yml` 中开启 Nacos Prompt 自动配置并配置 Nacos 连接信息：
 
 ```yaml
-spring:
-  ai:
-    nacos:
-      prompt:
-        template:
-          enabled: true  # 必须置为 true 以激活自动装配
+argi:
+  nacos:
+    prompt:
+      template:
+        enabled: true  # 必须置为 true 以激活自动装配
 ```
 
 ---
@@ -72,7 +71,7 @@ spring:
 ## 3. Nacos 端配置格式规范
 
 在 Nacos 控制台中，创建如下配置项：
-- **Data ID**：`spring.ai.alibaba.configurable.prompt`
+- **Data ID**：`argi.configurable.prompt`
 - **Group**：`DEFAULT_GROUP`
 - **配置格式**：`JSON`
 
@@ -102,9 +101,9 @@ spring:
 你可以直接通过 Spring 容器注入的 `ConfigurablePromptTemplateFactory` 获取模板并渲染：
 
 ```java
-import io.github.agentic.spring.ai.prompt.ConfigurablePromptTemplate;
-import io.github.agentic.spring.ai.prompt.ConfigurablePromptTemplateFactory;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.prompt.ConfigurablePromptTemplate;
+import io.github.agentic.ai.prompt.ConfigurablePromptTemplateFactory;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.stereotype.Service;
 
@@ -152,7 +151,7 @@ public class DynamicAgentService {
 模块提供了 `PromptTemplateCustomizer` 与 `PromptTemplateBuilderConfigure` 函数式接口。开发者可在 Spring 容器中声明自定义 Bean，在模板创建前后插入全局切面逻辑，例如注入全局租户环境变量或接入安全脱敏预检：
 
 ```java
-import io.github.agentic.spring.ai.prompt.PromptTemplateCustomizer;
+import io.github.agentic.ai.prompt.PromptTemplateCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

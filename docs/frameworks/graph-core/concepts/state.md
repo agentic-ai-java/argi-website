@@ -20,10 +20,10 @@ keywords: [OverAllState, State, KeyStrategy, ReplaceStrategy, AppendStrategy, �
 可以通过 `KeyStrategyFactory` 为不同的状态键配置策略：
 
 ```java
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,7 +96,7 @@ List<String> messages = (List<String>) result.get().value("messages").orElse(Lis
 `AppendStrategy` 支持通过 `RemoveByHash` 移除集合中的特定元素：
 
 ```java
-import io.github.agentic.spring.ai.graph.state.RemoveByHash;
+import io.github.agentic.ai.graph.state.RemoveByHash;
 
 var nodeDelete = node_async(state -> 
     Map.of("messages", RemoveByHash.of("消息2"))
@@ -108,7 +108,7 @@ var nodeDelete = node_async(state ->
 `MergeStrategy` 用于合并 `Map` 或可合并的普通对象。两个值都是 `Map` 时，新 Map 会覆盖旧 Map 中的同名键；两个值是同一类型的可合并对象时，框架会尝试按字段合并。
 
 ```java
-import io.github.agentic.spring.ai.graph.state.strategy.MergeStrategy;
+import io.github.agentic.ai.graph.state.strategy.MergeStrategy;
 
 KeyStrategyFactory factory = () -> Map.of("profile", new MergeStrategy());
 
@@ -123,10 +123,10 @@ var nodeB = node_async(state -> Map.of("profile", Map.of("language", "Java")));
 如果状态键较多，可以使用 `KeyStrategyFactoryBuilder` 集中声明策略。refactor 分支支持按固定 key、前缀、后缀、包含字符串、正则或谓词选择策略。
 
 ```java
-import io.github.agentic.spring.ai.graph.KeyStrategyFactoryBuilder;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.MergeStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactoryBuilder;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.state.strategy.MergeStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 KeyStrategyFactory factory = new KeyStrategyFactoryBuilder()
     .defaultStrategy(new ReplaceStrategy())
@@ -142,7 +142,7 @@ KeyStrategyFactory factory = new KeyStrategyFactoryBuilder()
 当需要自定义合并逻辑（例如按数值相加、字典递归合并或去重合并）时，您可以实现自定义的 `KeyStrategy` 接口：
 
 ```java
-import io.github.agentic.spring.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategy;
 
 public class CustomMergeStrategy implements KeyStrategy {
     @Override

@@ -16,7 +16,7 @@ keywords: [Threads, 会话, Checkpointer, 检查点, 状态恢复, 多租户]
 会话是分配给状态检查点（Checkpoint）序列的唯一标识符。通过在 `RunnableConfig` 中指定 `threadId`，图引擎会在每次超级步骤（Super-step）执行后，自动将当前状态快照与下一个待执行节点 ID 关联保存到指定的会话中。
 
 ```java
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.RunnableConfig;
 import java.util.Map;
 
 // 为用户会话生成独立的配置

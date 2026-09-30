@@ -30,7 +30,7 @@
     <path d="M 152 50 Q 157 42, 165 46 Q 160 54, 152 50 Z" fill="url(#accentGreen)"/>
   </g>
 
-  <!-- Agentic AI initials -->
+  <!-- ARGI initials -->
   <g id="agentic-text">
     <text x="35" y="55"
           font-family="'Brush Script MT', 'Lucida Handwriting', cursive"
@@ -58,7 +58,7 @@
           fill="url(#mainGreen)"
           font-style="italic"
           letter-spacing="1">
-      Agentic AI
+      ARGI
     </text>
   </g>
 

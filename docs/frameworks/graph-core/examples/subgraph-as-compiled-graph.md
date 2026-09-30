@@ -7,7 +7,7 @@ keywords: [子图, Subgraph, CompiledGraph, 编译, 性能优化, Graph复用]
 
 # 子图作为 CompiledGraph
 
-在 Agentic AI 中，可以先编译 StateGraph 得到 CompiledGraph，然后在其他 Graph 中复用，这种方式性能更好且更灵活。
+在 ARGI 中，可以先编译 StateGraph 得到 CompiledGraph，然后在其他 Graph 中复用，这种方式性能更好且更灵活。
 
 ## CompiledGraph vs StateGraph
 
@@ -26,19 +26,19 @@ keywords: [子图, Subgraph, CompiledGraph, 编译, 性能优化, Graph复用]
   language="java"
   title="创建并编译子图"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.exception.GraphStateException;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * 创建并编译子图
@@ -72,10 +72,10 @@ StateGraph subGraphDef = new StateGraph(subKeyFactory)
   language="java"
   title="在节点中使用 CompiledGraph"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.action.NodeAction;
 
 import java.util.Map;
 
@@ -112,12 +112,12 @@ public static class CompiledSubGraphNode implements NodeAction {
   language="java"
   title="在父图中使用"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.StateGraph;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.StateGraph;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * 在父图中使用
@@ -312,8 +312,8 @@ CompiledGraph 可以有自己独立的 checkpoint：
   language="java"
   title="带 Checkpoint 的子图"
 >
-{`import io.github.agentic.spring.ai.graph.checkpoint.MemorySaver;
-import io.github.agentic.spring.ai.graph.CompileConfig;
+{`import io.github.agentic.ai.graph.checkpoint.MemorySaver;
+import io.github.agentic.ai.graph.CompileConfig;
 
 // 子图使用独立的 checkpoint
 var subCheckpointer = new MemorySaver();

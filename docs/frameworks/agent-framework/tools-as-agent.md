@@ -34,7 +34,7 @@ Multi-agent系统在以下情况下很有用：
 
 ## 自定义Agent上下文
 
-Multi-agent设计的核心是**上下文工程**——决定每个Agent看到什么信息。Agentic AI 为你提供细粒度的控制：
+Multi-agent设计的核心是**上下文工程**——决定每个Agent看到什么信息。ARGI 为你提供细粒度的控制：
 
 * 将对话或状态的哪些部分传递给每个Agent
 * 为子Agent定制专门的提示
@@ -68,8 +68,8 @@ Multi-agent设计的核心是**上下文工程**——决定每个Agent看到什
   language="java"
   title="AgentTool 基础示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.AgentTool;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.AgentTool;
 import org.springframework.ai.chat.model.ChatModel;
 
 // 创建子Agent
@@ -122,8 +122,8 @@ Optional<OverAllState> result = blogAgent.invoke("帮我写一个100字左右的
   language="java"
   title="使用 inputSchema 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.AgentTool;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.AgentTool;
 
 // 定义子Agent的输入Schema（标准 JSON Schema 格式）
 String writerInputSchema = """
@@ -170,8 +170,8 @@ Optional<OverAllState> result = coordinatorAgent.invoke("请写一篇关于春�
   language="java"
   title="使用 inputType 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.AgentTool;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.AgentTool;
 
 // 定义输入类型
 public record ArticleRequest(
@@ -215,8 +215,8 @@ Optional<OverAllState> result = coordinatorAgent.invoke("请写一篇关于秋�
   language="java"
   title="使用 outputSchema 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.AgentTool;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.AgentTool;
 import org.springframework.ai.converter.BeanOutputConverter;
 
 // 定义输出类型
@@ -264,8 +264,8 @@ Optional<OverAllState> result = coordinatorAgent.invoke("写一篇关于冬天�
   language="java"
   title="使用 outputType 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.AgentTool;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.AgentTool;
 import org.springframework.ai.converter.BeanOutputConverter;
 
 // 定义输出类型
@@ -303,8 +303,8 @@ Optional<OverAllState> result = coordinatorAgent.invoke("写一篇关于夏天�
   language="java"
   title="完整类型化示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.AgentTool;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.AgentTool;
 
 // 定义输入和输出类型
 public record ArticleRequest(String topic, int wordCount, String style) {}
@@ -362,8 +362,8 @@ Optional<OverAllState> result = orchestratorAgent.invoke("请写一篇关于友�
   language="java"
   title="多个子Agent作为工具示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.AgentTool;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.AgentTool;
 
 // 创建写作Agent
 ReactAgent writerAgent = ReactAgent.builder()
