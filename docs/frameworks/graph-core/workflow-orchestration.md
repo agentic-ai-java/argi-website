@@ -7,9 +7,9 @@ keywords: [Graph, 工作流, Workflow, StateGraph, 智能体编排, 多Agent系�
 
 # Workflow 编排指南
 
-学习如何通过将客服邮件处理流程分解为离散步骤来使用 Agentic AI Graph 构建智能工作流。
+学习如何通过将客服邮件处理流程分解为离散步骤来使用 ARGI Graph 构建智能工作流。
 
-Agentic AI Graph 可以改变您构建智能代理的思维方式。使用 Graph 构建代理时，您将首先把它分解为称为 **节点（nodes）** 的离散步骤。然后，描述每个节点的不同决策和转换。最后，通过一个共享的 **状态（state）** 将节点连接起来，每个节点都可以读取和写入该状态。在本教程中，我们将指导您完成使用 Agentic AI Graph 构建客服邮件处理代理的思维过程。
+ARGI Graph 可以改变您构建智能代理的思维方式。使用 Graph 构建代理时，您将首先把它分解为称为 **节点（nodes）** 的离散步骤。然后，描述每个节点的不同决策和转换。最后，通过一个共享的 **状态（state）** 将节点连接起来，每个节点都可以读取和写入该状态。在本教程中，我们将指导您完成使用 ARGI Graph 构建客服邮件处理代理的思维过程。
 
 ## 当前核心能力
 
@@ -51,7 +51,7 @@ refactor 分支中的 Graph Core 已提供以下能力：
 4. 功能请求："能在移动应用中添加暗黑模式吗？"
 5. 复杂技术问题："我们的 API 集成间歇性失败，返回 504 错误"
 
-要在 Agentic AI Graph 中实现代理，通常遵循以下五个步骤。
+要在 ARGI Graph 中实现代理，通常遵循以下五个步骤。
 
 ## 步骤 1：将工作流映射为离散步骤
 
@@ -185,10 +185,10 @@ flowchart TD
   language="java"
   title="定义状态和状态键策略"
 >
-{`import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.AppendStrategy;
+{`import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -272,7 +272,7 @@ public static KeyStrategyFactory createKeyStrategyFactory() {
 
 ## 步骤 4：构建您的节点
 
-现在我们将每个步骤实现为一个函数。Agentic AI Graph 中的节点就是一个接受当前状态并返回更新的 Java 函数。
+现在我们将每个步骤实现为一个函数。ARGI Graph 中的节点就是一个接受当前状态并返回更新的 Java 函数。
 
 ### 适当处理错误
 
@@ -296,8 +296,8 @@ public static KeyStrategyFactory createKeyStrategyFactory() {
   language="java"
   title="LLM可恢复错误处理示例"
 >
-{`import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.OverAllState;
+{`import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.OverAllState;
 import java.util.Map;
 
 // 示例：处理工具调用错误，让 LLM 可以重试
@@ -334,8 +334,8 @@ public class ExecuteToolNode implements NodeAction {
   language="java"
   title="用户可修复错误处理示例"
 >
-{`import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.OverAllState;
+{`import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.OverAllState;
 import java.util.Map;
 
 // 示例：处理缺少用户输入的情况
@@ -349,7 +349,7 @@ public class LookupCustomerHistory implements NodeAction {
 
         if (customerId == null) {
             // 暂停执行，等待用户输入
-            // 注意：在 Agentic AI 中，使用 interruptBefore 配置
+            // 注意：在 ARGI 中，使用 interruptBefore 配置
             return Map.of(
                 "status", "需要客户ID",
                 "message", "请提供客户的账户ID以查找其订阅历史"
@@ -380,8 +380,8 @@ public class LookupCustomerHistory implements NodeAction {
   language="java"
   title="意外错误处理示例"
 >
-{`import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.OverAllState;
+{`import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.OverAllState;
 import java.util.Map;
 
 // 示例：如果需要在发送前验证数据，可以这样做
@@ -411,8 +411,8 @@ public class SendReplyNodeExample implements NodeAction {
   language="java"
   title="读取和分类节点实现"
 >
-{`import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.OverAllState;
+{`import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.OverAllState;
 import org.springframework.ai.chat.client.ChatClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -562,8 +562,8 @@ public static class ClassifyIntentNode implements NodeAction {
   language="java"
   title="搜索和跟踪节点实现"
 >
-{`import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.OverAllState;
+{`import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.OverAllState;
 import java.util.Map;
 import java.util.List;
 
@@ -630,8 +630,8 @@ public static class BugTrackingNode implements NodeAction {
   language="java"
   title="响应节点实现"
 >
-{`import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.OverAllState;
+{`import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.OverAllState;
 import org.springframework.ai.chat.client.ChatClient;
 import java.util.Map;
 import java.util.List;
@@ -784,18 +784,18 @@ public static class SendReplyNode implements NodeAction {
   language="java"
   title="创建邮件处理 Graph"
 >
-{`import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.checkpoint.config.SaverConfig;
-import io.github.agentic.spring.ai.graph.checkpoint.savers.MemorySaver;
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
+{`import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.exception.GraphStateException;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.client.ChatClient;
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 import java.util.Map;
 
 /**
@@ -884,9 +884,9 @@ public static CompiledGraph createEmailAgentGraph(ChatModel chatModel) throws Gr
   language="java"
   title="测试邮件代理"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.NodeOutput;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.NodeOutput;
 import reactor.core.publisher.Flux;
 import java.util.ArrayList;
 import java.util.Map;
@@ -959,7 +959,7 @@ public static void testBillingIssue(CompiledGraph app) throws Exception {
 
 ### 关键见解
 
-构建这个邮件代理向我们展示了 Agentic AI Graph 的思维方式：
+构建这个邮件代理向我们展示了 ARGI Graph 的思维方式：
 
 #### 1. 分解为离散步骤
 每个节点做好一件事。这种分解使得可以：
@@ -997,7 +997,7 @@ public static void testBillingIssue(CompiledGraph app) throws Exception {
 
 **韧性考虑**：
 
-Agentic AI Graph 的持久执行在节点边界创建检查点。当工作流在中断或失败后恢复时，它从执行停止的节点开始处重新开始。较小的节点意味着更频繁的检查点，这意味着如果出问题则重新执行的工作更少。如果您将多个操作合并到一个大节点中，接近结尾的失败意味着从该节点的开始重新执行所有内容。
+ARGI Graph 的持久执行在节点边界创建检查点。当工作流在中断或失败后恢复时，它从执行停止的节点开始处重新开始。较小的节点意味着更频繁的检查点，这意味着如果出问题则重新执行的工作更少。如果您将多个操作合并到一个大节点中，接近结尾的失败意味着从该节点的开始重新执行所有内容。
 
 我们为邮件代理选择这种分解的原因：
 
@@ -1013,15 +1013,15 @@ Agentic AI Graph 的持久执行在节点边界创建检查点。当工作流在
 
 **应用程序级关注点**：
 
-步骤2中的缓存讨论（是否缓存搜索结果）是应用程序级决策，而不是Agentic AI Graph框架功能。您根据具体需求在节点函数中实现缓存 - Agentic AI Graph不规定这一点。
+步骤2中的缓存讨论（是否缓存搜索结果）是应用程序级决策，而不是ARGI Graph框架功能。您根据具体需求在节点函数中实现缓存 - ARGI Graph不规定这一点。
 
 **性能考虑**：
 
-更多节点并不意味着更慢的执行。Agentic AI Graph默认在后台写入检查点（异步持久性模式），因此您的图继续运行而无需等待检查点完成。这意味着您可以获得频繁的检查点而性能影响最小。
+更多节点并不意味着更慢的执行。ARGI Graph默认在后台写入检查点（异步持久性模式），因此您的图继续运行而无需等待检查点完成。这意味着您可以获得频繁的检查点而性能影响最小。
 
 ### 下一步
 
-这是使用 Agentic AI Graph 构建代理的入门介绍。您可以使用以下内容扩展此基础：
+这是使用 ARGI Graph 构建代理的入门介绍。您可以使用以下内容扩展此基础：
 
 #### 1. 人工介入模式
 了解如何在执行前添加工具批准、批量批准和其他模式。参考：

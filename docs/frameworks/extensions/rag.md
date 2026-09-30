@@ -1,7 +1,7 @@
 ---
 title: 检索增强生成 (RAG)
 sidebar_label: 检索增强 (RAG)
-description: 深入解析 Agentic AI Extensions RAG 模块：基于 Elasticsearch 的混合检索 (BM25 + KNN + RRF 融合打分)、HyDE 假设性文档检索、多查询改写与生产级 Advisors。
+description: 深入解析 ARGI Extensions RAG 模块：基于 Elasticsearch 的混合检索 (BM25 + KNN + RRF 融合打分)、HyDE 假设性文档检索、多查询改写与生产级 Advisors。
 keywords: [Extensions, RAG, Hybrid Search, BM25, KNN, RRF, HyDE, Elasticsearch, Advisors, 检索增强]
 ---
 
@@ -9,7 +9,7 @@ keywords: [Extensions, RAG, Hybrid Search, BM25, KNN, RRF, HyDE, Elasticsearch, 
 
 单纯的密集向量检索（Dense Vector Search）在处理专有名词、产品型号、精确编码匹配时容易出现召回偏差；而传统的稀疏关键词检索（BM25）又缺乏语义理解能力。
 
-**`agentic-ai-starter-rag`** 提供了现代高级 RAG（Advanced RAG）所必需的关键基础设施，涵盖**混合检索（Hybrid Search）**、**假设性文档嵌入（HyDE）**、**多查询改写（Multi-Query）** 以及模块化 **Advisor** 编排。
+**`argi-starter-rag`** 提供了现代高级 RAG（Advanced RAG）所必需的关键基础设施，涵盖**混合检索（Hybrid Search）**、**假设性文档嵌入（HyDE）**、**多查询改写（Multi-Query）** 以及模块化 **Advisor** 编排。
 
 ---
 
@@ -38,30 +38,28 @@ keywords: [Extensions, RAG, Hybrid Search, BM25, KNN, RRF, HyDE, Elasticsearch, 
 ```xml
 <dependency>
     <groupId>io.github.agentic-ai</groupId>
-    <artifactId>agentic-ai-starter-rag</artifactId>
+    <artifactId>argi-starter-rag</artifactId>
 </dependency>
 ```
 
-### 属性配置（`spring.ai.alibaba.rag.elasticsearch`）
+### 属性配置（`argi.rag.elasticsearch`）
 ```yaml
-spring:
-  ai:
-    alibaba:
-      rag:
-        elasticsearch:
-          enabled: true
-          retriever-type: HYBRID  # 可选: BM25 / KNN / HYBRID
-          use-rrf: true           # 是否启用 RRF 倒数排名融合
-          top-k: 20
-          bm25-bias: 1.0          # BM25 权重打分偏置
-          knn-bias: 1.2           # KNN 向量权重打分偏置
-          recall:
-            similarity-threshold: 0.75
-            neighbors-num: 50
-            candidate-num: 100
-          rrf:
-            rank-constant: 60     # RRF 排名影响因子（值越大低排名文档权重越高）
-            rank-window-size: 50  # RRF 窗口大小
+argi:
+  rag:
+    elasticsearch:
+      enabled: true
+      retriever-type: HYBRID  # 可选: BM25 / KNN / HYBRID
+      use-rrf: true           # 是否启用 RRF 倒数排名融合
+      top-k: 20
+      bm25-bias: 1.0          # BM25 权重打分偏置
+      knn-bias: 1.2           # KNN 向量权重打分偏置
+      recall:
+        similarity-threshold: 0.75
+        neighbors-num: 50
+        candidate-num: 100
+      rrf:
+        rank-constant: 60     # RRF 排名影响因子（值越大低排名文档权重越高）
+        rank-window-size: 50  # RRF 窗口大小
 ```
 
 ### 自动装配说明与注入使用
@@ -73,7 +71,7 @@ Starter 内部的 `RagElasticSearchAutoConfiguration` 会在检测到配置生�
 开发者无需手动编写 `@Bean` 工厂方法，直接注入即可使用：
 
 ```java
-import io.github.agentic.spring.ai.rag.retrieval.search.HybridElasticsearchRetriever;
+import io.github.agentic.ai.rag.retrieval.search.HybridElasticsearchRetriever;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.rag.Query;
 import org.springframework.stereotype.Service;
@@ -172,7 +170,7 @@ Extensions 内置了可直接装配到 Spring AI `ChatClient` 的高级 Advisor�
 2. **`MultiQueryRetrieverAdvisor`**：将用户单个 Query 自动裂变为多角度的子查询并行检索并去重合并，避免由于用户提问措辞狭隘导致漏召回。
 
 ```java
-import io.github.agentic.spring.ai.rag.advisor.HybridSearchAdvisor;
+import io.github.agentic.ai.rag.advisor.HybridSearchAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 
 // 使用 Builder 模式构建 Advisor

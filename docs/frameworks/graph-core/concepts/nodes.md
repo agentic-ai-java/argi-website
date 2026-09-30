@@ -29,7 +29,7 @@ keywords: [Nodes, 节点, AsyncNodeAction, START, END, 智能体图, 函数式�
 由于图底层基于响应式与异步流水线运行，您可以使用 `AsyncNodeAction.node_async` 工具方法将标准的同步业务逻辑包装为异步节点：
 
 ```java
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 import java.util.Map;
 
 // 定义一个基础计算节点
@@ -46,7 +46,7 @@ stateGraph.addNode("search_node", searchNode);
 ### 使用带配置的节点
 
 ```java
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeActionWithConfig.node_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeActionWithConfig.node_async;
 
 var configAwareNode = node_async((state, config) -> {
     String threadId = config.threadId().orElse("default");
@@ -62,8 +62,8 @@ stateGraph.addNode("config_node", configAwareNode);
 当节点的输出既包含状态更新，又包含下一跳选择时，可以使用 `CommandAction` / `AsyncCommandAction`。
 
 ```java
-import io.github.agentic.spring.ai.graph.action.Command;
-import static io.github.agentic.spring.ai.graph.action.AsyncCommandAction.node_async;
+import io.github.agentic.ai.graph.action.Command;
+import static io.github.agentic.ai.graph.action.AsyncCommandAction.node_async;
 
 stateGraph.addNode("classify_and_route", node_async((state, config) -> {
     String intent = classify(state);
@@ -87,7 +87,7 @@ stateGraph.addNode("classify_and_route", node_async((state, config) -> {
 `START` 是图的虚拟入口节点。当用户调用 `graph.invoke(inputs)` 时，输入状态首先经由从 `START` 发出的边流向第一个业务节点：
 
 ```java
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.StateGraph.START;
 
 // 指定图从 START 节点进入分类节点
 stateGraph.addEdge(START, "classifier_node");
@@ -98,7 +98,7 @@ stateGraph.addEdge(START, "classifier_node");
 `END` 是图的虚拟终止节点。当执行流转到达 `END` 节点时，当前图的执行宣告完成，图引擎输出最终状态：
 
 ```java
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.END;
 
 // 当回复生成完成后走向结束
 stateGraph.addEdge("generate_reply_node", END);

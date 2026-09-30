@@ -32,10 +32,10 @@ Agent Framework 可以直接使用 Spring AI 的 `ToolCallback`、`@Tool` 方法
 | `WriteTodosTool` | 写入待办列表，支持事件处理器。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.tools.GlobSearchTool;
-import io.github.agentic.spring.ai.graph.agent.tools.GrepSearchTool;
-import io.github.agentic.spring.ai.graph.agent.tools.ShellTool;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.tools.GlobSearchTool;
+import io.github.agentic.ai.graph.agent.tools.GrepSearchTool;
+import io.github.agentic.ai.graph.agent.tools.ShellTool;
 
 ToolCallback shell = ShellTool.builder("/workspace")
     .withCommandTimeout(30_000)
@@ -60,7 +60,7 @@ ReactAgent agent = ReactAgent.builder()
 
 ## 文件系统工具
 
-`io.github.agentic.spring.ai.graph.agent.extension.tools.filesystem` 包提供文件读写、编辑、列表、glob 和 grep 工具。
+`io.github.agentic.ai.graph.agent.extension.tools.filesystem` 包提供文件读写、编辑、列表、glob 和 grep 工具。
 
 | 类 | 说明 |
 | --- | --- |
@@ -74,7 +74,7 @@ ReactAgent agent = ReactAgent.builder()
 | `FilesystemBackend`、`LocalFilesystemBackend` | 文件系统后端抽象和本地实现。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.extension.tools.filesystem.FileSystemTools;
+import io.github.agentic.ai.graph.agent.extension.tools.filesystem.FileSystemTools;
 
 FileSystemTools fileSystemTools = FileSystemTools.builder()
     .rootDir("/workspace")
@@ -100,7 +100,7 @@ ReactAgent agent = ReactAgent.builder()
 | `ToolStateCollector` | 汇总多个工具的状态更新，用于并行工具执行后合并状态。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.tools.ToolContextHelper;
+import io.github.agentic.ai.graph.agent.tools.ToolContextHelper;
 import org.springframework.ai.chat.model.ToolContext;
 
 Optional<RunnableConfig> config = ToolContextHelper.getConfig(toolContext);
@@ -156,7 +156,7 @@ ReactAgent agent = ReactAgent.builder()
 | `AgentSpecReactAgentFactory` | 基于 `AgentSpec` 创建 `ReactAgent`。 |
 
 ```java
-import io.github.agentic.spring.ai.graph.agent.tools.task.TaskToolsBuilder;
+import io.github.agentic.ai.graph.agent.tools.task.TaskToolsBuilder;
 
 ReactAgent worker = ReactAgent.builder()
     .name("worker")

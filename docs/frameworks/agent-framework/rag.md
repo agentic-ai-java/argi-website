@@ -29,7 +29,7 @@ keywords:
 
 **知识库**是用于检索的文档或结构化数据的存储库。
 
-如果你需要自定义知识库，可以使用 Agentic AI 的文档加载器和向量存储从你自己的数据构建。
+如果你需要自定义知识库，可以使用 ARGI 的文档加载器和向量存储从你自己的数据构建。
 
 > 如果你已经有一个知识库（例如 SQL 数据库、CRM 或内部文档系统），你**不需要**重建它。你可以：
 >
@@ -46,13 +46,13 @@ keywords:
 
 典型的检索工作流如下：
 
-![Agentic AI RAG](/img/agent/rag/rag1.png)
+![ARGI RAG](/img/agent/rag/rag1.png)
 
 每个组件都是模块化的：你可以交换加载器、分割器、嵌入或向量存储，而无需重写应用程序的逻辑。
 
 ### 构建模块
 
-在 Agentic AI 中，你可以使用以下组件构建 RAG 系统：
+在 ARGI 中，你可以使用以下组件构建 RAG 系统：
 
 #### 文档加载器和解析器
 
@@ -94,7 +94,7 @@ RAG 可以以多种方式实现，具体取决于你的系统需求。我们在�
 
 在**两步 RAG**中，检索步骤总是在生成步骤之前执行。这种架构简单且可预测，适合许多应用，其中检索相关文档是生成答案的明确前提。
 
-![Agentic AI RAG](/img/agent/rag/rag2.png)
+![ARGI RAG](/img/agent/rag/rag2.png)
 
 Spring AI 提供了开箱即用的 `QuestionAnswerAdvisor` 和 `RetrievalAugmentationAdvisor`，简化两步 RAG 的实现。这些 Advisor 自动处理检索和上下文增强，详见 [Spring AI Advisor 架构](https://docs.spring.io/spring-ai/reference/api/advisors.html)。
 
@@ -106,13 +106,13 @@ Spring AI 提供了开箱即用的 `QuestionAnswerAdvisor` 和 `RetrievalAugment
   language="java"
   title="使用 MessagesModelHook 实现两步RAG"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.MessagesModelHook;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.AgentCommand;
-import io.github.agentic.spring.ai.graph.agent.hook.messages.UpdatePolicy;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.messages.MessagesModelHook;
+import io.github.agentic.ai.graph.agent.hook.messages.AgentCommand;
+import io.github.agentic.ai.graph.agent.hook.messages.UpdatePolicy;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.chat.messages.Message;
@@ -202,7 +202,7 @@ ReactAgent ragAgent = ReactAgent.builder()
     .build();
 
 // 调用 Agent
-AssistantMessage response = ragAgent.call("Agentic AI支持哪些模型？");
+AssistantMessage response = ragAgent.call("ARGI支持哪些模型？");
 System.out.println("答案: " + response.getText());`}
 </Code>
 
@@ -214,11 +214,11 @@ System.out.println("答案: " + response.getText());`}
   language="java"
   title="使用 ModelInterceptor 实现两步RAG"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelInterceptor;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelRequest;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelResponse;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelCallHandler;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.interceptor.ModelInterceptor;
+import io.github.agentic.ai.graph.agent.interceptor.ModelRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ModelResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ModelCallHandler;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.chat.messages.SystemMessage;
@@ -309,7 +309,7 @@ ReactAgent ragAgent = ReactAgent.builder()
     .build();
 
 // 调用 Agent
-AssistantMessage response = ragAgent.call("Agentic AI支持哪些模型？");
+AssistantMessage response = ragAgent.call("ARGI支持哪些模型？");
 System.out.println("答案: " + response.getText());`}
 </Code>
 
@@ -321,16 +321,16 @@ System.out.println("答案: " + response.getText());`}
   language="java"
   title="使用 AgentHook 实现两步RAG（只检索一次）"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.AgentHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelInterceptor;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelRequest;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelResponse;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelCallHandler;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.AgentHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.interceptor.ModelInterceptor;
+import io.github.agentic.ai.graph.agent.interceptor.ModelRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ModelResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ModelCallHandler;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.chat.messages.SystemMessage;
@@ -463,7 +463,7 @@ ReactAgent ragAgent = ReactAgent.builder()
     .build();
 
 // 调用 Agent（RAG 检索只会在 Agent 开始时执行一次）
-AssistantMessage response = ragAgent.call("Agentic AI支持哪些模型？");
+AssistantMessage response = ragAgent.call("ARGI支持哪些模型？");
 System.out.println("答案: " + response.getText());`}
 </Code>
 
@@ -523,7 +523,7 @@ List<Document> results = vectorStore.similaritySearch("查询文本");`}
 Agent 启用 RAG 行为所需的唯一条件是访问一个或多个可以获取外部知识的**工具**——例如文档加载器、Web API 或数据库查询。
 :::
 
-![Agentic AI RAG](/img/agent/rag/rag3.png)
+![ARGI RAG](/img/agent/rag/rag3.png)
 
 #### Java 实现示例
 
@@ -531,7 +531,7 @@ Agent 启用 RAG 行为所需的唯一条件是访问一个或多个可以获取
   language="java"
   title="Agentic RAG实现示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
@@ -584,7 +584,7 @@ ReactAgent ragAgent = ReactAgent.builder()
     .build();
 
 // Agent会自动决定何时调用检索工具
-ragAgent.invoke("Agentic AI支持哪些向量数据库？");`}
+ragAgent.invoke("ARGI支持哪些向量数据库？");`}
 </Code>
 
 在这个例子中：
@@ -601,7 +601,7 @@ ragAgent.invoke("Agentic AI支持哪些向量数据库？");`}
   language="java"
   title="多工具Agentic RAG示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
@@ -700,7 +700,7 @@ multiSourceAgent.invoke("比较我们的产品文档中的功能和最新的市�
 
 架构通常支持这些步骤之间的多次迭代：
 
-![Agentic AI RAG](/img/agent/rag/rag4.png)
+![ARGI RAG](/img/agent/rag/rag4.png)
 
 #### Java 实现示例
 
@@ -710,16 +710,16 @@ multiSourceAgent.invoke("比较我们的产品文档中的功能和最新的市�
   language="java"
   title="混合RAG实现示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.hook.AgentHook;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPosition;
-import io.github.agentic.spring.ai.graph.agent.hook.HookPositions;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelInterceptor;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelRequest;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelResponse;
-import io.github.agentic.spring.ai.graph.agent.interceptor.ModelCallHandler;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.hook.AgentHook;
+import io.github.agentic.ai.graph.agent.hook.HookPosition;
+import io.github.agentic.ai.graph.agent.hook.HookPositions;
+import io.github.agentic.ai.graph.agent.interceptor.ModelInterceptor;
+import io.github.agentic.ai.graph.agent.interceptor.ModelRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ModelResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ModelCallHandler;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
@@ -939,7 +939,7 @@ ReactAgent hybridRAGAgent = ReactAgent.builder()
 
 // ========== 5. 使用混合 RAG Agent ==========
 
-AssistantMessage response = hybridRAGAgent.call("Agentic AI支持哪些向量数据库？");
+AssistantMessage response = hybridRAGAgent.call("ARGI支持哪些向量数据库？");
 System.out.println("答案: " + response.getText());`}
 </Code>
 
@@ -989,9 +989,9 @@ System.out.println("答案: " + response.getText());`}
    - 使用异步检索
    - 批量处理文档嵌入
 
-## Agentic AI RAG 组件
+## ARGI RAG 组件
 
-Agentic AI 提供了构建 RAG 系统的核心组件和模块化架构：
+ARGI 提供了构建 RAG 系统的核心组件和模块化架构：
 
 <Code
   language="java"
@@ -1037,7 +1037,7 @@ import org.springframework.ai.rag.RetrievalAugmentationAdvisor;
 // ChatModel 和 Agent
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.client.ChatClient;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 
 // 工具（用于 Agentic RAG）
 import org.springframework.ai.tool.ToolCallback;

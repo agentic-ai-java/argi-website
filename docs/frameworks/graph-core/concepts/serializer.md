@@ -60,8 +60,8 @@ public class CustomMessage {
 通过 `getStateSerializer()` 获取现有的 Jackson 序列化器并定制底层的 `ObjectMapper`：
 
 ```java
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.serializer.StateSerializer;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.serializer.StateSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 StateGraph graph = new StateGraph(keyStrategyFactory);
@@ -78,8 +78,8 @@ if (stateSerializer instanceof StateGraph.JacksonSerializer jacksonSerializer) {
 通过继承 `SpringAIJacksonStateSerializer`，注册自定义序列化与反序列化逻辑：
 
 ```java
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.serializer.plain_text.jackson.SpringAIJacksonStateSerializer;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.serializer.plain_text.jackson.SpringAIJacksonStateSerializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class CustomizedSerializer extends SpringAIJacksonStateSerializer {

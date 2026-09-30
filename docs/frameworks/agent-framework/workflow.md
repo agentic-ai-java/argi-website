@@ -11,10 +11,10 @@ Graph 是 Agent Framework 的底层运行时。**我们建议开发者使用 Age
 Graph 是一个低级工作流和多智能体编排框架，使开发者能够实现复杂的应用程序编排。
 
 ## Agent 编排的核心引擎
-Agentic AI Graph 是 Agent 编排背后的核心引擎，在底层，Agentic AI 框架会将 Agent 编排为 Graph，组成一个由节点串联而成的 DAG 图。
+ARGI Graph 是 Agent 编排背后的核心引擎，在底层，ARGI 框架会将 Agent 编排为 Graph，组成一个由节点串联而成的 DAG 图。
 
 ### Graph 引擎核心概念与定义
-Agentic AI Graph 有以下三个核心概念：
+ARGI Graph 有以下三个核心概念：
 
 + **状态（State）**：定义了在 Node 与 Edge 之间传递的数据结构，是整个 Agent 上下文传递的核心载体，具体实现上是一个 `Map<String, Object>`。
 + **节点（Node）**：Graph 中的每个 Node 是执行逻辑单元，接受当前 State 作为输入，执行某些操作（如调用 LLM 或自定义逻辑），并返回对 State 的更新。
@@ -22,20 +22,20 @@ Agentic AI Graph 有以下三个核心概念：
 
 ![](/img/agent/workflow/graph.png)
 
-通过组合 Node 和 Edge，开发者可以创建复杂的循环工作流，随着时间的推移不断更新 State 状态。然而，真正的力量来自 Agentic AI 如何管理这种 State 状态。
+通过组合 Node 和 Edge，开发者可以创建复杂的循环工作流，随着时间的推移不断更新 State 状态。然而，真正的力量来自 ARGI 如何管理这种 State 状态。
 
 简而言之：Node 完成工作，Edge 告诉下一步该做什么。
 
 ### Graph 引擎提供的 Low-level API
 
-Agentic AI 同时提供了声明式的 Agentic API 与底层原子化的 Graph API，两种模式都对开发者开发，**Agentic API vs Graph API **应该怎么选？前文我们已经重点介绍了 Agentic API 的开发模式，相比于 Agentic API，Graph API 可以让开发者对流程有更全面的控制，开发者可以独立定义每个 Node 的逻辑、每条边的逻辑，最终按照业务需要编排成完成的流程图。
+ARGI 同时提供了声明式的 Agentic API 与底层原子化的 Graph API，两种模式都对开发者开发，**Agentic API vs Graph API **应该怎么选？前文我们已经重点介绍了 Agentic API 的开发模式，相比于 Agentic API，Graph API 可以让开发者对流程有更全面的控制，开发者可以独立定义每个 Node 的逻辑、每条边的逻辑，最终按照业务需要编排成完成的流程图。
 
 以下是使用 Graph API 实现 DeepResearch 类工作流的流程图定义，演示了 Graph API 的具体使用方法：
 
 ### Graph 引擎提供更多运行时特性
-整个 Agentic AI 框架底层基于 Spring AI 实现（下图绿色部分），因此在 Augmented LLM 层次提供了 Model、Tool Calling、MCP、RAG 等原子能力的完善定义，具备厂商无关、易用性高、可扩展性强的特点。
+整个 ARGI 框架底层基于 Spring AI 实现（下图绿色部分），因此在 Augmented LLM 层次提供了 Model、Tool Calling、MCP、RAG 等原子能力的完善定义，具备厂商无关、易用性高、可扩展性强的特点。
 
-在 Agentic Framework 这一层（下图蓝色部分），是 Agentic AI 框架提供的核心抽象。定义了 Graph 引擎将以及面向开发者的 Agentic API、Graph API 来实现智能体流程编排。
+在 Agentic Framework 这一层（下图蓝色部分），是 ARGI 框架提供的核心抽象。定义了 Graph 引擎将以及面向开发者的 Agentic API、Graph API 来实现智能体流程编排。
 
 ![](/img/agent/overview/architecture.png)
 
@@ -48,7 +48,7 @@ Agentic AI 同时提供了声明式的 Agentic API 与底层原子化的 Graph A
 
 ## 定义自己的Node
 
-在 Agentic AI Graph 中，Node 是工作流的基本执行单元。每个 Node 负责处理特定的业务逻辑，接收状态（State）作为输入，并返回更新后的状态。
+在 ARGI Graph 中，Node 是工作流的基本执行单元。每个 Node 负责处理特定的业务逻辑，接收状态（State）作为输入，并返回更新后的状态。
 
 ### Node 接口
 
@@ -79,8 +79,8 @@ public interface NodeActionWithConfig {
   language="java"
   title="基础 Node 示例"
 >
-{`import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,9 +110,9 @@ public class TextProcessorNode implements NodeAction {
   language="java"
   title="高级 Node 示例：带配置的 AI Node"
 >
-{`import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.action.NodeActionWithConfig;
+{`import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.action.NodeActionWithConfig;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 
@@ -169,8 +169,8 @@ public class QueryExpanderNode implements NodeActionWithConfig {
   language="java"
   title="条件评估 Node 示例"
 >
-{`import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -208,8 +208,8 @@ public class ConditionEvaluatorNode implements NodeAction {
   language="java"
   title="并行结果聚合 Node 示例"
 >
-{`import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
 
 import java.util.*;
 
@@ -247,18 +247,18 @@ public class ParallelResultAggregatorNode implements NodeAction {
   language="java"
   title="集成自定义 Node 到 StateGraph 示例"
 >
-{`import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
 
 @Configuration
 public class WorkflowConfiguration {
@@ -361,14 +361,14 @@ public class WorkflowConfiguration {
   language="java"
   title="ReactAgent 作为 SubGraph Node 示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.streaming.StreamingOutput;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.streaming.StreamingOutput;
 import org.springframework.ai.chat.model.ChatModel;
 
 import java.util.HashMap;
@@ -453,14 +453,14 @@ public class AgentWorkflowExample {
   language="java"
   title="多 Agent 协作工作流示例"
 >
-{`import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.streaming.StreamingOutput;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.streaming.StreamingOutput;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
@@ -562,24 +562,24 @@ public class MultiAgentWorkflow {
   language="java"
   title="Agent Node 与普通 Node 混合使用示例"
 >
-{`import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.streaming.StreamingOutput;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.streaming.StreamingOutput;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.action.NodeAction;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.messages.Message;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
-import static io.github.agentic.spring.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
 
 public class HybridWorkflow {
 
@@ -670,7 +670,7 @@ public class HybridWorkflow {
 
 ### 执行工作流
 
-Agentic AI Graph 支持两种执行方式：
+ARGI Graph 支持两种执行方式：
 
 1. **流式执行**：使用 `compiledGraph.stream()` 方法，实时获取每个节点的输出，适合需要实时反馈的场景
 2. **同步执行**：使用 `compiledGraph.invoke()` 方法，等待整个工作流执行完成后返回最终结果
@@ -681,10 +681,10 @@ Agentic AI Graph 支持两种执行方式：
   language="java"
   title="流式执行工作流示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.NodeOutput;
-import io.github.agentic.spring.ai.graph.streaming.StreamingOutput;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.NodeOutput;
+import io.github.agentic.ai.graph.streaming.StreamingOutput;
 
 import java.util.Map;
 
@@ -716,21 +716,21 @@ System.out.println("最终结果: " + lastOutput.state().data());`}
   language="java"
   title="同步执行工作流示例"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.OverAllState;
-import io.github.agentic.spring.ai.graph.RunnableConfig;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
-import io.github.agentic.spring.ai.graph.action.NodeAction;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
+import io.github.agentic.ai.graph.action.NodeAction;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 public class WorkflowExecutor {
 
@@ -849,38 +849,38 @@ workflow.addEdge("aggregator", StateGraph.END);`}
 </Code>
 
 ## 与Dify低代码平台集成
-使用 Agentic AI Admin 平台，可以实现 Dify DSL 到 Agentic AI 高代码工程的导出。
+使用 ARGI Admin 平台，可以实现 Dify DSL 到 ARGI 高代码工程的导出。
 
 ### 压测数据
 
 #### 压测集群规格
-1. Agentic AI 工程，独立部署的容器，保持默认线程池等配置参数，2个POD，POD 规格 2C4G
+1. ARGI 工程，独立部署的容器，保持默认线程池等配置参数，2个POD，POD 规格 2C4G
 2. Dify 平台，官方部署方式，保持默认配置参数，每个组件都拉起2个POD，POD 规格 2C4G
 
 #### 有效并发处理上限
 * **压测方式：** 每个场景从 10 个 RPS（Request Per Second）开始，逐步提升，直到提升 RPS 值并不能带来 TPS 提升、成功率答复下降。
-* **结论：** Dify 能处理的上限 RPS < 10；Agentic AI 能处理的上限 RPS 约 150。
+* **结论：** Dify 能处理的上限 RPS < 10；ARGI 能处理的上限 RPS 约 150。
 
 Dify 压测截图：
 
 ![Dify DSL to Graph](/img/user/ai/practices/dify/dify-base-rps.png)
 
-Agentic AI 压测截图：
+ARGI 压测截图：
 
-![Dify DSL to Graph](/img/user/ai/practices/dify/agentic-ai-base-rps.png)
+![Dify DSL to Graph](/img/user/ai/practices/dify/argi-base-rps.png)
 
 
 #### 极限场景下的吞吐量
 * **压测方式：** 给集群远高于合理并发的压测请求量（测试场景为 1000 RPS），看集群的吞吐量、成功率变化。
-* **结论：** Dify 在此场景下成功率小于 10%，平均 RT 接近 60s，大部分请求出现超时（响应大于 60s）；Agentic AI 成功率变化不大，维持 99% 以上，平均 RT 也在 18s 左右。
+* **结论：** Dify 在此场景下成功率小于 10%，平均 RT 接近 60s，大部分请求出现超时（响应大于 60s）；ARGI 成功率变化不大，维持 99% 以上，平均 RT 也在 18s 左右。
 
 Dify 压测截图：
 
 ![Dify DSL to Graph](/img/user/ai/practices/dify/dify-extreme-rps.png)
 
-Agentic AI 压测截图：
+ARGI 压测截图：
 
-![Dify DSL to Graph](/img/user/ai/practices/dify/agentic-ai-extreme-rps.png)
+![Dify DSL to Graph](/img/user/ai/practices/dify/argi-extreme-rps.png)
 
 
 ## 相关资源

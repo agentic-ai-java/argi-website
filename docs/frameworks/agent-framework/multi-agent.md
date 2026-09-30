@@ -42,7 +42,7 @@ refactor 分支当前可确认的 Multi-agent 模式如下：
 
 ## 自定义Agent上下文
 
-Multi-agent设计的核心是**上下文工程**——决定每个Agent看到什么信息。Agentic AI 为你提供细粒度的控制：
+Multi-agent设计的核心是**上下文工程**——决定每个Agent看到什么信息。ARGI 为你提供细粒度的控制：
 
 * 将对话或状态的哪些部分传递给每个Agent
 * 为子Agent定制专门的提示
@@ -121,7 +121,7 @@ ReactAgent reviewerAgent = ReactAgent.builder()
 3. **Agent B**处理并传递给**Agent C**
 4. 最后一个Agent返回最终结果
 
-![Agentic AI SequentialAgent](/img/agent/multi-agent/sequential.png)
+![ARGI SequentialAgent](/img/agent/multi-agent/sequential.png)
 
 #### 实现
 
@@ -129,8 +129,8 @@ ReactAgent reviewerAgent = ReactAgent.builder()
   language="java"
   title="SequentialAgent 实现示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.flow.agent.SequentialAgent;
-import io.github.agentic.spring.ai.graph.OverAllState;
+{`import io.github.agentic.ai.graph.agent.flow.agent.SequentialAgent;
+import io.github.agentic.ai.graph.OverAllState;
 
 // 创建专业化的子Agent
 ReactAgent writerAgent = ReactAgent.builder()
@@ -233,7 +233,7 @@ if (result.isPresent()) {
 2. 所有Agent**并行**处理
 3. 结果被**合并**成单一输出
 
-![Agentic AI ParallelAgent](/img/agent/multi-agent/parallel.png)
+![ARGI ParallelAgent](/img/agent/multi-agent/parallel.png)
 
 #### 实现
 
@@ -241,7 +241,7 @@ if (result.isPresent()) {
   language="java"
   title="ParallelAgent 实现示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.flow.agent.ParallelAgent;
+{`import io.github.agentic.ai.graph.agent.flow.agent.ParallelAgent;
 
 // 创建多个专业化Agent
 ReactAgent proseWriterAgent = ReactAgent.builder()
@@ -349,7 +349,7 @@ ParallelAgent parallelAgent = ParallelAgent.builder()
 3. **选中的子Agent**处理请求
 4. 结果返回给用户
 
-![Agentic AI LlmRoutingAgent](/img/agent/multi-agent/routing.png)
+![ARGI LlmRoutingAgent](/img/agent/multi-agent/routing.png)
 
 #### 实现
 
@@ -357,8 +357,8 @@ ParallelAgent parallelAgent = ParallelAgent.builder()
   language="java"
   title="LlmRoutingAgent 实现示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.flow.agent.LlmRoutingAgent;
-import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.flow.agent.LlmRoutingAgent;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 
 // 创建专业化的子Agent
 ReactAgent writerAgent = ReactAgent.builder()
@@ -608,9 +608,9 @@ LlmRoutingAgent routingAgent = LlmRoutingAgent.builder()
   language="java"
   title="LoopAgent 固定次数循环示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
-import io.github.agentic.spring.ai.graph.agent.flow.agent.LoopAgent;
-import io.github.agentic.spring.ai.graph.agent.flow.agent.loop.LoopMode;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.graph.agent.flow.agent.LoopAgent;
+import io.github.agentic.ai.graph.agent.flow.agent.loop.LoopMode;
 
 ReactAgent reviseAgent = ReactAgent.builder()
     .name("revise_agent")
@@ -627,15 +627,15 @@ LoopAgent loopAgent = LoopAgent.builder()
     .loopStrategy(LoopMode.count(3))
     .build();
 
-loopAgent.invoke("请润色这段文字：Agentic AI 可以编排多个智能体。");`}
+loopAgent.invoke("请润色这段文字：ARGI 可以编排多个智能体。");`}
 </Code>
 
 <Code
   language="java"
   title="LoopAgent 条件循环示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.flow.agent.LoopAgent;
-import io.github.agentic.spring.ai.graph.agent.flow.agent.loop.LoopMode;
+{`import io.github.agentic.ai.graph.agent.flow.agent.LoopAgent;
+import io.github.agentic.ai.graph.agent.flow.agent.loop.LoopMode;
 import org.springframework.ai.chat.messages.Message;
 
 LoopAgent qualityLoop = LoopAgent.builder()
@@ -652,7 +652,7 @@ LoopAgent qualityLoop = LoopAgent.builder()
 
 ### 自定义（Customized）
 
-Agentic AI 提供了 `FlowAgent` 抽象类，允许你创建自定义的Agent工作流模式。通过继承 `FlowAgent` 并实现特定的图构建逻辑，你可以实现任何复杂的多Agent协作模式。
+ARGI 提供了 `FlowAgent` 抽象类，允许你创建自定义的Agent工作流模式。通过继承 `FlowAgent` 并实现特定的图构建逻辑，你可以实现任何复杂的多Agent协作模式。
 
 #### FlowAgent 架构
 
@@ -686,12 +686,12 @@ Agentic AI 提供了 `FlowAgent` 抽象类，允许你创建自定义的Agent工
   language="java"
   title="实现自定义FlowAgent示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.flow.agent.FlowAgent;
-import io.github.agentic.spring.ai.graph.agent.flow.builder.FlowAgentBuilder;
-import io.github.agentic.spring.ai.graph.agent.flow.builder.FlowGraphBuilder;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.CompileConfig;
-import io.github.agentic.spring.ai.graph.agent.Agent;
+{`import io.github.agentic.ai.graph.agent.flow.agent.FlowAgent;
+import io.github.agentic.ai.graph.agent.flow.builder.FlowAgentBuilder;
+import io.github.agentic.ai.graph.agent.flow.builder.FlowGraphBuilder;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.agent.Agent;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -777,7 +777,7 @@ public class ConditionalAgent extends FlowAgent {
   language="java"
   title="使用自定义Agent示例"
 >
-{`import io.github.agentic.spring.ai.graph.agent.ReactAgent;
+{`import io.github.agentic.ai.graph.agent.ReactAgent;
 import java.util.Map;
 
 // 创建两个分支Agent

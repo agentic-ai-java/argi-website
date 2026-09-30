@@ -7,7 +7,7 @@ keywords: [PlantUML, plantUML 输出, 图表, 可视化, UML, 流程图, Graph �
 
 # plantUML 输出
 
-Agentic AI Graph 支持将工作流导出为 PlantUML 格式，方便可视化和文档化。
+ARGI Graph 支持将工作流导出为 PlantUML 格式，方便可视化和文档化。
 
 ## PlantUML 工具函数
 
@@ -18,7 +18,7 @@ Agentic AI Graph 支持将工作流导出为 PlantUML 格式，方便可视化�
 {`import net.sourceforge.plantuml.SourceStringReader;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.FileFormat;
-import io.github.agentic.spring.ai.graph.GraphRepresentation;
+import io.github.agentic.ai.graph.GraphRepresentation;
 import java.io.IOException;
 
 static java.awt.Image plantUML2PNG(String code) throws IOException {
@@ -46,7 +46,7 @@ static void displayDiagram(GraphRepresentation representation) throws IOExceptio
 >
 {`var code = """
     @startuml
-    title Agentic AI Graph
+    title ARGI Graph
     START --> NodeA
     NodeA --> NodeB
     NodeB --> END
@@ -62,20 +62,20 @@ display(plantUML2PNG(code));`}
   language="java"
   title="从 Graph 生成 PlantUML"
 >
-{`import io.github.agentic.spring.ai.graph.CompiledGraph;
-import io.github.agentic.spring.ai.graph.GraphRepresentation;
-import io.github.agentic.spring.ai.graph.KeyStrategy;
-import io.github.agentic.spring.ai.graph.KeyStrategyFactory;
-import io.github.agentic.spring.ai.graph.StateGraph;
-import io.github.agentic.spring.ai.graph.exception.GraphStateException;
-import io.github.agentic.spring.ai.graph.state.strategy.ReplaceStrategy;
+{`import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.GraphRepresentation;
+import io.github.agentic.ai.graph.KeyStrategy;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.exception.GraphStateException;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.agentic.spring.ai.graph.StateGraph.END;
-import static io.github.agentic.spring.ai.graph.StateGraph.START;
-import static io.github.agentic.spring.ai.graph.action.AsyncNodeAction.node_async;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * 从 Graph 生成 PlantUML

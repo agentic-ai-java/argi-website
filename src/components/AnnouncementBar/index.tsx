@@ -65,7 +65,7 @@ export default function AnnouncementBar({
             </span>
             <span className={styles.messageText}>
               <Translate id="announcement.message" description="Announcement bar main message">
-                Agentic AI 智能体运行时现已全面支持 ReAct 循环、Graph 状态编排与 Studio 实时观测
+                ARGI 智能体运行时现已全面支持 ReAct 循环、Graph 状态编排与 Studio 实时观测
               </Translate>
             </span>
             <Link to="/docs/overview" className={styles.ctaLink}>
