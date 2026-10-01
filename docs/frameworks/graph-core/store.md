@@ -23,7 +23,7 @@ keywords: [Graph, Store, 长期记忆, MemoryStore, FileSystemStore, RedisStore,
 
 ## 内置实现
 
-refactor 分支当前可确认的实现如下：
+main 分支当前可确认的实现如下：
 
 | 实现 | 说明 |
 | --- | --- |

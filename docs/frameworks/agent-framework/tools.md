@@ -1736,7 +1736,7 @@ public class RemoteMcpChatService {
 
 ## ARGI 扩展工具能力
 
-除 Spring AI 的基础工具抽象外，Agent Framework refactor 分支还提供了面向 Agent 运行时的工具扩展。
+除 Spring AI 的基础工具抽象外，Agent Framework main 分支还提供了面向 Agent 运行时的工具扩展。
 
 ### 并行与异步工具执行
 
@@ -1823,7 +1823,7 @@ ToolMultimodalResult result = ToolMultimodalResult.builder()
 
 ### 内置工具
 
-refactor 分支当前可确认的内置工具包括：
+main 分支当前可确认的内置工具包括：
 
 | 工具 | 用途 | 构建入口 |
 | --- | --- | --- |

@@ -12,9 +12,9 @@ keywords: [版本, versions, releases, ARGI, Spring AI, Spring Boot, 依赖管�
 
 ## 版本口径
 
-ARGI fork 自 Spring AI Alibaba。当前重构版本统一迁移 Maven 坐标、Java package、配置前缀和框架公共类名，功能语义和使用方式保持一致。
+ARGI fork 自 Spring AI Alibaba。当前 `main` 分支统一使用 ARGI 的 Maven 坐标、Java package、配置前缀和框架公共类名。
 
-refactor 分支中的核心项目已经使用新的命名：
+main 分支中的核心项目已经使用新的命名：
 
 - Maven `groupId`：`io.github.agentic-ai`
 - BOM：`argi-bom`
@@ -35,8 +35,8 @@ Extensions 项目同样使用新的 Maven 坐标：
 
 | 项目 | ARGI 版本 | Spring AI | Spring Boot | 说明 |
 | --- | --- | --- | --- | --- |
-| Core | `2.1.0-dev` | `2.0.1` | `4.1.1` | refactor 分支当前开发版本。事实来源：Core `pom.xml`。 |
-| Extensions | `2.1.0-dev` | `2.0.0` | `4.1.0` | refactor 分支当前开发版本。事实来源：Extensions `pom.xml`。 |
+| Core | `2.1.0-dev` | `2.0.1` | `4.1.1` | `main` 分支当前开发版本。事实来源：Core `pom.xml`。 |
+| Extensions | `2.1.0-dev` | `2.0.1` | `4.1.1` | `main` 分支当前开发版本。事实来源：Extensions `pom.xml`。 |
 | Core | `1.1.2.0` | `1.1.2` | `3.5.x` | fork 后补齐发布版本，主要迁移包名与项目坐标。 |
 | Core | `1.1.0.0` | `1.1.0` | `3.4.x` | fork 后补齐发布版本，主要迁移包名与项目坐标。 |
 | Core | `1.0.x` | `1.0.0` | `3.4.x` | 1.0 基础系列。 |
@@ -79,7 +79,7 @@ Extensions 项目同样使用新的 Maven 坐标：
 
 如果使用已发布的 `1.x` 或 `2.0.x` 迁移版本，请将 `argi-bom` 与 `spring-ai-bom` 的版本调整为上表对应版本。
 
-Extensions starter 使用 `argi-extensions-bom` 管理版本。refactor 分支当前对应 Spring AI `2.0.0` 与 Spring Boot `4.1.0`。
+Extensions starter 使用 `argi-extensions-bom` 管理版本。`main` 分支当前与 Core 一样对应 Spring AI `2.0.1` 与 Spring Boot `4.1.1`。
 
 ```xml
 <dependencyManagement>
@@ -115,10 +115,13 @@ Extensions starter 使用 `argi-extensions-bom` 管理版本。refactor 分支�
 
 ## Extensions 模块
 
-refactor 分支已确认存在以下 starter：
+main 分支已确认存在以下 starter：
 
 | 能力 | artifactId |
 | --- | --- |
+| A2A Nacos 注册与发现 | `argi-starter-a2a-nacos` |
+| AgentScope 集成 | `argi-starter-agentscope` |
+| Nacos Agent 动态配置 | `argi-starter-config-nacos` |
 | MCP 分布式发现 | `argi-starter-mcp-distributed` |
 | MCP 注册 | `argi-starter-mcp-registry` |
 | MCP 网关 | `argi-starter-mcp-gateway` |
@@ -130,3 +133,5 @@ refactor 分支已确认存在以下 starter：
 | Mem0 Chat Memory | `argi-starter-model-chat-memory-mem0` |
 | Chat Memory Repository | `argi-starter-model-chat-memory-repository-redis`、`argi-starter-model-chat-memory-repository-jdbc`、`argi-starter-model-chat-memory-repository-mongodb`、`argi-starter-model-chat-memory-repository-elasticsearch`、`argi-starter-model-chat-memory-repository-memcached`、`argi-starter-model-chat-memory-repository-tablestore` |
 | Vector Store | `argi-starter-vector-store-tair`、`argi-starter-vector-store-opensearch`、`argi-starter-vector-store-oceanbase`、`argi-starter-vector-store-tablestore`、`argi-starter-vector-store-analyticdb` |
+
+除 Spring Boot Starter 外，Extensions 还提供 `argi-graph-persistence-*`、`argi-code-executor-docker`、`argi-graph-node-rag` 和 `argi-graph-node-network` 等可直接引入的库模块。

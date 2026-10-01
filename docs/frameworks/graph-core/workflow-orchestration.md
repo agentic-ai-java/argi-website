@@ -13,7 +13,7 @@ ARGI Graph 可以改变您构建智能代理的思维方式。使用 Graph 构�
 
 ## 当前核心能力
 
-refactor 分支中的 Graph Core 已提供以下能力：
+main 分支中的 Graph Core 已提供以下能力：
 
 | 能力 | 关键类型 | 说明 |
 | --- | --- | --- |

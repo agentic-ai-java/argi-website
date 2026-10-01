@@ -17,7 +17,7 @@ Multi-agent系统在以下情况下很有用：
 
 ## Multi-agent模式
 
-refactor 分支当前可确认的 Multi-agent 模式如下：
+main 分支当前可确认的 Multi-agent 模式如下：
 
 | 模式 | 工作原理 | 控制流 | 使用场景 |
 | ---- | -------- | ------ | -------- |
@@ -597,7 +597,7 @@ LlmRoutingAgent routingAgent = LlmRoutingAgent.builder()
 
 ### 循环执行（LoopAgent）
 
-在**循环执行**模式中，`LoopAgent` 重复执行一个子 Agent，并由 `LoopStrategy` 决定何时继续或退出。refactor 分支提供的内置策略包括：
+在**循环执行**模式中，`LoopAgent` 重复执行一个子 Agent，并由 `LoopStrategy` 决定何时继续或退出。main 分支提供的内置策略包括：
 
 - `LoopMode.count(int)`：固定次数循环。
 - `LoopMode.condition(Predicate<List<Message>>)`：根据消息列表判断是否结束循环。

@@ -6,7 +6,7 @@ keywords: [ARGI, community, contribution, security, code of conduct]
 
 # 社区协议
 
-ARGI fork 自 Spring AI Alibaba。refactor 分支已经将核心 Maven 坐标迁移到 `io.github.agentic-ai`，核心模块名迁移到 `argi-*`，Java 包名迁移到 `io.github.agentic.ai.*`。贡献代码时请以当前分支中的 POM、源码包名和模块目录为准。
+ARGI fork 自 Spring AI Alibaba。main 分支已经将核心 Maven 坐标迁移到 `io.github.agentic-ai`，核心模块名迁移到 `argi-*`，Java 包名迁移到 `io.github.agentic.ai.*`。贡献代码时请以当前分支中的 POM、源码包名和模块目录为准。
 
 ## 贡献协议
 

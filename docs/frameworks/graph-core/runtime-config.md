@@ -11,7 +11,7 @@ Graph Core 把配置分为两层：`CompileConfig` 作用于图编译后的执�
 
 ## CompileConfig
 
-`CompileConfig` 在 `StateGraph.compile(...)` 时传入。refactor 分支当前可确认的配置项如下：
+`CompileConfig` 在 `StateGraph.compile(...)` 时传入。main 分支当前可确认的配置项如下：
 
 | 配置项 | Builder 入口 | 说明 |
 | --- | --- | --- |

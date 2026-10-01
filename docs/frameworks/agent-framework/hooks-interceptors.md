@@ -419,7 +419,7 @@ Agent Framework 的 `extension/interceptor` 包中还提供了若干面向复杂
 | `PatchToolCallsInterceptor` | 修正或补全工具调用内容。 |
 | `SubAgentInterceptor` | 支持子 Agent 相关的模型调用拦截。 |
 
-这些类是 refactor 分支中的框架扩展点。使用前应结合源码中的构造参数和业务权限边界进行配置。
+这些类是 main 分支中的框架扩展点。使用前应结合源码中的构造参数和业务权限边界进行配置。
 
 ## 自定义 Hooks 和 Interceptors
 

@@ -1,7 +1,7 @@
 ---
 title: Extensions 概览
 sidebar_label: 概览
-description: 深入了解 ARGI Extensions 生态扩展组件库：统一 BOM、20 个核心 Starter 清单、配置前缀映射与架构集成指南。
+description: 深入了解 ARGI Extensions 生态扩展组件库：统一 BOM、23 个核心 Starter 清单、配置前缀映射与架构集成指南。
 keywords: [Extensions, MCP, Nacos, Prompt, Memory, RAG, Vector Store, ARMS, Starter, BOM]
 ---
 
@@ -35,12 +35,15 @@ keywords: [Extensions, MCP, Nacos, Prompt, Memory, RAG, Vector Store, ARMS, Star
 
 ---
 
-## 20 个 Starter 全景清单
+## 23 个 Starter 全景清单
 
-Extensions 当前代码库（版本 `2.1.0-dev`）共提供 **20 个独立 Starter**，按生态领域分类如下：
+Extensions 当前代码库（版本 `2.1.0-dev`）共提供 **23 个独立 Starter**，按生态领域分类如下：
 
 | 生态领域 | 对应 Starter 坐标 | 核心功能与适配实现 |
 | --- | --- | --- |
+| **Agent 与服务发现** | `argi-starter-a2a-nacos` | 将 ARGI Agent 发布为 A2A Server，并通过 Nacos 完成 AgentCard 注册、发现与负载均衡 |
+| | `argi-starter-agentscope` | 接入 AgentScope Agent 与路由流程，用于异构 Agent 协作 |
+| | `argi-starter-config-nacos` | 从 Nacos 动态装配 Agent 的模型、Prompt、MCP 工具与合作 Agent |
 | **MCP 生态** | `argi-starter-mcp-distributed` | 基于 Nacos 动态发现 SSE / Streamable HTTP 类型的 MCP Server，暴露为 Spring AI `ToolCallbackProvider` |
 | | `argi-starter-mcp-registry` | 将本地 MCP Server 自动注册至 Nacos 注册中心，支持无状态（Stateless）注册与工具 Schema 校验 |
 | | `argi-starter-mcp-gateway` | MCP 统一流量网关，支持 WebFlux/WebMvc 双栈、多 Server 聚合代理转发、OAuth 2.0 客户端认证与 JSON 模板解析 |

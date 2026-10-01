@@ -135,11 +135,11 @@
     "description": "Code title"
   },
   "homepage.description": {
-    "message": "A dual-theme documentation website template built with Docusaurus 3",
+    "message": "Agent Runtime and Graph Intelligence for production Java agent systems",
     "description": "The homepage description"
   },
   "homepage.title": {
-    "message": "Welcome to Project Name",
+    "message": "Build durable agent systems with ARGI",
     "description": "The homepage title"
   },
   "homepage.features.docs.title": {

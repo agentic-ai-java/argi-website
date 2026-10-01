@@ -56,7 +56,7 @@ System.out.println(response.getText());
 
 ## 核心配置
 
-refactor 分支中的 `ReactAgent.Builder` 暴露了下列能力。表格只列框架已经提供的配置入口；具体模型、工具和持久化组件仍由应用选择。
+main 分支中的 `ReactAgent.Builder` 暴露了下列能力。表格只列框架已经提供的配置入口；具体模型、工具和持久化组件仍由应用选择。
 
 | 能力 | Builder 入口 | 说明 |
 | --- | --- | --- |
@@ -86,7 +86,7 @@ Agent Framework 支持两类常用工具配置：
 
 ### 指令与系统提示
 
-`instruction(...)` 用于描述 Agent 的任务角色和行为约束。`systemPrompt(...)` 用于设置模型调用时的系统提示。两者都存在于 refactor 分支的 `ReactAgent` builder 中。
+`instruction(...)` 用于描述 Agent 的任务角色和行为约束。`systemPrompt(...)` 用于设置模型调用时的系统提示。两者都存在于 main 分支的 `ReactAgent` builder 中。
 
 ```java
 ReactAgent agent = ReactAgent.builder()
@@ -124,7 +124,7 @@ agent.call("我的项目叫什么？", config);
 
 Hook 用于在 Agent 或模型调用阶段注入运行时逻辑。Interceptor 用于拦截模型调用或工具调用。
 
-refactor 分支提供了内置的 `ModelCallLimitHook` 与 `ToolErrorInterceptor`：
+main 分支提供了内置的 `ModelCallLimitHook` 与 `ToolErrorInterceptor`：
 
 ```java
 import io.github.agentic.ai.graph.agent.ReactAgent;

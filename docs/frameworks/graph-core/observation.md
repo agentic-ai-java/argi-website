@@ -72,7 +72,7 @@ CompiledGraph graph = stateGraph.compile(
 
 ## 可扩展的 Observation 类型
 
-refactor 分支中可以确认以下 observation 扩展类型：
+main 分支中可以确认以下 observation 扩展类型：
 
 | 范围 | 类型 |
 | --- | --- |
