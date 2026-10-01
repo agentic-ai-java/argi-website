@@ -61,7 +61,7 @@ export default function AnnouncementBar({
           <div className={styles.content}>
             <span className={styles.statusBadge}>
               <span className={styles.statusDot} />
-              RUNTIME v1.0
+              ARGI 2.1 DEV
             </span>
             <span className={styles.messageText}>
               <Translate id="announcement.message" description="Announcement bar main message">

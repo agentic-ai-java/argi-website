@@ -7,7 +7,7 @@ keywords: [ReactAgent, Built-in Tools, ShellTool, FileSystemTools, TaskTools, As
 
 # 内置工具
 
-Agent Framework 可以直接使用 Spring AI 的 `ToolCallback`、`@Tool` 方法和 `ToolCallbackProvider`。此外，refactor 分支中还提供了一批面向 Agent 运行时的内置工具和工具扩展点。
+Agent Framework 可以直接使用 Spring AI 的 `ToolCallback`、`@Tool` 方法和 `ToolCallbackProvider`。此外，main 分支中还提供了一批面向 Agent 运行时的内置工具和工具扩展点。
 
 ## 工具注册方式
 

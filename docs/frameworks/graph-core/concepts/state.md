@@ -120,7 +120,7 @@ var nodeB = node_async(state -> Map.of("profile", Map.of("language", "Java")));
 
 ## KeyStrategyFactoryBuilder
 
-如果状态键较多，可以使用 `KeyStrategyFactoryBuilder` 集中声明策略。refactor 分支支持按固定 key、前缀、后缀、包含字符串、正则或谓词选择策略。
+如果状态键较多，可以使用 `KeyStrategyFactoryBuilder` 集中声明策略。main 分支支持按固定 key、前缀、后缀、包含字符串、正则或谓词选择策略。
 
 ```java
 import io.github.agentic.ai.graph.KeyStrategyFactoryBuilder;

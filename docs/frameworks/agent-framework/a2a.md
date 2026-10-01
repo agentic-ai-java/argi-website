@@ -9,14 +9,14 @@ keywords: [A2A, A2A Agent, Agent-to-Agent, 分布式Agent, 远程Agent, AgentCar
 
 Agent2Agent（A2A）协议用于描述和调用远程智能体。ARGI 在 `argi-agent-framework` 中提供了 A2A 客户端侧封装，可以把远程 Agent 包装成 `A2aRemoteAgent`，再像本地 Agent 一样调用或放入 Graph 编排。
 
-当前 refactor 分支可确认的核心类型包括：
+当前 main 分支可确认的核心类型包括：
 
 - `A2aRemoteAgent`：把远程 A2A Agent 包装为 ARGI Agent。
 - `AgentCardProvider`：抽象 AgentCard 的获取方式。
 - `RemoteAgentCardProvider`：从远程 URL 获取 AgentCard。
 - `AgentCardWrapper`：封装 A2A SDK 的 `AgentCard`，暴露名称、描述、能力、技能等元数据。
 
-> 说明：当前 refactor 分支没有发现 `argi-starter-a2a-nacos` 或同等 A2A Nacos starter。Nacos MCP starter 存在，但它面向 MCP 注册、发现、网关和路由，不等同于 A2A AgentCard 的自动注册与发现。
+> Extensions 中的 `argi-starter-a2a-nacos` 可以将 ARGI Agent 发布为 A2A Server，并通过 Nacos 完成 AgentCard 注册、发现与客户端负载均衡。
 
 ## 添加依赖
 
@@ -42,6 +42,17 @@ Agent2Agent（A2A）协议用于描述和调用远程智能体。ARGI 在 `argi-
     </dependency>
 </dependencies>
 ```
+
+如果需要 A2A Server 自动装配和 Nacos 服务发现，再通过 `argi-extensions-bom` 管理并引入 Extensions Starter：
+
+```xml
+<dependency>
+    <groupId>io.github.agentic-ai</groupId>
+    <artifactId>argi-starter-a2a-nacos</artifactId>
+</dependency>
+```
+
+该 Starter 的源码和自动配置位于 [ARGI Extensions](https://github.com/agentic-ai-java/argi-extensions/tree/main/starters/argi-starter-a2a-nacos)。
 
 ## 调用远程 A2A Agent
 
@@ -126,4 +137,4 @@ graph.compile();`}
 - 如果只需要调用一个远程 Agent，直接使用 `A2aRemoteAgent.invoke(...)`。
 - 如果需要把远程 Agent 编入本地流程，使用 `asNode(...)` 加入 `StateGraph`。
 - 如果 AgentCard 来源不是固定 URL，可以实现 `AgentCardProvider`，从配置中心、数据库或服务发现系统读取 AgentCard。
-- 如果需要 Nacos 联动，当前可确认的是 extensions 的 MCP/Nacos 能力；A2A AgentCard 的 Nacos 自动注册与发现需要以对应 starter 或配置类落地后再写入文档。
+- 如果需要 Nacos 联动，使用 `argi-starter-a2a-nacos` 提供的 Server 自动装配、AgentCard 注册和客户端发现能力。

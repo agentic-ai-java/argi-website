@@ -11,7 +11,7 @@ keywords: [ReactAgent, Builder, RunnableConfig, CompileConfig, ReAct, 运行配�
 
 ## Builder 能力清单
 
-refactor 分支中 `ReactAgent.Builder` 可确认的配置入口如下：
+main 分支中 `ReactAgent.Builder` 可确认的配置入口如下：
 
 | 分类 | 配置入口 | 说明 |
 | --- | --- | --- |

@@ -24,18 +24,19 @@
     "write-translations:en": "docusaurus write-translations --locale en",
     "write-heading-ids": "docusaurus write-heading-ids",
     "index:search": "pagefind --site build",
+    "verify:contract": "node scripts/verify-argi-contract.mjs",
     "verify:search": "node scripts/verify-pagefind-search.mjs",
     "typecheck": "tsc",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "keywords": [
-    "documentation",
-    "website",
-    "template",
-    "docusaurus",
-    "dual-theme",
-    "open-source"
+    "agent-runtime",
+    "graph-orchestration",
+    "multi-agent",
+    "spring-ai",
+    "java-ai",
+    "docusaurus"
   ],
   "dependencies": {
     "@docusaurus/core": "^3.8.1",

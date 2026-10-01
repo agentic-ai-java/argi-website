@@ -177,20 +177,19 @@ const BLUEPRINTS: BlueprintItem[] = [
     badge: 'DECLARATIVE AGENT BUILDER',
     fileName: 'ProductionReactAgent.java',
     title: '几行 Java 代码构建生产级 ReAct 智能体',
-    description: '通过流式 Builder API 将大模型推理、MCP 工具集、上下文压缩钩子与持久化检查点组合为可观测的自治智能体循环。',
-    code: `ReactAgent opsAgent = ReactAgent.builder()
+    description: '通过流式 Builder API 将大模型推理、MCP 工具集、模型调用限额与检查点组合为可观测的自治智能体循环。',
+    code: `MemorySaver saver = MemorySaver.builder().build();
+ModelCallLimitHook callLimit = ModelCallLimitHook.builder()
+    .threadLimit(12)
+    .build();
+
+ReactAgent opsAgent = ReactAgent.builder()
     .name("cloud-sre-agent")
     .model(chatModel)
     .systemPrompt("You are an autonomous production SRE agent.")
-    .tools(
-        mcpClient.resolve("prometheus-query"),
-        mcpClient.resolve("k8s-rollout-status")
-    )
-    .hooks(
-        ModelCallLimitHook.of(12),
-        ContextCompressionHook.slidingWindow(16_384)
-    )
-    .saver(PostgresCheckpointSaver.create(dataSource))
+    .tools(prometheusTool, rolloutStatusTool)
+    .hooks(callLimit)
+    .saver(saver)
     .build();
 
 AssistantMessage reply = opsAgent.call(
@@ -200,17 +199,17 @@ AssistantMessage reply = opsAgent.call(
     stateSnapshot: {
       threadId: 'incident-2026-09',
       currentNode: 'ReactAgent.toolExecution',
-      checkpointStatus: 'PERSISTED (PostgreSQL)',
+      checkpointStatus: 'PERSISTED (MemorySaver)',
       keys: [
         { key: 'agent.name', value: '"cloud-sre-agent"' },
         { key: 'loop.iteration', value: '3 / 12 (CONVERGED)', highlight: true },
         { key: 'mcp.tools.invoked', value: '["prometheus-query", "k8s-rollout-status"]' },
-        { key: 'context.tokens', value: '4,820 / 16,384 (COMPRESSED)' },
+        { key: 'checkpoint.saver', value: 'MemorySaver (ACTIVE)' },
       ],
     },
     highlights: [
       '原生支持 MCP 工具协议与 Spring AI ToolCallback 自动装配',
-      '内置 Hook 生命周期拦截（模型调用限流、PII 脱敏、上下文压缩）',
+      '内置 Hook 生命周期拦截（模型调用限流、PII 脱敏、上下文摘要）',
       '每次推理与工具调用自动生成可回放的状态快照',
     ],
   },
@@ -221,10 +220,14 @@ AssistantMessage reply = opsAgent.call(
     fileName: 'AutonomousWorkflowGraph.java',
     title: '用类型安全的状态图编排复杂多分支与循环工作流',
     description: '使用节点（Node）、有向边（Edge）、条件路由（Conditional Edge）与归约器（Reducer）精确控制长周期多智能体协作。',
-    code: `StateGraph<OverAllState> workflow = new StateGraph<>(OverAllState::new)
-    .addNode("planner", node_async(new PlannerNode(chatModel)))
-    .addNode("researcher", node_async(new ParallelResearchNode(searchTool)))
-    .addNode("critic", node_async(new ReflectionCriticNode(chatModel)))
+    code: `StateGraph workflow = new StateGraph(() -> Map.of(
+        "plan", KeyStrategy.REPLACE,
+        "evidence", KeyStrategy.APPEND,
+        "qualityScore", KeyStrategy.REPLACE
+    ))
+    .addNode("planner", node_async(state -> Map.of("plan", "research and verify")))
+    .addNode("researcher", node_async(state -> Map.of("evidence", "verified source")))
+    .addNode("critic", node_async(state -> Map.of("qualityScore", 0.94)))
     .addEdge(START, "planner")
     .addEdge("planner", "researcher")
     .addEdge("researcher", "critic")
@@ -236,7 +239,9 @@ AssistantMessage reply = opsAgent.call(
 
 CompiledGraph runtime = workflow.compile(
     CompileConfig.builder()
-        .saverConfig(SaverConfig.builder().register(redisSaver).build())
+        .saverConfig(SaverConfig.builder()
+            .register(MemorySaver.builder().build())
+            .build())
         .build()
 );`,
     stateSnapshot: {
@@ -262,7 +267,7 @@ CompiledGraph runtime = workflow.compile(
     badge: 'HUMAN-IN-THE-LOOP & STUDIO',
     fileName: 'HumanInTheLoopExecution.java',
     title: '关键节点中断审批、状态热修改与时间旅行恢复',
-    description: '在执行高风险操作前自动挂起工作流，结合 Agentic Studio 可视化审查推理链路、修改中间状态并随时恢复执行。',
+    description: '在执行高风险操作前自动挂起工作流，结合 ARGI Studio 可视化审查推理链路、修改中间状态并随时恢复执行。',
     code: `CompiledGraph durableGraph = workflow.compile(
     CompileConfig.builder()
         .saverConfig(SaverConfig.builder().register(checkpointSaver).build())

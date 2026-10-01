@@ -16,7 +16,7 @@ ARGI 是 **Agent Runtime and Graph Intelligence** 的缩写，读作 **“AR-jee
 - **Graph Core**：提供 `StateGraph`、`CompiledGraph`、节点、边、共享状态、检查点、恢复、流式输出和人工介入等图运行时能力。
 - **Studio**：提供嵌入式可视化调试界面，用于观测智能体对话流与图工作流执行过程。
 
-ARGI fork 自 Spring AI Alibaba。refactor 分支已经将核心 Maven 坐标迁移到 `io.github.agentic-ai`，模块名迁移到 `argi-*`，Java 包名迁移到 `io.github.agentic.ai.*`。
+ARGI fork 自 Spring AI Alibaba。main 分支已经将核心 Maven 坐标迁移到 `io.github.agentic-ai`，模块名迁移到 `argi-*`，Java 包名迁移到 `io.github.agentic.ai.*`。
 
 ## 架构设计与定位
 

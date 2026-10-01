@@ -13,7 +13,7 @@ ARGI Graph 具有内置的持久化层，通过检查点（Checkpointers）实�
 
 ## Saver 类型
 
-refactor 分支当前可确认的 checkpoint saver 如下：
+main 分支当前可确认的 checkpoint saver 如下：
 
 | 类型 | 类名 | 说明 |
 | --- | --- | --- |

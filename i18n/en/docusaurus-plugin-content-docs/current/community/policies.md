@@ -6,7 +6,7 @@ keywords: [ARGI, community, contribution, security, code of conduct]
 
 # Community Policies
 
-ARGI was forked from Spring AI Alibaba. The refactor branch has migrated the core Maven group to `io.github.agentic-ai`, core artifact names to `argi-*`, and Java packages to `io.github.agentic.ai.*`. Use the POM files, source packages, and module directories in the current branch as the source of truth when contributing.
+ARGI was forked from Spring AI Alibaba. The main branch has migrated the core Maven group to `io.github.agentic-ai`, core artifact names to `argi-*`, and Java packages to `io.github.agentic.ai.*`. Use the POM files, source packages, and module directories in the current branch as the source of truth when contributing.
 
 ## Contribution
 

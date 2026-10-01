@@ -60,7 +60,7 @@ agent.call("你好！我叫 Bob。", config);`}
 
 ### Checkpointer 类型
 
-Graph Core 的 refactor 分支提供了多种 checkpoint saver。它们用于保存 `StateGraph` 或 `ReactAgent` 的运行状态，和 Spring AI 的 `ChatMemoryRepository` 不是同一个抽象。
+Graph Core 的 main 分支提供了多种 checkpoint saver。它们用于保存 `StateGraph` 或 `ReactAgent` 的运行状态，和 Spring AI 的 `ChatMemoryRepository` 不是同一个抽象。
 
 | 类型 | 类名 | 适用场景 |
 | --- | --- | --- |
@@ -69,7 +69,7 @@ Graph Core 的 refactor 分支提供了多种 checkpoint saver。它们用于保
 | 文件系统 | `FileSystemSaver` | 本地文件持久化、调试状态快照。 |
 | Redis | `RedisSaver` | 分布式应用中保存 checkpoint。 |
 | MongoDB | `MongoSaver` | 使用 MongoDB 保存 checkpoint。 |
-| JDBC | `H2Saver`、`PostgresSaver`、`OracleSaver` | 使用关系数据库保存 checkpoint。当前 refactor 代码中可确认这些实现。 |
+| JDBC | `H2Saver`、`PostgresSaver`、`OracleSaver` | 使用关系数据库保存 checkpoint。当前 `main` 分支中可确认这些实现。 |
 
 ### 在生产环境中
 

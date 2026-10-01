@@ -420,4 +420,4 @@ Map<String, Object> result = graph.invoke(
 
 通过并行节点，您可以显著提高工作流的执行效率，特别是在处理独立任务时。
 
-更多详细示例，请以 Core refactor 分支中的 Graph 测试与示例代码为准。
+更多详细示例，请以 Core main 分支中的 Graph 测试与示例代码为准。

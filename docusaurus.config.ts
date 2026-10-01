@@ -72,7 +72,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:title',
-        content: 'ARGI - ARGI Framework for Java Developers',
+        content: 'ARGI - Agent Runtime and Graph Intelligence',
       },
     },
     {
@@ -115,7 +115,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'twitter:title',
-        content: 'ARGI - ARGI Framework for Java Developers',
+        content: 'ARGI - Agent Runtime and Graph Intelligence',
       },
     },
     {
