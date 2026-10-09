@@ -313,9 +313,9 @@ ReactAgent agent = ReactAgent.builder()
     .build();
 ```
 
-### Planning（规划）
+### Planning（待办提示）
 
-在执行工具之前强制执行一个规划步骤，以概述 Agent 将要采取的步骤。
+`TodoListInterceptor` 向模型提供待办列表提示，配合 `WriteTodosTool` 记录内容和进度；它不会强制生成执行计划、校验依赖 DAG 或保证工具执行顺序。需要有 stepId、依赖、能力引用及输入/输出契约的计划时，使用可选的 [结构化任务规划](/docs/frameworks/agent-framework/planner)。Planner 同样只生成和校验计划，不自动执行。
 
 **适用场景**：
 * 需要执行复杂、多步骤任务的 Agent；

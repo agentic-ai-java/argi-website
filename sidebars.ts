@@ -130,6 +130,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'frameworks/agent-framework/multi-agent',
+        'frameworks/agent-framework/planner',
         'frameworks/agent-framework/tools-as-agent',
         'frameworks/agent-framework/workflow',
         'frameworks/agent-framework/a2a',
