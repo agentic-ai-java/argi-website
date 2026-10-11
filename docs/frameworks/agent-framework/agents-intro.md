@@ -11,6 +11,10 @@ Agent 将语言模型、工具和运行时控制逻辑组合在一起，用于�
 
 ARGI Agent Framework 的核心实现是 `ReactAgent`。它构建在 Graph Core 之上：底层由 `StateGraph` 表示执行拓扑，模型节点负责推理和生成工具调用，工具节点执行工具并把观察结果写回状态，然后由图边决定继续循环还是结束。
 
+## 结构化任务规划
+
+需要显式的多步骤计划时，可以选择 [结构化任务规划](/docs/frameworks/agent-framework/planner)。`ArgiPlanner` 支持不调用模型的单步规划，以及基于模型的依赖 DAG 拆解；它只生成和校验计划，不执行工具，也不替换 Todo 或现有 flow agents。
+
 ## ReAct 循环
 
 ReAct 表示 Reasoning + Acting。`ReactAgent` 的典型执行过程包括：
