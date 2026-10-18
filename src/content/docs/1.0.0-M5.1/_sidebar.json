@@ -38,6 +38,7 @@
         "autogenerate": {
             "directory": "tutorials"
         },
+	    "collapsed": true,
         "items": []
 	},
 	{
@@ -45,10 +46,56 @@
         "translations": {
             "en": "practices"
         },
-        "autogenerate": {
-            "directory": "practices"
+        "items": [{
+					  "label": "阿里云百炼",
+					  "translations": {
+						  "en": "Bailian"
+					  },
+				      "collapsed": false,
+					  "autogenerate": {
+						  "directory": "practices/bailian"
+					  },
+					  "items": []
+				},{
+					  "label": "场景示例",
+					  "translations": {
+						  "en": "Use Cases"
+					  },
+				      "collapsed": false,
+					  "autogenerate": {
+						  "directory": "practices/usecase"
+					  },
+					  "items": []
+				}
+			]
+	},
+	{
+        "label": "生态集成",
+        "translations": {
+            "en": "integrations"
         },
-        "items": []
+        "items": [{
+					  "label": "Tool Calling",
+					  "translations": {
+						  "en": "Tool Calling"
+					  },
+				      "link": "docs/1.0.0-M5.1/integrations/tools"
+				},
+			    {
+					  "label": "Document Reader",
+					  "translations": {
+						  "en": "Document Reader"
+					  },
+					  "link": "docs/1.0.0-M5.1/integrations/documentreader"
+				},
+			    {
+					  "label": "Vector Store",
+					  "translations": {
+						  "en": "Vector Store"
+					  },
+					  "link": "docs/1.0.0-M5.1/integrations/vectorstore"
+				}
+			]
 	}
 
 ]
