@@ -1,0 +1,88 @@
+[
+	{
+        "label": "概览",
+        "translations": {
+            "en": "Introduction"
+        },
+        "link": "docs/1.0.0-M5.1/overview/"
+    },
+    {
+        "label": "快速开始",
+        "translations": {
+            "en": "Quick Start"
+        },
+        "autogenerate": {
+			"directory": "get-started"
+		},
+		"items": []
+	},
+	{
+        "label": "使用教程",
+        "translations": {
+            "en": "Tutorials"
+        },
+        "items": [{
+					  "label": "基础框架",
+					  "translations": {
+						  "en": "Framework Basics"
+					  },
+				      "collapsed": true,
+					  "autogenerate": {
+						  "directory": "tutorials/basics"
+					  },
+					  "items": []
+				},{
+					  "label": "智能体与工作流",
+					  "translations": {
+						  "en": "Agent & Workflow"
+					  },
+				      "collapsed": true,
+					  "autogenerate": {
+						  "directory": "tutorials/graph"
+					  },
+					  "items": []
+				}
+			]
+	},
+	{
+        "label": "最佳实践",
+        "translations": {
+            "en": "practices"
+        },
+	    "collapsed": true,
+        "autogenerate": {
+            "directory": "practices"
+        },
+        "items": []
+	},
+	{
+        "label": "生态集成",
+        "translations": {
+            "en": "Integrations"
+        },
+	    "collapsed": false,
+        "items": [{
+					  "label": "DocumentReader",
+					  "translations": {
+						  "en": "DocumentReader"
+					  },
+				      "collapsed": true,
+					  "autogenerate": {
+						  "directory": "integration/documentreader"
+					  },
+					  "items": []
+				},{
+					  "label": "functioncalling",
+					  "translations": {
+						  "en": "FunctionCalling"
+					  },
+				      "collapsed": true,
+					  "autogenerate": {
+						  "directory": "integration/functioncalling"
+					  },
+					  "items": []
+				}
+			]
+	}
+
+]
