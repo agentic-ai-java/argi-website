@@ -2,7 +2,7 @@
 
 [NVIDIA LLM API](https://docs.api.nvidia.com/nim/reference/llm-apis) 是一个代理 AI Inference Engine，提供来自[各种提供商](https://docs.api.nvidia.com/nim/reference/llm-apis#models)的广泛模型。
 
-Spring AI 通过重用现有的 [OpenAI](chat/openai-chat) 客户端与 NVIDIA LLM API 集成。
+Spring AI 通过重用现有的 [OpenAI](../openai-chat) 客户端与 NVIDIA LLM API 集成。
 为此，您需要将 base-url 设置为 `+https://integrate.api.nvidia.com+`，选择提供的 [LLM models](https://docs.api.nvidia.com/nim/reference/llm-apis#model) 之一，并获取其 `api-key`。
 
 ![spring-ai-nvidia-llm-api-1.jpg](/img/integration/spring-ai-nvidia-llm-api-1.jpg)
@@ -43,7 +43,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 ### Chat Properties
 

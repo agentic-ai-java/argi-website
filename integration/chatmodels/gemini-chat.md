@@ -46,7 +46,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 ### Chat Properties
 
@@ -151,7 +151,7 @@ String response = ChatClient.create(this.chatModel)
         .content();
 ```
 
-在 [Tools](tools) 文档中查找更多信息。
+在 [Tools](../toolcalls/tool-calls) 文档中查找更多信息。
 
 ## Multimodal
 
@@ -259,7 +259,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 接下来，创建一个 `VertexAiGeminiChatModel` 并将其用于文本生成：
 

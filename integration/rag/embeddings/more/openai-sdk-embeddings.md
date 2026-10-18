@@ -2,7 +2,7 @@
 
 Spring AI 通过 OpenAI Java SDK 支持 OpenAI 的文本 embeddings 模型，提供与 OpenAI 服务（包括 Microsoft Foundry 和 GitHub Models）的强大且官方维护的集成。
 
-注意：此实现使用来自 OpenAI 的官方 link:https://github.com/openai/openai-java[OpenAI Java SDK]。有关替代的 Spring AI 实现，请参阅 [OpenAI Embeddings](embeddings/openai-embeddings.adoc)。
+注意：此实现使用来自 OpenAI 的官方 link:https://github.com/openai/openai-java[OpenAI Java SDK]。有关替代的 Spring AI 实现，请参阅 [OpenAI Embeddings](../openai-embeddings)。
 
 OpenAI 的文本 embeddings 测量文本字符串的相关性。
 embedding 是浮点数（列表）的向量。两个向量之间的距离衡量它们的相关性。小距离表示高相关性，大距离表示低相关性。
@@ -94,9 +94,9 @@ spring.ai.openai-sdk.api-key=${OPENAI_API_KEY}
 ### 添加仓库和 BOM
 
 Spring AI 工件发布在 Maven Central 和 Spring Snapshot 仓库中。
-请参阅 [Artifact Repositories](getting-started.adoc#artifact-repositories) 部分，将这些仓库添加到您的构建系统。
+请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将这些仓库添加到您的构建系统。
 
-为了帮助依赖管理，Spring AI 提供了一个 BOM（物料清单），以确保在整个项目中使用一致版本的 Spring AI。请参阅 [Dependency Management](getting-started.adoc#dependency-management) 部分，将 Spring AI BOM 添加到您的构建系统。
+为了帮助依赖管理，Spring AI 提供了一个 BOM（物料清单），以确保在整个项目中使用一致版本的 Spring AI。请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建系统。
 
 ## 自动配置
 
@@ -123,7 +123,7 @@ dependencies {
 ```
 ======
 
-提示：请参阅 [Dependency Management](getting-started.adoc#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件。
+提示：请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件。
 
 ### 配置属性
 
@@ -257,10 +257,10 @@ dependencies {
 }
 ```
 
-提示：请参阅 [Dependency Management](getting-started.adoc#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件。
+提示：请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件。
 
 注意：`spring-ai-openai-sdk` 依赖项还提供对 `OpenAiSdkChatModel` 和 `OpenAiSdkImageModel` 的访问。
-有关 `OpenAiSdkChatModel` 的更多信息，请参阅 [OpenAI SDK Chat](chat/openai-sdk-chat.adoc) 部分。
+有关 `OpenAiSdkChatModel` 的更多信息，请参阅 [OpenAI SDK Chat](../../../chatmodels/more/openai-sdk-chat) 部分。
 
 接下来，创建一个 `OpenAiSdkEmbeddingModel` 实例并使用它来计算两个输入文本之间的相似性：
 

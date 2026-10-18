@@ -2,7 +2,7 @@
 
 [Groq](https://groq.com/) 是一个极快的、基于 LPU™ 的 AI Inference Engine，支持各种 [AI Models](https://console.groq.com/docs/models)，支持 `Tool/Function Calling` 并暴露 `OpenAI API` 兼容的 endpoint。
 
-Spring AI 通过重用现有的 [OpenAI](chat/openai-chat) 客户端与 [Groq](https://groq.com/) 集成。
+Spring AI 通过重用现有的 [OpenAI](../openai-chat) 客户端与 [Groq](https://groq.com/) 集成。
 为此，您需要获取 [Groq Api Key](https://console.groq.com/keys)，将 base-url 设置为 https://api.groq.com/openai 并选择提供的 [Groq models](https://console.groq.com/docs/models) 之一。
 
 ![spring-ai-groq-integration.jpg](/img/integration/spring-ai-groq-integration.jpg)
@@ -65,9 +65,9 @@ String model = System.getenv("GROQ_MODEL");
 ### Add Repositories and BOM
 
 Spring AI artifacts 发布在 Maven Central 和 Spring Snapshot 仓库中。
-请参阅 [Artifact Repositories](getting-started#artifact-repositories) 部分，将这些仓库添加到您的构建系统中。
+请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将这些仓库添加到您的构建系统中。
 
-为了帮助进行依赖管理，Spring AI 提供了一个 BOM (bill of materials)，以确保在整个项目中使用一致版本的 Spring AI。请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建系统中。
+为了帮助进行依赖管理，Spring AI 提供了一个 BOM (bill of materials)，以确保在整个项目中使用一致版本的 Spring AI。请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建系统中。
 
 ## Auto-configuration
 
@@ -91,7 +91,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 ### Chat Properties
 
@@ -309,7 +309,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 接下来，创建一个 `OpenAiChatModel` 并将其用于文本生成：
 

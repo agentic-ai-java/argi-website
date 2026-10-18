@@ -28,8 +28,8 @@ const config: Config = {
   // check links and markdown links
   // if the link is broken, it will throw an error during build
   // if the markdown link is broken, it will show a warning during build
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
 
   // Metadata for SEO
   headTags: [
@@ -458,7 +458,7 @@ const config: Config = {
             },
             {
               label: 'Spring AI',
-              to: '/ecosystem/spring-ai/reference/concepts',
+              to: '/integration/chatmodels/comparison',
             },
           ],
         },

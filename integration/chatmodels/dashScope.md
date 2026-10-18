@@ -49,9 +49,9 @@ String apiKey = System.getenv("AI_DASHSCOPE_API_KEY");
 ### Add Repositories and BOM
 
 Spring AI Alibaba artifacts 发布在 Maven Central 仓库中。
-请参阅 [Artifact Repositories](getting-started#artifact-repositories) 部分，将这些仓库添加到您的构建系统中。
+请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将这些仓库添加到您的构建系统中。
 
-为了帮助进行依赖管理，Spring AI Alibaba 提供了 BOM (bill of materials)，以确保在整个项目中使用一致版本的 Spring AI Alibaba。请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI Alibaba BOM 添加到您的构建系统中。
+为了帮助进行依赖管理，Spring AI Alibaba 提供了 BOM (bill of materials)，以确保在整个项目中使用一致版本的 Spring AI Alibaba。请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI Alibaba BOM 添加到您的构建系统中。
 
 ## Auto-configuration
 
@@ -65,7 +65,7 @@ Spring AI Alibaba 为 DashScope Chat Client 提供 Spring Boot auto-configuratio
 </dependency>
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI Alibaba BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI Alibaba BOM 添加到您的构建文件中。
 
 ### Chat Properties
 
@@ -185,7 +185,7 @@ ChatResponse response = chatModel.call(
 
 您可以将自定义 Java functions 注册到 `DashScopeChatModel`，并让 DashScope 模型智能地选择输出包含参数以调用一个或多个已注册 functions 的 JSON 对象。
 这是一种将 LLM 功能与外部工具和 APIs 连接的强大技术。
-了解更多关于 [Tool Calling](tools)。
+了解更多关于 [Tool Calling](../toolcalls/tool-calls)。
 
 ## Multimodal
 
@@ -346,7 +346,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI Alibaba BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI Alibaba BOM 添加到您的构建文件中。
 
 接下来，创建一个 `DashScopeChatModel` 并将其用于文本生成：
 

@@ -7,7 +7,7 @@
 * 正在运行的 Milvus 实例。以下选项可用：
 ** [Milvus Standalone](https://milvus.io/docs/install_standalone-docker.md)：Docker、Operator、Helm、DEB/RPM、Docker Compose。
 ** [Milvus Cluster](https://milvus.io/docs/install_cluster-milvusoperator.md)：Operator、Helm。
-* 如果需要，为 [EmbeddingModel](embeddings#available-implementations) 提供一个 API key，用于生成 `MilvusVectorStore` 存储的嵌入。
+* 如果需要，为 [EmbeddingModel](../embeddings#available-implementations) 提供一个 API key，用于生成 `MilvusVectorStore` 存储的嵌入。
 
 ## Dependencies
 
@@ -32,15 +32,15 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
-> 请参阅 [Artifact Repositories](getting-started#artifact-repositories) 部分，将 Maven Central 和/或 Snapshot Repositories 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> 请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将 Maven Central 和/或 Snapshot Repositories 添加到您的构建文件中。
 
 向量存储实现可以为您初始化所需的 schema，但您必须通过在适当的构造函数中指定 `initializeSchema` 布尔值或在 `application.properties` 文件中设置 `...initialize-schema=true` 来选择加入。
 
 > **注意：** 这是一个破坏性更改！在 Spring AI 的早期版本中，此 schema 初始化默认发生。
 
 Vector Store 还需要一个 `EmbeddingModel` 实例来计算文档的嵌入。
-您可以选择一个可用的 [EmbeddingModel 实现](embeddings#available-implementations)。
+您可以选择一个可用的 [EmbeddingModel 实现](../embeddings#available-implementations)。
 
 要连接和配置 `MilvusVectorStore`，您需要提供实例的访问详细信息。
 可以通过 Spring Boot 的 `application.yml` 提供简单配置：
@@ -95,7 +95,7 @@ List<Document> results = this.vectorStore.similaritySearch(SearchRequest.builder
 </dependency>
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 要在应用程序中配置 MilvusVectorStore，您可以使用以下设置：
 

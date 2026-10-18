@@ -18,7 +18,7 @@
 ** [Neo4j Desktop](https://neo4j.com/download/)
 ** [Neo4j Aura](https://neo4j.com/cloud/aura-free/)
 ** [Neo4j Server](https://neo4j.com/deployment-center/) 实例
-* 如果需要，为 [EmbeddingModel](embeddings#available-implementations) 提供一个 API key，用于生成 `Neo4jVectorStore` 存储的嵌入。
+* 如果需要，为 [EmbeddingModel](../embeddings#available-implementations) 提供一个 API key，用于生成 `Neo4jVectorStore` 存储的嵌入。
 
 ## Auto-configuration
 
@@ -44,17 +44,17 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 请查看 [Configuration Properties](#neo4jvector-properties) 列表以了解向量存储的默认值和配置选项。
 
-> **提示：** 请参阅 [Artifact Repositories](getting-started#artifact-repositories) 部分，将 Maven Central 和/或 Snapshot Repositories 添加到您的构建文件中。
+> **提示：** 请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将 Maven Central 和/或 Snapshot Repositories 添加到您的构建文件中。
 
 向量存储实现可以为您初始化所需的 schema，但您必须通过在适当的构造函数中指定 `initializeSchema` 布尔值或在 `application.properties` 文件中设置 `...initialize-schema=true` 来选择加入。
 
 > **注意：** 这是一个破坏性更改！在 Spring AI 的早期版本中，此 schema 初始化默认发生。
 
-此外，您需要一个配置的 `EmbeddingModel` bean。请参阅 [EmbeddingModel](embeddings#available-implementations) 部分了解更多信息。
+此外，您需要一个配置的 `EmbeddingModel` bean。请参阅 [EmbeddingModel](../embeddings#available-implementations) 部分了解更多信息。
 
 现在您可以在应用程序中自动装配 `Neo4jVectorStore` 作为向量存储。
 
@@ -141,7 +141,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 创建 Neo4j `Driver` bean。
 阅读 [Neo4j Documentation](https://neo4j.com/docs/java-manual/current/client-applications/) 以获取有关自定义驱动程序配置的更多深入信息。
@@ -180,7 +180,7 @@ public EmbeddingModel embeddingModel() {
 
 ## Metadata Filtering
 
-您可以将通用的、可移植的 [metadata filters](vectordbs#metadata-filters) 与 Neo4j 存储一起使用。
+您可以将通用的、可移植的 [metadata filters](https://docs.spring.io/spring-ai/reference/api/vectordbs.html#_metadata_filters) 与 Neo4j 存储一起使用。
 
 例如，您可以使用文本表达式语言：
 

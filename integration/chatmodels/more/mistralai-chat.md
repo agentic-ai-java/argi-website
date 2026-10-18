@@ -3,7 +3,7 @@
 Spring AI 支持来自 Mistral AI 的各种 AI 语言模型。您可以与 Mistral AI 语言模型交互，并基于 Mistral 模型创建多语言对话助手。
 
 > **提示：** Mistral AI 还提供 OpenAI API 兼容的 endpoint。
-> 请查看 [OpenAI API compatibility](_openai_api_compatibility) 部分，了解如何使用 [Spring AI OpenAI](chat/openai-chat) 集成与 Mistral endpoint 通信。
+> 请查看 [OpenAI API compatibility](https://docs.spring.io/spring-ai/reference/api/chat/openai-compatible-servers.html) 部分，了解如何使用 [Spring AI OpenAI](../openai-chat) 集成与 Mistral endpoint 通信。
 
 ## Prerequisites
 
@@ -44,9 +44,9 @@ String apiKey = System.getenv("MISTRALAI_API_KEY");
 ### Add Repositories and BOM
 
 Spring AI artifacts 发布在 Maven Central 和 Spring Snapshot 仓库中。
-请参阅 [Artifact Repositories](getting-started#artifact-repositories) 部分，将这些仓库添加到您的构建系统中。
+请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将这些仓库添加到您的构建系统中。
 
-为了帮助进行依赖管理，Spring AI 提供了一个 BOM (bill of materials)，以确保在整个项目中使用一致版本的 Spring AI。请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建系统中。
+为了帮助进行依赖管理，Spring AI 提供了一个 BOM (bill of materials)，以确保在整个项目中使用一致版本的 Spring AI。请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建系统中。
 
 ## Auto-configuration
 
@@ -72,7 +72,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 ### Chat Properties
 
@@ -164,7 +164,7 @@ ChatResponse response = chatModel.call(
 
 您可以将自定义 Java functions 注册到 `MistralAiChatModel`，并让 Mistral AI 模型智能地选择输出包含参数以调用一个或多个已注册 functions 的 JSON 对象。
 这是一种将 LLM 功能与外部工具和 APIs 连接的强大技术。
-了解更多关于 [Tool Calling](tools)。
+了解更多关于 [Tool Calling](../../toolcalls/tool-calls)。
 
 ## Multimodal
 
@@ -222,7 +222,7 @@ view of the fruit inside.
 
 ## OpenAI API Compatibility
 
-Mistral 与 OpenAI API 兼容，您可以使用 [Spring AI OpenAI](chat/openai-chat) 客户端与 Mistrial 通信。
+Mistral 与 OpenAI API 兼容，您可以使用 [Spring AI OpenAI](../openai-chat) 客户端与 Mistrial 通信。
 为此，您需要将 OpenAI base URL 配置为 Mistral AI 平台：`spring.ai.openai.chat.base-url=https://api.mistral.ai`，并选择 Mistral 模型：`spring.ai.openai.chat.options.model=mistral-small-latest` 并设置 Mistral AI API key：`spring.ai.openai.chat.api-key=<YOUR MISTRAL API KEY`。
 
 查看 [MistralWithOpenAiChatModelIT.java](https://github.com/spring-projects/spring-ai/blob/main/models/spring-ai-openai/src/test/java/org/springframework/ai/openai/chat/proxy/MistralWithOpenAiChatModelIT.java) 测试以了解通过 Spring AI OpenAI 使用 Mistral 的示例。
@@ -289,7 +289,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 接下来，创建一个 `MistralAiChatModel` 并将其用于文本生成：
 

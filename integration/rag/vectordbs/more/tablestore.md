@@ -11,7 +11,7 @@
 1. 一个 Tablestore 实例，并已启用向量检索功能
 2. Tablestore 访问凭证和配置信息
 3. 用于计算文档嵌入的 `EmbeddingModel` 实例。有多个选项可用：
-   - 如果需要，为 [EmbeddingModel](embeddings#available-implementations) 提供一个 API key，用于生成 `TablestoreVectorStore` 存储的嵌入。
+   - 如果需要，为 [EmbeddingModel](../../embeddings#available-implementations) 提供一个 API key，用于生成 `TablestoreVectorStore` 存储的嵌入。
 
 向量存储实现可以为您初始化所需的表结构，但您必须通过设置 `initializeTable=true` 来选择加入。
 
@@ -40,13 +40,13 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
-> **提示：** 请参阅 [Artifact Repositories](getting-started#artifact-repositories) 部分，将 Maven Central 和/或 Snapshot Repositories 添加到您的构建文件中。
+> **提示：** 请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将 Maven Central 和/或 Snapshot Repositories 添加到您的构建文件中。
 
 请查看 [configuration parameters](#tablestore-properties) 列表以了解向量存储的默认值和配置选项。
 
-此外，您需要一个配置的 `EmbeddingModel` bean。请参阅 [EmbeddingModel](embeddings#available-implementations) 部分了解更多信息。
+此外，您需要一个配置的 `EmbeddingModel` bean。请参阅 [EmbeddingModel](../../embeddings#available-implementations) 部分了解更多信息。
 
 现在您可以在应用程序中自动装配 `TablestoreVectorStore` 作为向量存储：
 
@@ -74,7 +74,7 @@ Tablestore 向量存储的配置主要通过 `KnowledgeStoreImpl` 进行，该�
 
 ## Metadata Filtering
 
-您可以将通用的、可移植的 [metadata filters](vectordbs#metadata-filters) 与 Tablestore 一起使用。
+您可以将通用的、可移植的 [metadata filters](https://docs.spring.io/spring-ai/reference/api/vectordbs.html#_metadata_filters) 与 Tablestore 一起使用。
 
 例如，您可以使用文本表达式语言：
 

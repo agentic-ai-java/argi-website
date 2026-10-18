@@ -7,7 +7,7 @@
 ## Prerequisites
 
 * Qdrant 实例：按照 Qdrant 文档中的[安装说明](https://qdrant.tech/documentation/guides/installation/)设置 Qdrant 实例。
-* 如果需要，为 [EmbeddingModel](embeddings#available-implementations) 提供一个 API key，用于生成 `QdrantVectorStore` 存储的嵌入。
+* 如果需要，为 [EmbeddingModel](../../embeddings#available-implementations) 提供一个 API key，用于生成 `QdrantVectorStore` 存储的嵌入。
 
 > **注意：** 建议提前使用适当的维度和配置[创建](https://qdrant.tech/documentation/concepts/collections/#create-a-collection) Qdrant collection。
 > 如果未创建 collection，`QdrantVectorStore` 将尝试使用 `Cosine` 相似性和配置的 `EmbeddingModel` 的维度创建一个。
@@ -36,17 +36,17 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 请查看 [configuration parameters](#qdrant-vectorstore-properties) 列表以了解向量存储的默认值和配置选项。
 
-> **提示：** 请参阅 [Artifact Repositories](getting-started#artifact-repositories) 部分，将 Maven Central 和/或 Snapshot Repositories 添加到您的构建文件中。
+> **提示：** 请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将 Maven Central 和/或 Snapshot Repositories 添加到您的构建文件中。
 
 向量存储实现可以为您初始化所需的 schema，但您必须通过在构建器中指定 `initializeSchema` 布尔值或在 `application.properties` 文件中设置 `...initialize-schema=true` 来选择加入。
 
 > **注意：** 这是一个破坏性更改！在 Spring AI 的早期版本中，此 schema 初始化默认发生。
 
-此外，您需要一个配置的 `EmbeddingModel` bean。请参阅 [EmbeddingModel](embeddings#available-implementations) 部分了解更多信息。
+此外，您需要一个配置的 `EmbeddingModel` bean。请参阅 [EmbeddingModel](../../embeddings#available-implementations) 部分了解更多信息。
 
 现在您可以在应用程序中自动装配 `QdrantVectorStore` 作为向量存储。
 
@@ -115,7 +115,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 创建 Qdrant 客户端 bean：
 
@@ -154,7 +154,7 @@ public EmbeddingModel embeddingModel() {
 
 ## Metadata Filtering
 
-您可以将通用的、可移植的 [metadata filters](vectordbs#metadata-filters) 与 Qdrant 存储一起使用。
+您可以将通用的、可移植的 [metadata filters](https://docs.spring.io/spring-ai/reference/api/vectordbs.html#_metadata_filters) 与 Qdrant 存储一起使用。
 
 例如，您可以使用文本表达式语言：
 

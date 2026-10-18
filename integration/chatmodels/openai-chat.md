@@ -46,9 +46,9 @@ String apiKey = System.getenv("OPENAI_API_KEY");
 ### Add Repositories and BOM
 
 Spring AI artifacts 发布在 Maven Central 和 Spring Snapshot 仓库中。
-请参阅 [Artifact Repositories](getting-started#artifact-repositories) 部分，将这些仓库添加到您的构建系统中。
+请参阅 [Artifact Repositories](https://docs.spring.io/spring-ai/reference/getting-started.html#artifact-repositories) 部分，将这些仓库添加到您的构建系统中。
 
-为了帮助进行依赖管理，Spring AI 提供了一个 BOM (bill of materials)，以确保在整个项目中使用一致版本的 Spring AI。请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建系统中。
+为了帮助进行依赖管理，Spring AI 提供了一个 BOM (bill of materials)，以确保在整个项目中使用一致版本的 Spring AI。请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建系统中。
 
 ## Auto-configuration
 
@@ -66,7 +66,7 @@ Spring AI 为 OpenAI Chat Client 提供 Spring Boot auto-configuration。
 </dependency>
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 ### Chat Properties
 
@@ -251,7 +251,7 @@ ChatResponse response = chatModel.call(
 
 您可以将自定义 Java functions 注册到 `OpenAiChatModel`，并让 OpenAI 模型智能地选择输出包含参数以调用一个或多个已注册 functions 的 JSON 对象。
 这是一种将 LLM 功能与外部工具和 APIs 连接的强大技术。
-了解更多关于 [Tool Calling](tools)。
+了解更多关于 [Tool Calling](../toolcalls/tool-calls)。
 
 ## Multimodal
 
@@ -366,7 +366,7 @@ byte[] waveAudio = response.getResult().getOutput().getMedia().get(0).getDataAsB
 ## Structured Outputs
 
 OpenAI 提供自定义 [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs) APIs，确保您的模型生成严格符合您提供的 `JSON Schema` 的响应。
-除了现有的 Spring AI 模型无关的 [Structured Output Converter](structured-output-converter) 之外，这些 APIs 还提供增强的控制和精度。
+除了现有的 Spring AI 模型无关的 [Structured Output Converter](https://docs.spring.io/spring-ai/reference/api/chat/structured-output-converter.html) 之外，这些 APIs 还提供增强的控制和精度。
 
 > **注意：** 目前，OpenAI 支持 [subset of the JSON Schema language](https://platform.openai.com/docs/guides/structured-outputs/supported-schemas) 格式。
 
@@ -415,7 +415,7 @@ ChatResponse response = this.openAiChatModel.call(this.prompt);
 
 #### Integrating with BeanOutputConverter Utilities
 
-您可以利用现有的 [BeanOutputConverter](structured-output-converter#_bean_output_converter) 工具自动从您的域对象生成 JSON Schema，然后将结构化响应转换为域特定的实例：
+您可以利用现有的 [BeanOutputConverter](https://docs.spring.io/spring-ai/reference/api/chat/structured-output-converter.html#_bean_output_converter) 工具自动从您的域对象生成 JSON Schema，然后将结构化响应转换为域特定的实例：
 
 ```java
 record MathReasoning(
@@ -526,7 +526,7 @@ dependencies {
 }
 ```
 
-> **提示：** 请参阅 [Dependency Management](getting-started#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
+> **提示：** 请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件中。
 
 接下来，创建一个 `OpenAiChatModel` 并将其用于文本生成：
 

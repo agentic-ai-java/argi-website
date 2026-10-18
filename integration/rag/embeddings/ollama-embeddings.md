@@ -60,7 +60,7 @@ dependencies {
 ```
 ======
 
-提示：请参阅 [Dependency Management](getting-started.adoc#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件。
+提示：请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件。
 Spring AI 工件发布在 Maven Central 和 Spring Snapshot 仓库中。
 请参阅 Repositories 部分，将这些仓库添加到您的构建系统。
 
@@ -289,10 +289,10 @@ dependencies {
 ```
 ======
 
-提示：请参阅 [Dependency Management](getting-started.adoc#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件。
+提示：请参阅 [Dependency Management](https://docs.spring.io/spring-ai/reference/getting-started.html#dependency-management) 部分，将 Spring AI BOM 添加到您的构建文件。
 
 注意：`spring-ai-ollama` 依赖项还提供对 `OllamaChatModel` 的访问。
-有关 `OllamaChatModel` 的更多信息，请参阅 link:../chat/ollama-chat.html[Ollama Chat Client] 部分。
+有关 `OllamaChatModel` 的更多信息，请参阅 [Ollama Chat Client](../../chatmodels/ollama-chat) 部分。
 
 接下来，创建一个 `OllamaEmbeddingModel` 实例，并使用专用的 `chroma/all-minilm-l6-v2-f32` embedding 模型计算两个输入文本的 embeddings：
 
