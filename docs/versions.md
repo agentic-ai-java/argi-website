@@ -1,137 +1,90 @@
 ---
 sidebar_position: 2
-title: 项目版本说明
-sidebar_label: 项目版本说明
-description: 了解 ARGI 核心框架与 Extensions 的版本口径、Spring Boot 与 Spring AI 版本对应关系。
-keywords: [版本, versions, releases, ARGI, Spring AI, Spring Boot, 依赖管理]
+title: Versions and source compatibility
+sidebar_label: Versions
+description: Match ARGI coordinates, source revisions and optional integration dependencies.
 ---
 
-# 项目版本说明
+# Versions and source compatibility
 
-本文说明 ARGI 核心框架与 Extensions 的版本口径、Spring Boot 与 Spring AI 适用版本，以及 Maven 依赖坐标。核心框架主要覆盖 `argi-agent-framework` 与 `argi-graph-core`；Extensions 覆盖 MCP、Nacos Prompt、Memory、RAG、Vector Store 与 Observation 等 starter。
+Reviewed on **2026-10-18** against Core main
+`5ec935b384d5379324ee60277ddcd3a6683a861f`.
+The current main development version is **`2.1.0-RC2-SNAPSHOT`**.
+A snapshot coordinate does not freeze its contents. Build the pinned revision locally
+before using APIs added after RC1; this is not a claim of publication to Maven Central.
 
-## 版本口径
-
-ARGI fork 自 Spring AI Alibaba。当前 `main` 分支统一使用 ARGI 的 Maven 坐标、Java package、配置前缀和框架公共类名。
-
-main 分支中的核心项目已经使用新的命名：
-
-- Maven `groupId`：`io.github.agentic-ai`
-- BOM：`argi-bom`
-- Agent Framework：`argi-agent-framework`
-- Graph Core：`argi-graph-core`
-- Java package：`io.github.agentic.ai.*`
-- 配置前缀：`argi.*`
-
-Extensions 项目同样使用新的 Maven 坐标：
-
-- Maven `groupId`：`io.github.agentic-ai`
-- BOM：`argi-extensions-bom`
-- 模块名：`argi-*`
-- Java package：`io.github.agentic.ai.*`
-- 配置前缀：`argi.*`
-
-## 版本对应表
-
-| 项目 | ARGI 版本 | Spring AI | Spring Boot | 说明 |
-| --- | --- | --- | --- | --- |
-| Core | `2.1.0-dev` | `2.0.1` | `4.1.1` | `main` 分支当前开发版本。事实来源：Core `pom.xml`。 |
-| Extensions | `2.1.0-dev` | `2.0.1` | `4.1.1` | `main` 分支当前开发版本。事实来源：Extensions `pom.xml`。 |
-| Core | `1.1.2.0` | `1.1.2` | `3.5.x` | fork 后补齐发布版本，主要迁移包名与项目坐标。 |
-| Core | `1.1.0.0` | `1.1.0` | `3.4.x` | fork 后补齐发布版本，主要迁移包名与项目坐标。 |
-| Core | `1.0.x` | `1.0.0` | `3.4.x` | 1.0 基础系列。 |
-
-## 依赖管理
-
-新项目建议通过 ARGI BOM 管理核心模块版本，并同时导入匹配的 Spring AI BOM。
-
-```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>io.github.agentic-ai</groupId>
-            <artifactId>argi-bom</artifactId>
-            <version>2.1.0-dev</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-bom</artifactId>
-            <version>2.0.1</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-
-<dependencies>
-    <dependency>
-        <groupId>io.github.agentic-ai</groupId>
-        <artifactId>argi-agent-framework</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>io.github.agentic-ai</groupId>
-        <artifactId>argi-graph-core</artifactId>
-    </dependency>
-</dependencies>
-```
-
-如果使用已发布的 `1.x` 或 `2.0.x` 迁移版本，请将 `argi-bom` 与 `spring-ai-bom` 的版本调整为上表对应版本。
-
-Extensions starter 使用 `argi-extensions-bom` 管理版本。`main` 分支当前与 Core 一样对应 Spring AI `2.0.1` 与 Spring Boot `4.1.1`。
-
-```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>io.github.agentic-ai</groupId>
-            <artifactId>argi-extensions-bom</artifactId>
-            <version>2.1.0-dev</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-
-<dependencies>
-    <dependency>
-        <groupId>io.github.agentic-ai</groupId>
-        <artifactId>argi-starter-mcp-distributed</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>io.github.agentic-ai</groupId>
-        <artifactId>argi-starter-nacos-prompt</artifactId>
-    </dependency>
-</dependencies>
-```
-
-## 核心模块
-
-| 模块 | artifactId | 说明 |
-| --- | --- | --- |
-| Agent Framework | `argi-agent-framework` | 提供 `ReactAgent`、工具调用、Hook、Interceptor、结构化输出和多智能体编排基础。 |
-| Graph Core | `argi-graph-core` | 提供 `StateGraph`、`CompiledGraph`、状态合并策略、检查点、恢复、流式输出和子图能力。 |
-
-## Extensions 模块
-
-main 分支已确认存在以下 starter：
-
-| 能力 | artifactId |
+| Contract | Value |
 | --- | --- |
-| A2A Nacos 注册与发现 | `argi-starter-a2a-nacos` |
-| AgentScope 集成 | `argi-starter-agentscope` |
-| Nacos Agent 动态配置 | `argi-starter-config-nacos` |
-| MCP 分布式发现 | `argi-starter-mcp-distributed` |
-| MCP 注册 | `argi-starter-mcp-registry` |
-| MCP 网关 | `argi-starter-mcp-gateway` |
-| MCP 路由 | `argi-starter-mcp-router` |
-| Nacos Prompt | `argi-starter-nacos-prompt` |
-| RAG | `argi-starter-rag` |
-| ARMS Observation | `argi-starter-arms-observation` |
-| Chat Memory | `argi-starter-model-chat-memory` |
-| Mem0 Chat Memory | `argi-starter-model-chat-memory-mem0` |
-| Chat Memory Repository | `argi-starter-model-chat-memory-repository-redis`、`argi-starter-model-chat-memory-repository-jdbc`、`argi-starter-model-chat-memory-repository-mongodb`、`argi-starter-model-chat-memory-repository-elasticsearch`、`argi-starter-model-chat-memory-repository-memcached`、`argi-starter-model-chat-memory-repository-tablestore` |
-| Vector Store | `argi-starter-vector-store-tair`、`argi-starter-vector-store-opensearch`、`argi-starter-vector-store-oceanbase`、`argi-starter-vector-store-tablestore`、`argi-starter-vector-store-analyticdb` |
+| Maven group | `io.github.agentic-ai-java` |
+| Core BOM | `argi-bom` |
+| Agent runtime | `argi-agent-framework` |
+| Graph runtime | `argi-graph-core` |
+| Neutral contracts | `argi-api` |
+| Java packages | `io.github.agentic.ai.*` |
+| Configuration prefix | `argi.*` |
+| Java baseline | 17 |
 
-除 Spring Boot Starter 外，Extensions 还提供 `argi-graph-persistence-*`、`argi-code-executor-docker`、`argi-graph-node-rag` 和 `argi-graph-node-network` 等可直接引入的库模块。
+The historical `io.github.agentic-ai` group and `2.1.0-dev` version do not identify
+this baseline. The `argi-api-base` directory publishes the artifact `argi-api`.
+
+## Core dependencies
+
+```xml
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.agentic-ai-java</groupId>
+      <artifactId>argi-bom</artifactId>
+      <version>2.1.0-RC2-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+<dependencies>
+  <dependency>
+    <groupId>io.github.agentic-ai-java</groupId>
+    <artifactId>argi-agent-framework</artifactId>
+  </dependency>
+</dependencies>
+```
+
+Use `argi-graph-core` instead for a graph-only application. The neutral runtime does
+not require every provider SDK or a Spring AI BOM. Add the selected optional adapter;
+see [current runtime contracts](./frameworks/agent-framework/runtime-contracts.md).
+
+The reviewed source uses Spring AI `2.0.1` in its Spring AI adapter and Spring Boot
+`4.1.1` for optional starters and Studio. These are integration dependencies, not
+the model contract of Core.
+
+## Extensions dependencies
+
+Extensions are versioned separately. Its reviewed source uses `2.1.0-RC2-SNAPSHOT`,
+while its default Core dependency still points to RC1. The example bootstrap sets
+`-Dargi.version=2.1.0-RC2-SNAPSHOT` when building matching Extensions source.
+
+Add the following entry to `dependencyManagement` alongside the Core BOM when using
+optional integrations:
+
+```xml
+<dependency>
+  <groupId>io.github.agentic-ai-java</groupId>
+  <artifactId>argi-extensions-bom</artifactId>
+  <version>2.1.0-RC2-SNAPSHOT</version>
+  <type>pom</type>
+  <scope>import</scope>
+</dependency>
+```
+
+Core does not import the Extensions BOM. Build compatible source revisions rather
+than assuming all equally named snapshots work together.
+
+## Example validation baseline
+
+The [example repository](https://github.com/agentic-ai-java/argi-example) records
+source pins, staged compatibility corrections and actual results in
+`docs/compatibility.md`. Its live-provider results from 2026-10-15 are historical
+evidence, not verification of the newly pinned source.
+
+New guides cover features already on the pinned main revision. Unmerged proposals
+are excluded. Runtime policies are opt-in; no application data migration is performed.

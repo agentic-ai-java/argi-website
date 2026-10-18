@@ -64,8 +64,9 @@ for (const relativePath of contentFiles) {
   }
 }
 
-requireText('docs/versions.md', '`main` 分支当前开发版本')
-requireText('docs/versions.md', '<groupId>io.github.agentic-ai</groupId>')
+requireText('docs/versions.md', 'current main development version')
+requireText('docs/versions.md', '<groupId>io.github.agentic-ai-java</groupId>')
+requireText('docs/versions.md', '2.1.0-RC2-SNAPSHOT')
 requireText('docs/versions.md', '<artifactId>argi-bom</artifactId>')
 requireText('docs/frameworks/agent-framework/quick-start.md', 'io.github.agentic.ai.graph.agent.ReactAgent')
 requireText('docs/frameworks/graph-core/quick-start.md', 'io.github.agentic.ai.graph.StateGraph')
@@ -73,6 +74,19 @@ requireText('src/pages/index.tsx', 'MemorySaver.builder().build()')
 requireText('src/pages/index.tsx', 'ModelCallLimitHook.builder()')
 requireText('project.config.ts', 'username: \'agentic-ai-java\'')
 requireText('project.config.ts', 'repoName: \'argi\'')
+
+const runtimeGuides = [
+  'frameworks/agent-framework/runtime-contracts',
+  'frameworks/agent-framework/tool-execution-policies',
+  'frameworks/agent-framework/context-provenance',
+  'frameworks/agent-framework/background-tasks',
+  'frameworks/agent-framework/batched-array-loops',
+  'frameworks/graph-core/versioned-recovery',
+]
+for (const guide of runtimeGuides) {
+  readSource(`docs/${guide}.md`)
+  requireText('sidebars.ts', `'${guide}'`)
+}
 
 if (failures.length > 0) {
   console.error('ARGI contract verification failed:')
