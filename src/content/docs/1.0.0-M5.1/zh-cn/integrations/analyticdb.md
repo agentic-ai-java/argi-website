@@ -1,4 +1,8 @@
-## spring-ai-alibaba-analyticdb-store 使用方法
+---
+title: spring-ai-alibaba-analyticdb-store 使用方法
+keywords: [Spring Ai Alibaba, VectorStore, Analyticdb]
+description: "Spring Ai Alibaba 适配 Analyticdb 向量数据库"
+---
 
 ### 1. 添加Maven依赖
 ```xml
