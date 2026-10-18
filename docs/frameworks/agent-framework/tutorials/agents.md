@@ -402,26 +402,40 @@ System.out.println(response.getText());`}
 
 #### 使用 outputSchema
 
-直接提供 JSON Schema 字符串进行更灵活的控制：
+使用 `BeanOutputConverter` 生成输出 Schema，提供类型安全和自动 schema 生成：
 
 <Code
   language="java"
   title="使用 outputSchema 自定义输出格式" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/framework/tutorials/AgentsExample.java"
 >
-{`String customSchema = """
-    请严格按照以下JSON格式返回结果：
-    {
-        "summary": "内容摘要",
-        "keywords": ["关键词1", "关键词2", "关键词3"],
-        "sentiment": "情感倾向（正面/负面/中性）",
-        "confidence": 0.95
-    }
-    """;
+{`import org.springframework.ai.converter.BeanOutputConverter;
+
+// 定义输出类型
+public static class TextAnalysisResult {
+    private String summary;
+    private List<String> keywords;
+    private String sentiment;
+    private Double confidence;
+
+    // Getters and Setters
+    public String getSummary() { return summary; }
+    public void setSummary(String summary) { this.summary = summary; }
+    public List<String> getKeywords() { return keywords; }
+    public void setKeywords(List<String> keywords) { this.keywords = keywords; }
+    public String getSentiment() { return sentiment; }
+    public void setSentiment(String sentiment) { this.sentiment = sentiment; }
+    public Double getConfidence() { return confidence; }
+    public void setConfidence(Double confidence) { this.confidence = confidence; }
+}
+
+// 使用 BeanOutputConverter 生成 outputSchema
+BeanOutputConverter<TextAnalysisResult> outputConverter = new BeanOutputConverter<>(TextAnalysisResult.class);
+String format = outputConverter.getFormat();
 
 ReactAgent agent = ReactAgent.builder()
     .name("analysis_agent")
     .model(chatModel)
-    .outputSchema(customSchema)
+    .outputSchema(format)
     .saver(new MemorySaver())
     .build();
 
@@ -429,8 +443,8 @@ AssistantMessage response = agent.call("分析这段文本：春天来了，万�
 </Code>
 
 **选择建议**：
-- `outputType`：类型安全，适合结构固定的场景
-- `outputSchema`：灵活性高，适合动态或复杂的输出格式
+- `outputType`：类型安全，适合结构固定的场景（**推荐**）
+- `outputSchema`：使用 `BeanOutputConverter` 生成时提供类型安全，手动提供字符串时灵活性高，适合动态或复杂的输出格式
 
 ### Memory（记忆）
 
@@ -473,6 +487,9 @@ Hooks 允许在 Agent 执行的关键点插入自定义逻辑。
   title="Hook 使用示例" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/framework/tutorials/AgentsExample.java"
 >
 {`import com.alibaba.cloud.ai.graph.agent.hook.*;
+import com.alibaba.cloud.ai.graph.agent.hook.messages.MessagesModelHook;
+import com.alibaba.cloud.ai.graph.agent.hook.messages.AgentCommand;
+import com.alibaba.cloud.ai.graph.agent.hook.messages.UpdatePolicy;
 
 // 1. AgentHook - 在 Agent 开始/结束时执行，每次Agent调用只会运行一次
 @HookPositions({HookPosition.BEFORE_AGENT, HookPosition.AFTER_AGENT})
@@ -493,8 +510,9 @@ public class LoggingHook extends AgentHook {
     }
 }
 
-// 2. ModelHook - 在模型调用前后执行（例如：消息修剪），区别于AgentHook，ModelHook在一次agent调用中可能会调用多次，也就是每次 reasoning-acting 迭代都会执行
-public class MessageTrimmingHook extends ModelHook {
+// 2. MessagesModelHook - 在模型调用前后执行（例如：消息修剪），专门用于操作消息列表，使用更简单，更推荐。区别于AgentHook，MessagesModelHook在一次agent调用中可能会调用多次，也就是每次 reasoning-acting 迭代都会执行
+@HookPositions({HookPosition.BEFORE_MODEL})
+public class MessageTrimmingHook extends MessagesModelHook {
     private static final int MAX_MESSAGES = 10;
 
     @Override
@@ -503,26 +521,17 @@ public class MessageTrimmingHook extends ModelHook {
     }
 
     @Override
-    public HookPosition[] getHookPositions() {
-        return new HookPosition[]{HookPosition.BEFORE_MODEL};
-    }
-
-    @Override
-    public CompletableFuture<Map<String, Object>> beforeModel(OverAllState state, RunnableConfig config) {
-        Optional<Object> messagesOpt = state.value("messages");
-        if (messagesOpt.isPresent()) {
-            List<Message> messages = (List<Message>) messagesOpt.get();
-            if (messages.size() > MAX_MESSAGES) {
-                return CompletableFuture.completedFuture(Map.of("messages",
-                    messages.subList(messages.size() - MAX_MESSAGES, messages.size())));
-            }
+    public AgentCommand beforeModel(List<Message> previousMessages, RunnableConfig config) {
+        if (previousMessages.size() > MAX_MESSAGES) {
+            // 只保留最后 MAX_MESSAGES 条消息
+            List<Message> trimmedMessages = previousMessages.subList(
+                previousMessages.size() - MAX_MESSAGES, 
+                previousMessages.size()
+            );
+            return new AgentCommand(trimmedMessages, UpdatePolicy.REPLACE);
         }
-        return CompletableFuture.completedFuture(Map.of());
-    }
-
-    @Override
-    public CompletableFuture<Map<String, Object>> afterModel(OverAllState state, RunnableConfig config) {
-        return CompletableFuture.completedFuture(Map.of());
+        // 消息数量未超过限制，直接返回原消息列表
+        return new AgentCommand(previousMessages);
     }
 }`}
 </Code>
@@ -549,7 +558,7 @@ public class GuardrailInterceptor extends ModelInterceptor {
     public ModelResponse interceptModel(ModelRequest request, ModelCallHandler handler) {
         // 前置：检查输入
         if (containsSensitiveContent(request.getMessages())) {
-            return ModelResponse.blocked("检测到不适当的内容");
+        	return ModelResponse.of(AssistantMessage.builder().content("检测到不适当的内容").build());
         }
 
         // 执行调用
@@ -640,13 +649,12 @@ public class CustomStopConditionHook extends ModelHook {
 
         // 找到答案或错误过多时停止
         if (answerFound || errorCount > 3) {
-            List<Message> messages = new ArrayList<>(
-                (List<Message>) state.value("messages").orElse(new ArrayList<>())
-            );
+            List<Message> messages = new ArrayList<>();
             messages.add(new AssistantMessage(
                 answerFound ? "已找到答案，Agent 执行完成。"
                             : "错误次数过多 (" + errorCount + ")，Agent 执行终止。"
             ));
+            // the messages will be appended to the original message list context.
             return CompletableFuture.completedFuture(Map.of("messages", messages));
         }
 
@@ -666,19 +674,137 @@ ReactAgent agent = ReactAgent.builder()
 
 #### 流式输出
 
+在 Agent 场景中，流式输出的核心是处理 `StreamingOutput` 类型。无论是模型推理、工具调用还是 Hook 节点，输出都统一为这个类型。
+
+**使用 OutputType 区分输出类型**：
+
+通过 `OutputType` 枚举可以区分不同节点的输出，以及判断是流式增量内容还是完成输出：
+
+| OutputType | 说明 |
+|------------|------|
+| `AGENT_MODEL_STREAMING` | 模型推理的流式增量内容 |
+| `AGENT_MODEL_FINISHED` | 模型推理完成，可获取全量内容 |
+| `AGENT_TOOL_STREAMING` | 工具调用的流式增量内容 |
+| `AGENT_TOOL_FINISHED` | 工具调用完成 |
+| `AGENT_HOOK_STREAMING` | Hook 节点的流式增量内容 |
+| `AGENT_HOOK_FINISHED` | Hook 节点完成 |
+
+:::tip
+- 对于 Hook 等通常非流式的节点，直接使用 `AGENT_HOOK_FINISHED` 读取内容即可
+- 并非所有节点输出都有意义，尤其是 Hook 节点可能产生无效输出，建议通过 `OutputType` 进行过滤
+:::
+
 <Code
   language="java"
   title="流式输出示例" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/framework/tutorials/AgentsExample.java"
 >
 {`import reactor.core.publisher.Flux;
+import com.alibaba.cloud.ai.graph.NodeOutput;
+import com.alibaba.cloud.ai.graph.streaming.StreamingOutput;
+import com.alibaba.cloud.ai.graph.streaming.OutputType;
 
 Flux<NodeOutput> stream = agent.stream("复杂任务");
 stream.subscribe(
-    response -> System.out.println("进度: " + response),
+    output -> {
+        // 检查是否为 StreamingOutput 类型
+        if (output instanceof StreamingOutput streamingOutput) {
+            OutputType type = streamingOutput.getOutputType();
+            
+            // 处理模型推理的流式输出
+            if (type == OutputType.AGENT_MODEL_STREAMING) {
+                // 流式增量内容，逐步显示
+                System.out.print(streamingOutput.message().getText());
+            } else if (type == OutputType.AGENT_MODEL_FINISHED) {
+                // 模型推理完成，可获取完整响应
+                System.out.println("\\n模型输出完成");
+            }
+            
+            // 处理工具调用完成（目前不支持 STREAMING）
+            if (type == OutputType.AGENT_TOOL_FINISHED) {
+                System.out.println("工具调用完成: " + output.node());
+            }
+            
+            // 对于 Hook 节点，通常只关注完成事件（如果Hook没有有效输出可以忽略）
+            if (type == OutputType.AGENT_HOOK_FINISHED) {
+                System.out.println("Hook 执行完成: " + output.node());
+            }
+        }
+    },
     error -> System.err.println("错误: " + error),
-    () -> System.out.println("完成")
+    () -> System.out.println("Agent 执行完成")
 );`}
 </Code>
+
+#### 消息类型识别
+
+`StreamingOutput.message()` 返回的消息有多种类型，需要结合 `OutputType` 和消息元数据进行区分处理：
+
+| OutputType | 消息类型 | 判断条件 | 说明 |
+|------------|----------|----------|------|
+| `AGENT_MODEL_STREAMING` / `AGENT_MODEL_FINISHED` | 模型普通响应 | `AssistantMessage` 且 `metadata.reasoningContent` 为空 | 模型的实际回复内容，通过 `getText()` 获取 |
+| `AGENT_MODEL_STREAMING` / `AGENT_MODEL_FINISHED` | 模型 Thinking | `AssistantMessage` 且 `metadata.reasoningContent` 不为空 | 模型的思考过程（如 DeepSeek 等支持 Thinking 的模型） |
+| `AGENT_MODEL_FINISHED` | 工具调用请求 | `AssistantMessage` 且 `hasToolCalls()` 为 `true` | 模型请求调用工具，包含工具名称和参数 |
+| `AGENT_TOOL_FINISHED` | 工具响应结果 | `ToolResponseMessage` | 工具执行后的返回结果 |
+
+<Code
+  language="java"
+  title="消息类型识别示例" sourceUrl="https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/framework/tutorials/AgentsExample.java"
+>
+{`import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.messages.ToolResponseMessage;
+
+// 结合 OutputType 和消息类型进行处理
+if (output instanceof StreamingOutput streamingOutput) {
+    OutputType type = streamingOutput.getOutputType();
+    Message message = streamingOutput.message();
+    
+    // 处理模型流式输出
+    if (type == OutputType.AGENT_MODEL_STREAMING) {
+        if (message instanceof AssistantMessage assistantMessage) {
+            // 检查是否为 Thinking 消息
+            Object reasoningContent = assistantMessage.getMetadata().get("reasoningContent");
+            if (reasoningContent != null && !reasoningContent.toString().isEmpty()) {
+                System.out.print("[Thinking] " + reasoningContent);
+            } else {
+                // 普通模型响应（增量内容）
+                System.out.print(assistantMessage.getText());
+            }
+        }
+    }
+    // 处理模型输出完成
+    else if (type == OutputType.AGENT_MODEL_FINISHED) {
+        if (message instanceof AssistantMessage assistantMessage) {
+            if (assistantMessage.hasToolCalls()) {
+                // 工具调用请求
+                assistantMessage.getToolCalls().forEach(toolCall -> {
+                    System.out.println("[Tool Call] " + toolCall.name() + ": " + toolCall.arguments());
+                });
+            } else {
+                // 模型完整响应
+                System.out.println("\\n[Model Finished]");
+            }
+        }
+    }
+    // 处理工具执行结果
+    else if (type == OutputType.AGENT_TOOL_FINISHED) {
+        if (message instanceof ToolResponseMessage toolResponse) {
+            toolResponse.getResponses().forEach(response -> {
+                System.out.println("[Tool Result] " + response.name() + ": " + response.responseData());
+            });
+        }
+    }
+}`}
+</Code>
+
+:::tip
+- **先判断 OutputType**：通过 `OutputType` 先确定是模型输出、工具输出还是 Hook 输出，再处理具体消息
+- **Thinking 消息**：部分模型（如 DeepSeek-R1）支持输出思考过程，通过 `metadata.reasoningContent` 获取
+- **工具调用**：工具调用请求通常在 `AGENT_MODEL_FINISHED` 阶段出现，此时 `hasToolCalls()` 返回 `true`
+- **流式 vs 完成**：`STREAMING` 阶段内容是增量的，`FINISHED` 阶段可获取完整消息或执行结果
+:::
+
+更多关于 Graph 底层流式输出机制，请参考 [Graph 流式输出](/docs/frameworks/graph-core/core/streaming)。
 
 ## 下一步
 

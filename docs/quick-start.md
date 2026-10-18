@@ -26,14 +26,14 @@ keywords: [ReactAgent, 快速开始, Quick Start, Spring AI Alibaba, Agent Frame
   <dependency>
     <groupId>com.alibaba.cloud.ai</groupId>
     <artifactId>spring-ai-alibaba-agent-framework</artifactId>
-    <version>1.1.0.0-M5</version>
+    <version>1.1.0.0-RC2</version>
   </dependency>
 
-  <!-- DashScope ChatModel 支持（如果使用其他模型，请参考文档选择对应的 starter） -->
+  <!-- DashScope ChatModel 支持（如果使用其他模型，请跳转 Spring AI 文档选择对应的 starter） -->
   <dependency>
     <groupId>com.alibaba.cloud.ai</groupId>
     <artifactId>spring-ai-alibaba-starter-dashscope</artifactId>
-    <version>1.1.0.0-M5</version>
+    <version>1.1.0.0-RC2</version>
   </dependency>
 </dependencies>
 ```
@@ -59,7 +59,7 @@ spring:
 **获取 API Key**：
 
 * DashScope（阿里云百炼）：访问 [https://bailian.console.aliyun.com/?apiKey=1&tab=api#/api](https://bailian.console.aliyun.com/?apiKey=1&tab=api#/api)
-* 其他模型提供商请参考对应的文档
+* 其他模型提供商请 [参考文档](../integration/chatmodels/openai-chat)
 
 ## 构建一个基础 Agent
 
@@ -166,7 +166,17 @@ public class UserLocationTool implements BiFunction<String, ToolContext, String>
         @ToolParam(description = "User query") String query,
         ToolContext toolContext) {
         // 从上下文中获取用户信息
-        String userId = (String) toolContext.getContext().get("user_id");
+        String userId = "";
+        if (toolContext != null && toolContext.getContext() != null) {
+			RunnableConfig runnableConfig = (RunnableConfig) toolContext.getContext().get(AGENT_CONFIG_CONTEXT_KEY);
+			Optional<Object> userIdObjOptional = runnableConfig.metadata("user_id");
+			if (userIdObjOptional.isPresent()) {
+				userId = (String) userIdObjOptional.get();
+			}
+		}
+		if (userId == null) {
+			userId = "1";
+		}
         return "1".equals(userId) ? "Florida" : "San Francisco";
     }
 }
@@ -219,14 +229,14 @@ ChatModel chatModel = DashScopeChatModel.builder()
 <dependency>
  <groupId>com.alibaba.cloud.ai</groupId>
  <artifactId>spring-ai-alibaba-starter-dashscope</artifactId>
- <version>1.1.0.0-M5</version>
+ <version>1.1.0.0-RC2</version>
 </dependency>
 
 <!-- OpenAI-->
 <dependency>
  <groupId>org.springframework.ai</groupId>
  <artifactId>spring-ai-starter-model-openai</artifactId>
- <version>1.1.0-M3</version>
+ <version>1.1.0</version>
 </dependency>
 ```
 
@@ -380,13 +390,20 @@ if (result.isPresent()) {
 
 ### 配置最大迭代次数
 
-为防止无限循环，可以配置最大迭代次数：
+为防止无限循环，可以使用 `ModelCallLimitHook` 来限制模型调用次数：
 
 ```java
+import com.alibaba.cloud.ai.graph.agent.hook.modelcalllimit.ModelCallLimitHook;
+
+ModelCallLimitHook hook = ModelCallLimitHook.builder()
+    .runLimit(5)  // 限制最多调用 5 次
+    .exitBehavior(ModelCallLimitHook.ExitBehavior.ERROR)  // 超出限制时抛出异常
+    .build();
+
 ReactAgent agent = ReactAgent.builder()
     .name("my_agent")
     .model(chatModel)
-    .maxIterations(5)  // 默认为 10
+    .hooks(hook)
     .saver(new MemorySaver())
     .build();
 ```

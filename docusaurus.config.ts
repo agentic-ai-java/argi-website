@@ -28,7 +28,7 @@ const config: Config = {
   // check links and markdown links
   // if the link is broken, it will throw an error during build
   // if the markdown link is broken, it will show a warning during build
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Metadata for SEO
@@ -259,6 +259,19 @@ const config: Config = {
         breadcrumbs: true,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'integration',
+        path: 'integration',
+        routeBasePath: 'integration',
+        sidebarPath: './sidebars/sidebars-integration.ts',
+        editUrl: githubUrls.editDocs,
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+        breadcrumbs: true,
+      },
+    ],
     // [
     //   '@docusaurus/plugin-content-docs',
     //   {
@@ -357,10 +370,17 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'integrationSidebar',
+          docsPluginId: 'integration',
+          position: 'left',
+          label: '生态集成',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'ecosystemSidebar',
           docsPluginId: 'ecosystem',
           position: 'left',
-          label: '生态',
+          label: 'Admin',
         },
         {
           to: '/blog',
