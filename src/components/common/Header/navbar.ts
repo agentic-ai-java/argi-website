@@ -25,7 +25,7 @@ export default [
     route: "/blog/",
   },
   {
-    label: "插件生态",
+    label: "示例与插件",
     translations: {
       en: "Tools",
     },
@@ -35,14 +35,14 @@ export default [
     activePath: ["/cloud"],
   },
   {
-    label: "脚手架",
+    label: "MCP Directory",
     translations: {
-      en: "Initializer",
+      en: "MCP Marketplace",
     },
     trigger: "click",
     target: "_self",
-    route: "/initializer/",
-    activePath: ["/initializer"],
+    route: "/mcp/",
+    activePath: ["/mcp"],
   },
   {
     label: "社区",
