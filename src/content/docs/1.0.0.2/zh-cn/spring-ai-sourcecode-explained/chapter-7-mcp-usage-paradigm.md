@@ -4,21 +4,21 @@ keywords: [Spring AI, Spring AI Alibaba, 源码解读]
 description: "本章介绍了 MCP（Model Context Protocol），一个旨在标准化 AI 模型与外部工具及资源交互方式的协议。通过一个基于 WebFlux 的客户端-服务器（Client-Server） 示例，展示了其在 Spring AI 中的应用。对于 MCP 服务器端，展示了 `spring-ai-starter-mcp-server-webflux` 依赖、`application.yml` 中的服务器配置（包括服务器名称、版本、类型、指令、SSE 端点及声明的能力如工具、资源调用等），以及如何通过一个带有 `@Tool` 注解的 `TimeService` 来暴露工具功能，并在主应用类 `WebfluxServerApplication` 中注册为 `ToolCallbackProvider`。对于 MCP 客户端，展示了 `spring-ai-starter-mcp-client-webflux` 依赖、客户端 `application.yml` 配置（包括启用标志、客户端名称、版本、请求超时、类型及指向 MCP 服务器的 SSE 连接），以及一个 `WebfluxClientApplication` 示例，该示例通过 `ChatClient` 与 MCP 服务器通信，利用服务器提供的工具来响应用户输入。章节后续计划进行 MCP 的源码解读。 "
 ---
 
-本章是MCP快速上手 + 源码解读（MCP、SpringAI下的MCP）
+- 作者：影子, Spring AI Alibaba Committer
+- 本文档基于 Spring AI 1.0.0 版本，Spring AI Alibaba 1.0.0.2 版本
+- 本章是MCP快速上手 + 源码解读（MCP、SpringAI下的MCP）
 
-# 第七章：MCP 使用范式
+## 第七章：MCP 快速上手
 
-> [!TIP]
-> MCP 官方文档：[https://modelcontextprotocol.io/introduction](https://modelcontextprotocol.io/introduction)
+> MCP 官方文档：[https://modelcontextprotocol.io/introduction](https://modelcontextprotocol.io/introduction),
 > MCP（Model Context Protocol）是一种标准化协议，使 AI 模型能够以结构化方式与外部工具和资源交互
+> 以下是实现时间工具的 MCP 典型案例：webflux,实战代码可见：https://github.com/GTyingzi/spring-ai-tutorial 下的mcp
 
-以下是实现时间工具的 MCP 典型案例：webflux
+### webflux
 
-## webflux
+#### server
 
-### server
-
-#### pom.xml
+##### pom.xml
 
 ```xml
 <dependencies>
@@ -29,7 +29,7 @@ description: "本章介绍了 MCP（Model Context Protocol），一个旨在标�
 </dependencies>
 ```
 
-#### application.yml
+##### application.yml
 
 ```yml
 server:
@@ -53,7 +53,7 @@ spring:
           completion: true
 ```
 
-#### TimeService
+##### TimeService
 
 ```java
 package com.spring.ai.tutorial.mcp.server.service;
@@ -99,7 +99,7 @@ public class TimeService {
 }
 ```
 
-#### WebfluxServerApplication
+##### WebfluxServerApplication
 
 ```java
 package com.spring.ai.tutorial.mcp.server;
@@ -125,9 +125,9 @@ public class WebfluxServerApplication {
 }
 ```
 
-### client
+#### client
 
-#### pom.xml
+##### pom.xml
 
 ```xml
 <dependencies>
@@ -150,7 +150,7 @@ public class WebfluxServerApplication {
 </dependencies>
 ```
 
-#### application.yml
+##### application.yml
 
 ```yaml
 server:
@@ -181,7 +181,7 @@ spring:
               url: http://localhost:19000
 ```
 
-#### WebfluxClientApplication
+##### WebfluxClientApplication
 
 ```java
 package com.spring.ai.tutorial.mcp.client;
@@ -228,18 +228,15 @@ public class WebfluxClientApplication {
 }
 ```
 
-#### 效果
+##### 效果
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/AlkVb6xPSombAmxM5MDcBOJon2b.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/AlkVb6xPSombAmxM5MDcBOJon2b.png)
 
+## MCP 源码解读
 
-
-# MCP 源码解读
-
-> [!TIP]
 > 本文档是 Java 实现 MCP 的 0.10.0 版本
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/mcp-源码解读.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/mcp-源码解读.png)
 
 ### pom.xml
 
@@ -251,9 +248,10 @@ public class WebfluxClientApplication {
 </dependency>
 ```
 
-### MCP 各类说明
+#### MCP 各类说明
 
-### McpTransport
+
+#### McpTransport
 
 该接口定义了一个异步传输层，用于实现模型的上下文协议的双向通信，设计目标是基于 JSON-RPC 格式的异步消息交换，并且与协议无关，可通过不同的传输机制（入 WebSocket、HTTP 或自定义协议）实现
 
@@ -6639,7 +6637,7 @@ public final class McpSchema {
 
 
 
-# SpringAI 下的 MCP
+## SpringAI 下的 MCP
 
 ### pom.xml 文件
 
@@ -6664,9 +6662,7 @@ public final class McpSchema {
 
 ### SpringAI 下 MCP 各类的说明
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/SpringAI下的MCP.png)
-
-
+![](/img/user/ai/spring-ai-explained-sourcecode/SpringAI下的MCP.png)
 
 ### server 自动注入
 

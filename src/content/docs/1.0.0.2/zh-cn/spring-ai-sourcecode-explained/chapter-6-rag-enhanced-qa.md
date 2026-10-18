@@ -4,16 +4,15 @@ keywords: [Spring AI, Spring AI Alibaba, 源码解读]
 description: "本章主要介绍 RAG（Retrieval-Augmented Generation，检索增强生成）技术，该技术通过从外部知识库检索相关信息，并将其融入提供给大型语言模型（LLM）的提示（Prompt）中，从而显著增强模型在处理知识密集型任务时的表现和回答的准确性。"
 ---
 
-本章包含快速上手（Rag简单对比、模块化、ETL）+ 源码解读（模块化、ETL）
+- 作者：影子, Spring AI Alibaba Committer
+- 本文档基于 Spring AI 1.0.0 版本，Spring AI Alibaba 1.0.0.2 版本
+- 本章包含快速上手（Rag简单对比、模块化、ETL）+ 源码解读（模块化、ETL）
 
-# Rag 快速上手
+## Rag 快速上手
 
-> [!TIP]
-> RAG（Retrieval-Augmented Generation，检索增强生成） ，该技术通过从外部知识库中检索相关信息，并将其作为提示（Prompt）输入给大型语言模型（LLMs），以**增强模型处理知识密集型任务的能力**
+> RAG（Retrieval-Augmented Generation，检索增强生成） ，该技术通过从外部知识库中检索相关信息，并将其作为提示（Prompt）输入给大型语言模型（LLMs），以增强模型处理知识密集型任务的能力。以下结合内存向量数据库实现 RAG 的典型案例：Pre-Retrieval、Retrieval、Generation 等场景，实战代码可见：https://github.com/GTyingzi/spring-ai-tutorial 下的rag目录
 
-以下结合内存向量数据库实现 RAG 的典型案例：Pre-Retrieval、Retrieval、Generation 等场景
-
-## pom.xml
+### pom.xml
 
 ```xml
 <dependencies>
@@ -40,7 +39,7 @@ description: "本章主要介绍 RAG（Retrieval-Augmented Generation，检索�
     </dependencies>
 ```
 
-## application.yml
+### application.yml
 
 ```yaml
 server:
@@ -62,9 +61,9 @@ spring:
           model: text-embedding-v1
 ```
 
-## RAG 效果简单对比
+### RAG 效果简单对比
 
-### RagSimpleController
+#### RagSimpleController
 
 ```java
 package com.spring.ai.tutorial.rag.controller;
@@ -139,17 +138,17 @@ public class RagSimpleController {
 
 直接询问，并不知道“影子”是谁
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/Npo0b5sLaorTEzxzRFTczLo2nWb.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/Npo0b5sLaorTEzxzRFTczLo2nWb.png)
 
 在 RAG 增强下，得知了“影子”
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/APyjbCBm2o9qmixFY8dcBpKYnEg.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/APyjbCBm2o9qmixFY8dcBpKYnEg.png)
 
-## RAG 模块化案例
+### RAG 模块化案例
 
-RAG 可以由一组模块化组件构成 [Rag 模块化源码篇](https://ik3te1knhq.feishu.cn/wiki/D2jxwN6btiXkyOkKHDTcLpWtnJh)，结构化的工作流程保障 AI 模型生成质量
+RAG 可以由一组模块化组件构成 《Rag 模块化》，结构化的工作流程保障 AI 模型生成质量
 
-### DocumentSelectFirst
+#### DocumentSelectFirst
 
 ```java
 package com.spring.ai.tutorial.rag.service;
@@ -172,7 +171,7 @@ public class DocumentSelectFirst implements DocumentPostProcessor {
 
 实现 DocumentPostProcessor 接口，从文档中挑选第一个
 
-### RagModuleController
+#### RagModuleController
 
 ```java
 package com.spring.ai.tutorial.rag.controller;
@@ -305,38 +304,37 @@ Generation
 
 首先，进来的 originalQuery 的原始文本为“你好，请告诉我影子这个人的身份信息”
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/KAXabu18SoUDnvxLQmYcfnRAnvh.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/KAXabu18SoUDnvxLQmYcfnRAnvh.png)
 
 经过 TranslationQueryTransformer 翻译为英文
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/N0FTbkho8ozPNPxqAr4cKHpQnWb.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/N0FTbkho8ozPNPxqAr4cKHpQnWb.png)
 
 默认是增加 3 个，且保留原来的 1 个
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/Dhk1bOFozoLh1nx8O8XcBBMxnjf.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/Dhk1bOFozoLh1nx8O8XcBBMxnjf.png)
 
 从向量存储中检索文档
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/KjlsbekV9ocAv2xqgL7chb6tnib.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/KjlsbekV9ocAv2xqgL7chb6tnib.png)
 
 将检索到的文档进行拼接
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/QqOxbKnAsoUBABxHUkkcwotEn1f.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/QqOxbKnAsoUBABxHUkkcwotEn1f.png)
 
 选择第一个
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/XsSibkFouoCa6zx5UC8cD0xIn0c.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/XsSibkFouoCa6zx5UC8cD0xIn0c.png)
 
 增加的上下文信息
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/M1C7b3UBpoVd9dxDoyqc3EtNnJc.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/M1C7b3UBpoVd9dxDoyqc3EtNnJc.png)
 
-# RAG 的 ETL Pipeline 快速上手
+## RAG 的 ETL Pipeline 快速上手
 
-> [!TIP]
-> 提取（Extract）、转换（Transform）和加载（Load）框架是[第六章：Rag 增强问答质量](https://ik3te1knhq.feishu.cn/wiki/JPs3wA6mQiOR97kO98PcjOYsnzf)中数据处理的链路，将原始数据源导入到向量化存储的流程，确保数据处于最佳格式，以便 AI 模型进行检索
+> 提取（Extract）、转换（Transform）和加载（Load）框架是 Rag 中数据处理的链路，将原始数据源导入到向量化存储的流程，确保数据处于最佳格式，以便 AI 模型进行检索。实战代码可见：https://github.com/GTyingzi/spring-ai-tutorial 下的rag/rag-etl-pipeline
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/QSmXbeYKHotZS4xzsskcHaQ8ntg.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/QSmXbeYKHotZS4xzsskcHaQ8ntg.png)
 
 ### pom 文件
 
@@ -428,7 +426,7 @@ public class Constant {
 }
 ```
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/YFNubwl4Posj9Qxy181ch0qunhf.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/YFNubwl4Posj9Qxy181ch0qunhf.png)
 
 #### ReaderController
 
@@ -521,31 +519,31 @@ public class ReaderController {
 
 读取文本文件
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/BuynbEf4CoEgrpxZsDQcJFGanPg.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/BuynbEf4CoEgrpxZsDQcJFGanPg.png)
 
 读取 json 文件
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/Cdbzbt9NxoODIIxqMDCceoJYnbd.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/Cdbzbt9NxoODIIxqMDCceoJYnbd.png)
 
 读取 pdf 文件
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/GXXnbbB5voLcAWxRzmwcywwZnng.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/GXXnbbB5voLcAWxRzmwcywwZnng.png)
 
 读取带目录的 pdf 文件
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/I36Mb8pTHovOonx5s6DcpP0Encb.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/I36Mb8pTHovOonx5s6DcpP0Encb.png)
 
 读取 markdown 文件
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/OkRmbADN6oWkAOxj6o4cvTSpnBe.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/OkRmbADN6oWkAOxj6o4cvTSpnBe.png)
 
 读取 html 文件
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/Kl3jbSDOWoZuTLxB6ckcPTGrnUg.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/Kl3jbSDOWoZuTLxB6ckcPTGrnUg.png)
 
 利用 tika 读取任意文档格式
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/P7VubwKbGoqTg4xlTbXc0KZunpf.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/P7VubwKbGoqTg4xlTbXc0KZunpf.png)
 
 ### 转换文档
 
@@ -644,19 +642,19 @@ public class TransformerController {
 
 TokenTextSplitter 切分
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/YwaabAMpzoTHGkxeuRwcAckjnzg.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/YwaabAMpzoTHGkxeuRwcAckjnzg.png)
 
 DefaultContentFormatter 格式化
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/Le65bQU7qoviLyxc5T3c10M0nxf.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/Le65bQU7qoviLyxc5T3c10M0nxf.png)
 
 KeywordMetadataEnricher 提取关键字
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/V9ylbKbhoo9gdjxpFrOcUWRWnah.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/V9ylbKbhoo9gdjxpFrOcUWRWnah.png)
 
 SummaryMetadataEnricher 提取摘要
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/VR2JboLW4oQgAKxSULFclN0jnJm.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/VR2JboLW4oQgAKxSULFclN0jnJm.png)
 
 ### 写出文档
 
@@ -732,26 +730,25 @@ public class WriterController {
 
 Document 写出文本文件
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/SPDdb11MhoD6HGx8lmCc3MPfnbz.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/SPDdb11MhoD6HGx8lmCc3MPfnbz.png)
 
 写入 vector
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/Pq9HbrBe8oKMgyxN6hFcaxGPnpR.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/Pq9HbrBe8oKMgyxN6hFcaxGPnpR.png)
 
 从 vector 中查找
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/SQjdbEKhAo72oIxh3CQcpHqenNh.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/SQjdbEKhAo72oIxh3CQcpHqenNh.png)
 
 
 
-# Rag 模块化源码篇
+## Rag 模块化源码篇
 
-> [!TIP]
 > Spring AI 实现了一个模块化的 RAG 架构，其灵感来自于论文：[Modular RAG: Transforming RAG Systems into LEGO-like Reconfigurable Frameworks](https://arxiv.org/abs/2407.21059)，本文是 RAG 模块化源码的讲解
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/rag-模块化.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/rag-模块化.png)
 
-## RetrievalAugmentationAdvisor
+### RetrievalAugmentationAdvisor
 
 RAG 增强器，利用模块化 RAG 组件（Query、Pre-Retrieval、Retrieval、Post-Retrieval、Generation）为用户文本添加额外信息
 
@@ -973,7 +970,7 @@ public final class RetrievalAugmentationAdvisor implements BaseAdvisor {
 }
 ```
 
-## Query
+### Query
 
 用于在 RAG 流程中表示查询的类
 
@@ -1045,9 +1042,9 @@ public record Query(String text, List<Message> history, Map<String, Object> cont
 }
 ```
 
-## Pre-Retrieval
+### Pre-Retrieval
 
-### QueryExpander（查询扩展接口类）
+#### QueryExpander（查询扩展接口类）
 
 作用：
 
@@ -1070,7 +1067,7 @@ public interface QueryExpander extends Function<Query, List<Query>> {
 }
 ```
 
-#### MultiQueryExpander
+##### MultiQueryExpander
 
 扩展查询的类，通过使用 LLM 将单个查询扩展为多个语义上多样化的变体，这些变体能从不同角度或方面覆盖原始查询的主题，从而增加检索到相关结果的机会
 
@@ -1181,7 +1178,7 @@ public final class MultiQueryExpander implements QueryExpander {
 }
 ```
 
-### QueryTransformer（查询转换接口类）
+#### QueryTransformer（查询转换接口类）
 
 作用：
 
@@ -1205,7 +1202,7 @@ public interface QueryTransformer extends Function<Query, Query> {
 }
 ```
 
-#### CompressionQueryTransformer
+##### CompressionQueryTransformer
 
 用于压缩对话历史和后续查询的类
 
@@ -1293,7 +1290,7 @@ public class CompressionQueryTransformer implements QueryTransformer {
 }
 ```
 
-#### RewriteQueryTransformer
+##### RewriteQueryTransformer
 
 重写用户查询的类
 
@@ -1384,7 +1381,7 @@ public class RewriteQueryTransformer implements QueryTransformer {
 }
 ```
 
-#### TranslationQueryTransformer
+##### TranslationQueryTransformer
 
 将用户查询翻译为目标语言的工具类
 
@@ -1474,7 +1471,7 @@ public final class TranslationQueryTransformer implements QueryTransformer {
 }
 ```
 
-## Retrieval
+### Retrieval
 
 #### DocumentRetriever（文档检索通用接口）
 
@@ -1664,9 +1661,9 @@ public class ConcatenationDocumentJoiner implements DocumentJoiner {
 }
 ```
 
-## Post-Retrieval
+### Post-Retrieval
 
-### DocumentPostProcessor
+#### DocumentPostProcessor
 
 检索后，对文档进行逻辑出现，如压缩、排名、选择部分等，通过实现该接口
 
@@ -1687,9 +1684,9 @@ public interface DocumentPostProcessor extends BiFunction<Query, List<Document>,
 }
 ```
 
-## Generation
+### Generation
 
-### QueryAugmenter（查询增强接口类）
+#### QueryAugmenter（查询增强接口类）
 
 通过将用户查询与额外的上下文数据结合，从而为 LLM 提供更丰富的背景信息
 
@@ -1710,7 +1707,7 @@ public interface QueryAugmenter extends BiFunction<Query, List<Document>, Query>
 }
 ```
 
-#### ContextualQueryAugmenter
+##### ContextualQueryAugmenter
 
 增强用户查询的类，通过将用户查询与提供的文档内容结合，生成一个增强后的查询，为后续的 RAG 流程提供更丰富的背景信息
 
@@ -1818,11 +1815,11 @@ public final class ContextualQueryAugmenter implements QueryAugmenter {
 
 
 
-# ETL Pipeline 源码解析
+## ETL Pipeline 源码解析
 
-![](/public/img/user/ai/spring-ai-explained-sourcecode/OKuGbaedFoPKCmxLbmNc03yHnDg.png)
+![](/img/user/ai/spring-ai-explained-sourcecode/OKuGbaedFoPKCmxLbmNc03yHnDg.png)
 
-## DocumentReader（读取文档数据接口类）
+### DocumentReader（读取文档数据接口类）
 
 ```java
 package org.springframework.ai.document;
@@ -1837,7 +1834,7 @@ public interface DocumentReader extends Supplier<List<Document>> {
 }
 ```
 
-### TextReader
+#### TextReader
 
 用于从资源中读取文本内容并将其转换为 Document 对象
 
@@ -1953,7 +1950,7 @@ public class TextReader implements DocumentReader {
 }
 ```
 
-### JsonReader
+#### JsonReader
 
 用于从 JSON 资源中读取数据并将其转换为 Document 对象
 
@@ -2056,7 +2053,7 @@ public class JsonReader implements DocumentReader {
 }
 ```
 
-### JsoupDocumentReader
+#### JsoupDocumentReader
 
 用于从 HTML 文档中提取文本内容，并将其转换为 Document 对象
 
@@ -2170,7 +2167,7 @@ public class JsoupDocumentReader implements DocumentReader {
 }
 ```
 
-#### JsoupDocumentReaderConfig
+##### JsoupDocumentReaderConfig
 
 配置 JsoupDocumentReader 行为的工具类
 
@@ -2294,7 +2291,7 @@ public final class JsoupDocumentReaderConfig {
 }
 ```
 
-### MarkdownDocumentReader
+#### MarkdownDocumentReader
 
 用于从 Markdown 文件中读取内容并将其转换为 Document 对象。基于 CommonMark 库解析 Markdown 文档，支持将标题、段落、代码块等内容分组为 Document 对象，并生成相关元数据
 
@@ -2489,7 +2486,7 @@ public class MarkdownDocumentReader implements DocumentReader {
 }
 ```
 
-#### MarkdownDocumentReaderConfig
+##### MarkdownDocumentReaderConfig
 
 配置 MarkdownDocumentReader 的行为
 
@@ -2570,7 +2567,7 @@ public class MarkdownDocumentReaderConfig {
 }
 ```
 
-### PagePdfDocumentReader
+#### PagePdfDocumentReader
 
 用于将 PDF 文件按页分组解析为多个 Document，每个 Document 可包含一页或多页内容，支持自定义分组和页面裁剪
 
@@ -2721,7 +2718,7 @@ public class PagePdfDocumentReader implements DocumentReader {
 }
 ```
 
-#### PdfDocumentReaderConfig
+##### PdfDocumentReaderConfig
 
 PDF 文档读取器的配置类，用于控制 PDF 解析和分组行为
 
@@ -2808,7 +2805,7 @@ public final class PdfDocumentReaderConfig {
 }
 ```
 
-### ParagraphPdfDocumentReader
+#### ParagraphPdfDocumentReader
 
 用于将 PDF 文件按段落（基于目录/结构信息）解析为多个 Document，每个 Document 通常对应一个段落
 
@@ -3003,7 +3000,7 @@ public class ParagraphPdfDocumentReader implements DocumentReader {
 }
 ```
 
-#### ParagraphManager
+##### ParagraphManager
 
 类用于管理 PDF 文档的段落结构，主要通过解析 PDF 目录（TOC/书签）生成段落树，并可将其扁平化为段落列表，便于后续内容提取和分组
 
@@ -3155,7 +3152,7 @@ public class ParagraphManager {
 }
 ```
 
-### TikaDocumentReader
+#### TikaDocumentReader
 
 用于从多种文档格式（如 PDF、DOC/DOCX、PPT/PPTX、HTML 等）中提取文本，并将其封装为 Document 对象，基于 Apache Tika 库实现，支持广泛的文档格式。
 
@@ -3276,7 +3273,7 @@ public interface DocumentTransformer extends Function<List<Document>, List<Docum
 }
 ```
 
-### TextSplitter
+#### TextSplitter
 
 主要用于将长文本型 Document 拆分为多个较小的文本块（chunk），它为具体的文本分割策略（如按长度、按句子、按段落等）提供了通用框架
 
@@ -3376,7 +3373,7 @@ public abstract class TextSplitter implements DocumentTransformer {
 }
 ```
 
-#### TokenTextSplitter
+##### TokenTextSplitter
 
 用于将文本按 token 拆分为指定大小块，基于 jtokit 库实现，适用于需要按 token 粒度处理文本的场景，如 LLM 的输入处理。
 
@@ -3546,7 +3543,7 @@ public class TokenTextSplitter extends TextSplitter {
 }
 ```
 
-### ContentFormatTransformer
+#### ContentFormatTransformer
 
 对 Document 列表中的每个文档应用内容格式化器，以格式化文档
 
@@ -3616,7 +3613,7 @@ public class ContentFormatTransformer implements DocumentTransformer {
 }
 ```
 
-#### ContentFormatte（格式化接口类）
+##### ContentFormatte（格式化接口类）
 
 ```java
 public interface ContentFormatter {
@@ -3626,7 +3623,7 @@ public interface ContentFormatter {
 }
 ```
 
-#### DefaultContentFormatter
+##### DefaultContentFormatter
 
 用于格式化 Document 对象的内容和元数据，通过模版和配置来控制文档显示方式
 
@@ -3792,7 +3789,7 @@ public final class DefaultContentFormatter implements ContentFormatter {
 }
 ```
 
-### KeywordMetadataEnricher
+#### KeywordMetadataEnricher
 
 从文档中提取关键词，并将其作为元数据添加到文档中。通过调用 ChatModel 生成关键词，并将关键词存储在文档的元数据中
 
@@ -3838,7 +3835,7 @@ public class KeywordMetadataEnricher implements DocumentTransformer {
 }
 ```
 
-### SummaryMetadataEnricher
+#### SummaryMetadataEnricher
 
 用于从文档中提取摘要，并将其作为元数据添加到文档中。支持提取当前文档、前一个文档和下一个文档的摘要，并将这些摘要存储在文档的元数据中
 
@@ -3934,7 +3931,7 @@ public class SummaryMetadataEnricher implements DocumentTransformer {
 }
 ```
 
-## DocumentWriter（文档写入接口类）
+### DocumentWriter（文档写入接口类）
 
 ```java
 package org.springframework.ai.document;
@@ -3949,7 +3946,7 @@ public interface DocumentWriter extends Consumer<List<Document>> {
 }
 ```
 
-### FileDocumentWriter
+#### FileDocumentWriter
 
 将一组 Document 文档对象的内容写入到指定文件，支持追加写入、文档分隔标记、元数据格式化等功能
 
@@ -4025,6 +4022,6 @@ public class FileDocumentWriter implements DocumentWriter {
 }
 ```
 
-### VectorStore
+#### VectorStore
 
 VectorStore 继承了 DocumentWriter 接口，详情可见第五章：向量数据库篇
