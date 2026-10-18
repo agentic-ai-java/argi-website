@@ -6,9 +6,9 @@ import { getEntries } from "astro:content";
 
 // 吊顶提示文案
 export const TOPBAR = {
-    "text": "Spring AI Alibaba 发布 40+ 官方插件实现，涵盖 DocumentReader & FunctionCalling 等，让私域数据集成更简单。",
-    "mobileText": "Spring AI Alibaba 发布 40+ 官方插件实现，涵盖 DocumentReader & FunctionCalling 等，让私域数据集成更简单。",
-    "link": "/blog/spring-ai-alibaba-plugin/",
+    "text": "Spring AI 1.0 GA 正式发布，快速了解所有核心功能！Spring AI Alibaba 正式版也马上来了！",
+    "mobileText": "Spring AI 1.0 GA 正式发布，快速了解所有核心功能！Spring AI Alibaba 正式版也马上来了",
+    "link": "/blog/spring-ai-100-ga-released/",
     "target": "_blank",
     "display": true
 }
