@@ -90,6 +90,12 @@ bash tools/run.sh argi-agent-example/batched-array-loop
 bash tools/run.sh argi-graph-example/versioned-recovery
 ```
 
+The seven local entry points, including the selection and retry failure drills,
+were executed on **2026-10-18** and produced their documented outcomes. The example
+repository keeps teaching programs without unit-test suites or coverage gates.
+Its CI follows ARGI's applicable formatting, style, lint, license, secret-check and
+compilation rules; these checks do not invoke models or external services.
+
 Existing `invoke` and `stream` calls do not automatically enable these opt-in policies.
 Whole-run durable execution, task-completion hooks, AgentResult delivery and tool-context
 patch validation are not part of this pinned main revision; open proposals must not be
