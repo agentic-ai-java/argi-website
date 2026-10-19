@@ -57,6 +57,7 @@ const sidebars: SidebarsConfig = {
         'frameworks/graph-core/runtime-config',
         'frameworks/graph-core/context-management',
         'frameworks/graph-core/persistence',
+        'frameworks/graph-core/versioned-recovery',
         'frameworks/graph-core/store',
         'frameworks/graph-core/streaming',
         'frameworks/graph-core/scheduling',
@@ -89,6 +90,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'frameworks/agent-framework/quick-start',
+        'frameworks/agent-framework/runtime-contracts',
         'frameworks/agent-framework/agents-intro',
         'frameworks/agent-framework/react-agent-theory',
       ],
@@ -102,6 +104,7 @@ const sidebars: SidebarsConfig = {
         'frameworks/agent-framework/runtime-config',
         'frameworks/agent-framework/structured-io',
         'frameworks/agent-framework/memory',
+        'frameworks/agent-framework/context-provenance',
       ],
     },
     {
@@ -111,6 +114,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'frameworks/agent-framework/tools',
         'frameworks/agent-framework/builtin-tools',
+        'frameworks/agent-framework/background-tasks',
         'frameworks/agent-framework/skills',
         'frameworks/agent-framework/rag',
       ],
@@ -121,6 +125,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'frameworks/agent-framework/hooks-interceptors',
+        'frameworks/agent-framework/tool-execution-policies',
         'frameworks/agent-framework/hitl',
       ],
     },
@@ -130,6 +135,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'frameworks/agent-framework/multi-agent',
+        'frameworks/agent-framework/batched-array-loops',
         'frameworks/agent-framework/planner',
         'frameworks/agent-framework/tools-as-agent',
         'frameworks/agent-framework/workflow',
