@@ -101,6 +101,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'frameworks/agent-framework/messages',
+        'frameworks/agent-framework/stream-message-identity',
         'frameworks/agent-framework/runtime-config',
         'frameworks/agent-framework/structured-io',
         'frameworks/agent-framework/memory',
