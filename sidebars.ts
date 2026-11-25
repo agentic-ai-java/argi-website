@@ -127,6 +127,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'frameworks/agent-framework/hooks-interceptors',
         'frameworks/agent-framework/model-retry',
+        'frameworks/agent-framework/model-fallback',
         'frameworks/agent-framework/context-window-budget',
         'frameworks/agent-framework/tool-execution-policies',
         'frameworks/agent-framework/hitl',

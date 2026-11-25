@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.agentic-ai-java.examples</groupId>
+  <artifactId>streaming-fallback</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <!-- Install Core c6e453f20fcb1c7837d92b321aa18ec5a46ccab6 first. -->
+    <!-- ModelFallbackInterceptor and ModelRetryInterceptor ship in argi-agent-framework; ReActAgent in argi-agent-core. -->
+    <dependency>
+      <groupId>io.github.agentic-ai-java</groupId>
+      <artifactId>argi-agent-framework</artifactId>
+      <version>2.1.0-RC2-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  <build><plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.14.1</version></plugin>
+    <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.6.3</version>
+      <configuration><mainClass>example.StreamingFallbackExample</mainClass></configuration>
+    </plugin>
+  </plugins></build>
+</project>

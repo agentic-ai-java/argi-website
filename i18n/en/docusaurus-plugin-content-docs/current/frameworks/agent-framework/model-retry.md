@@ -148,10 +148,18 @@ the next candidate is tried.
 
 ## Streaming calls
 
-For a call that returns a streaming response, a failure is retried only if no chunk has been
-emitted downstream yet; once partial output was produced the failure ends the stream, so
-output is never duplicated. Each subscription owns its own attempt budget. The offline
-example on this page covers the non-streaming `call` path only.
+When the interceptor receives a streaming `ModelResponse` (the graph-based `ReactAgent` with
+streaming enabled), a failure is retried only if no chunk has been emitted downstream yet; once
+partial output was produced the failure ends the stream, so output is never duplicated. Each
+subscription owns its own attempt budget.
+
+The independent ReActAgent with `streamModel(true)` is different: the engine consumes the stream
+and emits deltas inside the model call and hands the interceptor a non-streaming response, so a
+transient failure after partial deltas **is still retried**, the new deltas are appended to the
+same message ID, and the complete snapshot replaces them afterwards. See
+[Model fallback and the streaming switch boundary](./model-fallback.md#how-the-two-engines-differ);
+scenario 9 of its offline example verifies this. The offline example on this page covers the
+non-streaming `call` path only.
 
 ## Running the offline example
 
