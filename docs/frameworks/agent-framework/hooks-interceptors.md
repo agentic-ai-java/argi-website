@@ -250,6 +250,8 @@ ReactAgent agent = ReactAgent.builder()
 
 `ModelFallbackInterceptor` 在主模型失败时依次尝试备用 `ChatModel`。
 
+流式切换边界、取消处理、与重试的注册顺序和当前包名见[模型回退与流式切换边界](./model-fallback)。
+
 <Code
   language="java"
   title="ModelFallbackInterceptor 模型回退示例"
