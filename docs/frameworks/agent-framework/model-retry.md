@@ -182,3 +182,7 @@ PASS: transient retry, attempt bound, UNKNOWN not retried, legacy predicate, cus
 本重试只针对单次模型调用：不切换模型、不重放工具调用、不维护持久化重试预算。
 离线通过不代表真实提供商已验证。本页及英文对应页只覆盖
 [#372](https://github.com/agentic-ai-java/argi/issues/372) 的模型重试项。
+
+## 与上下文窗口预算的区别
+
+重试控制失败后是否再次调用；它不保证请求适合当前模型窗口。完整请求估算、压缩、配对校验与拒绝分发见 [上下文窗口预算](./context-window-budget)。组合使用时需验证自己的拦截器顺序。
