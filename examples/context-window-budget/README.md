@@ -52,7 +52,7 @@ There is no external provider, credential, Extensions artifact, or summary call.
 
 ## Validation record
 
-Validated on 2026-11-25 entirely inside Simular Box Ubuntu with OpenJDK
+Validated on 2026-11-25 entirely inside an Ubuntu cloud computer with OpenJDK
 17.0.21.1, Maven 3.9.9, Node 24.21.0, npm 11.19.0. Java compilation target is 17.
 Website base: `041a2c3561c5614511a9654efeff832a900fe8e6`.
 Core base: `c6e453f20fcb1c7837d92b321aa18ec5a46ccab6`.
