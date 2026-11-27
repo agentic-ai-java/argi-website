@@ -209,3 +209,7 @@ This retry covers one model call only: it does not switch models, replay tool ca
 persistent retry budget. Passing offline does not validate a real provider. This page and its
 Chinese counterpart cover only the model-retry item of
 [#372](https://github.com/agentic-ai-java/argi/issues/372).
+
+## Separate from context window budgets
+
+Retries decide whether to call again after a failure; they do not ensure that a request fits the current model window. See [Context window budgets](./context-window-budget) for full-request estimation, compaction, pairing validation, and dispatch rejection. Test interceptor ordering for your composition.

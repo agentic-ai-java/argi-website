@@ -1483,3 +1483,7 @@ ReactAgent agent = ReactAgent.builder()
 * [Agents 介绍](./agents-intro.md) - 了解 ReactAgent 的核心概念
 * [Message 定义](./messages.md) - 了解消息类型和使用
 * [ReAct Agent 理论基础](./react-agent-theory.md) - 了解推理与行动循环机制
+
+## 完整请求预算
+
+消息计数或记忆摘要不等于最终模型请求的完整预算。系统消息、会话、披露工具 schema 与输出预留的组合检查，以及压缩失败时的拒绝行为，见 [上下文窗口预算](./context-window-budget)。
